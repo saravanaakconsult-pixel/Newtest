@@ -1,175 +1,316 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CrystalCore Business Solutions (CCBS)</title>
-  <meta name="description" content="CrystalCore Business Solutions — Business Analyst & Consultant Service. Clarity, precision, and innovation for growth, efficiency, and digital excellence.">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CrystalCore Business Solutions — Prototype</title>
+<meta name="description" content="CrystalCore Business Solutions (CCBS) — Business Analyst & Consultant Service" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
-  <style>
-    :root {
-      --purple: #6A0DAD;
-      --yellow: #FFD700;
-      --white: #FFFFFF;
-      --bg: #F7F7FB;
-      --ink: #222;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
-    }
-    header {
-      background: var(--white);
-      border-bottom: 1px solid #eee;
-      text-align: center;
-      padding: 20px 0;
-    }
-    header img {
-      height: 100px;
-    }
-    header h1 {
-      color: var(--purple);
-      font-size: 24px;
-      margin-top: 8px;
-    }
-    nav {
-      background: var(--white);
-      border-top: 1px solid #eee;
-      text-align: center;
-      padding: 12px 0;
-    }
-    nav a {
-      margin: 0 12px;
-      color: var(--purple);
-      font-weight: 600;
-      text-decoration: none;
-      position: relative;
-    }
-    nav a:hover::after, nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 0; right: 0; bottom: -4px;
-      height: 3px;
-      background: var(--yellow);
-      border-radius: 5px;
-    }
+<style>
+  /* ============= Brand ============= */
+  :root{
+    --purple: #6A0DAD;    /* your brand purple */
+    --yellow: #FFD700;    /* your accent yellow */
+    --ink: #111216;
+    --muted: #6B7280;
+    --bg: #ffffff;
+    --glass: rgba(255,255,255,0.85);
+    --header-h: 76px;
+  }
 
-    section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    h2 {
-      color: var(--purple);
-      font-size: 24px;
-      margin-bottom: 10px;
-      position: relative;
-    }
-    h2::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 5px;
-      background: var(--yellow);
-      border-radius: 5px;
-      margin-top: 5px;
-    }
-    .card {
-      background: var(--white);
-      border: 1px solid #eee;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      margin: 15px 0;
-    }
-    footer {
-      background: var(--purple);
-      color: var(--white);
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-    button {
-      background: var(--purple);
-      color: var(--white);
-      border: none;
-      border-radius: 25px;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    button:hover {
-      background: #4e088d;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-bottom: 10px;
-    }
-    form {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-  </style>
+  /* Reset & base */
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#f7f8fb;line-height:1.45;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* ============= Header ============= */
+  .site-header{
+    position:sticky;top:0;z-index:80;
+    backdrop-filter: blur(6px);
+    background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.6));
+    border-bottom:1px solid rgba(15,23,42,0.04);
+    height:var(--header-h);
+    display:flex;align-items:center;
+    transition:box-shadow .18s ease, background .18s ease, height .18s ease;
+  }
+  .site-header.shrink{height:64px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+
+  .container{max-width:1180px;margin:0 auto;padding:0 20px;width:100%}
+  .header-row{display:flex;align-items:center;justify-content:space-between;width:100%}
+
+  /* Brand */
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .logo{
+    width:44px;height:44px;border-radius:10px;
+    display:inline-grid;place-items:center;font-weight:800;color:#111;
+    background:var(--yellow);
+    box-shadow:0 4px 12px rgba(106,13,173,0.06);
+  }
+  .brand .title{line-height:1}
+  .brand .title .company{font-weight:700;color:var(--purple);letter-spacing:0.1px}
+  .brand .title .tag{font-size:12px;color:var(--muted)}
+
+  /* Nav */
+  nav.primary{display:flex;align-items:center;gap:18px}
+  .nav-list{display:flex;gap:6px;align-items:center}
+  .nav-item{position:relative; font-weight:600; font-size:15px; padding:10px 8px; border-radius:8px; color:var(--ink)}
+  .nav-item:focus{outline:2px solid rgba(106,13,173,0.08);outline-offset:3px}
+  .nav-item:hover{background:rgba(16,24,40,0.02)}
+  /* animated underline (like NatWest feel) */
+  .nav-item::after{
+    content:""; position:absolute; left:10px; right:10px; height:4px; bottom:6px;
+    border-radius:4px; transform:scaleX(0); transform-origin:center;
+    transition: transform .22s cubic-bezier(.2,.9,.2,1), background .12s;
+    background:var(--yellow);
+  }
+  .nav-item:hover::after, .nav-item.active::after{ transform:scaleX(1) }
+
+  /* Mega menu panel */
+  .mega{
+    position:absolute; left:0; top:calc(var(--header-h) + 6px);
+    width:760px; max-width:calc(100vw - 40px); padding:18px; border-radius:14px;
+    box-shadow:0 18px 60px rgba(16,24,40,.12); background:#fff; display:none;
+    transform-origin:top center; transition:opacity .18s ease, transform .18s ease;
+  }
+  .nav-item.has-mega:hover .mega, .nav-item.has-mega:focus-within .mega{
+    display:block; opacity:1; transform:translateY(0);
+  }
+  .mega-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .mega h4{margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:0.6px}
+  .mega a{display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px}
+  .mega a:hover{background:#f8f6ff;color:var(--purple)}
+
+  /* CTA button */
+  .cta{margin-left:12px;padding:10px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(106,13,173,0.12)}
+  .cta:active{transform:translateY(1px)}
+
+  /* Mobile */
+  .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
+  @media (max-width:900px){
+    .nav-list{display:none}
+    .mobile-toggle{display:inline-flex}
+    .mega{position:static;width:100%;box-shadow:none;border-radius:10px;margin-top:8px}
+  }
+
+  /* ============= Hero & Sections ============= */
+  main{padding-top:18px}
+  .hero{padding:56px 0 36px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
+  .hero-grid{display:flex;gap:28px;align-items:center;max-width:1180px;margin:0 auto;padding:0 20px}
+  .hero-left{flex:1}
+  .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(106,13,173,0.07);color:var(--purple);font-weight:700;font-size:13px}
+  .hero h1{font-size:34px;margin:10px 0 6px;line-height:1.05;color:var(--ink)}
+  .hero p{color:var(--muted);font-size:15px;margin:0}
+
+  .hero-cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+  .hero-card{width:380px;border-radius:14px;padding:18px;background:#fff;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 40px rgba(16,24,40,0.06)}
+
+  /* small fade-up animation helper */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Section titles with yellow accent */
+  .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .section-title h2{margin:0;font-size:20px;color:var(--purple)}
+  .section-title .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
+
+  /* Footer */
+  footer{padding:36px 0;text-align:center;color:#6b7280;padding-bottom:70px}
+
+  /* tiny utility */
+  .muted{color:var(--muted);font-size:14px}
+</style>
 </head>
-
 <body>
-  <header>
-    <img src="logo-ccbs.png" alt="CrystalCore Business Solutions Logo" />
-    <h1>CrystalCore Business Solutions</h1>
-    <p>Business Analyst & Consultant Service</p>
-  </header>
 
-  <nav>
-    <a href="#about" class="active">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header class="site-header" id="siteHeader">
+  <div class="container header-row" role="banner">
+    <div class="brand" aria-hidden="false">
+      <!-- Replace with your SVG logo if available -->
+      <div class="logo" aria-hidden="true">C</div>
+      <div class="title">
+        <div class="company">CrystalCore Business Solutions</div>
+        <div class="tag muted">Business Analyst & Consultant</div>
+      </div>
+    </div>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>CrystalCore Business Solutions (CCBS) helps startups and small businesses achieve clarity, precision, and digital growth through structured business analysis, transformation, and consulting.</p>
+    <nav class="primary" role="navigation" aria-label="Main navigation">
+      <div class="nav-list" id="navList">
+        <div class="nav-item has-mega" tabindex="0" data-target="services">Services
+          <div class="mega" role="menu" aria-label="Services menu">
+            <div class="mega-grid">
+              <div>
+                <h4>Business Consulting</h4>
+                <a href="#services" role="menuitem">Business Analysis Planning</a>
+                <a href="#services" role="menuitem">Change Management</a>
+                <a href="#services" role="menuitem">Project Management</a>
+              </div>
+              <div>
+                <h4>Data & Strategy</h4>
+                <a href="#services" role="menuitem">Data Analysis & Reporting</a>
+                <a href="#services" role="menuitem">Financial & Risk</a>
+              </div>
+              <div>
+                <h4>Operations</h4>
+                <a href="#services" role="menuitem">Record Management</a>
+                <a href="#services" role="menuitem">Requirements (BRD/FRD)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="nav-item" href="#about" data-target="about">About</a>
+        <a class="nav-item" href="#insights" data-target="insights">Insights</a>
+        <a class="nav-item" href="#contact" data-target="contact">Contact</a>
+      </div>
+
+      <a class="cta" href="#contact">Book Consultation</a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="eyebrow">Business Analyst & Consultant Service</div>
+        <h1 class="reveal">Transforming businesses with smart analysis & strategy</h1>
+        <p class="muted reveal" style="transition-delay:.05s">We help startups and SMEs align processes, requirements and technology to drive sustainable growth.</p>
+        <div class="hero-cta reveal" style="transition-delay:.12s">
+          <a class="cta" href="#contact">Book a Consultation</a>
+          <a class="nav-item" href="#services" style="background:transparent;border-radius:12px;padding:10px 12px;border:1px solid rgba(106,13,173,0.08);">Explore Services</a>
+        </div>
+      </div>
+
+      <aside class="hero-card reveal" style="transition-delay:.18s">
+        <strong style="color:var(--purple)">Quick services</strong>
+        <ul class="muted" style="margin-top:8px">
+          <li>BRD/FRD/SRS</li>
+          <li>CRM / ERP selection</li>
+          <li>Process & automation</li>
+          <li>Market research</li>
+        </ul>
+      </aside>
+    </div>
   </section>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="card">
-      <h3>🔍 Business Analysis & Planning</h3>
-      <p>Planning & Monitoring, BRD / FRD / SRS documentation.</p>
+  <section id="about" class="container" style="padding-top:32px">
+    <div class="section-title">
+      <h2>About</h2><div class="accent" aria-hidden="true"></div>
     </div>
-    <div class="card">
-      <h3>💻 Digital Transformation</h3>
-      <p>CRM / ERP selection and implementation, automation strategy.</p>
+    <p class="muted">CrystalCore Business Solutions helps organisations with requirements, process improvement and digital transformation.</p>
+  </section>
+
+  <section id="services" class="container" style="padding-top:32px">
+    <div class="section-title">
+      <h2>Services</h2><div class="accent" aria-hidden="true"></div>
     </div>
-    <div class="card">
-      <h3>📊 Data & Reporting</h3>
-      <p>Dashboard, analysis, and insight reports.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:14px">
+      <div class="card reveal"><strong style="color:var(--purple)">Business Analysis & Planning</strong><p class="muted">Planning, BRD/FRD, health-check.</p></div>
+      <div class="card reveal"><strong style="color:var(--purple)">Digital Transformation</strong><p class="muted">CRM/ERP selection, automation roadmaps.</p></div>
+      <div class="card reveal"><strong style="color:var(--purple)">Data & Reporting</strong><p class="muted">Dashboards, KPIs and insights.</p></div>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form>
-      <label>Name</label>
-      <input type="text" required />
-      <label>Email</label>
-      <input type="email" required />
-      <label>Message</label>
-      <textarea rows="4"></textarea>
-      <button type="submit">Send Message</button>
+  <section id="insights" class="container" style="padding-top:32px">
+    <div class="section-title">
+      <h2>Insights</h2><div class="accent" aria-hidden="true"></div>
+    </div>
+    <div class="muted">Short blog previews or case studies can go here.</div>
+  </section>
+
+  <section id="contact" class="container" style="padding-top:32px;padding-bottom:64px">
+    <div class="section-title">
+      <h2>Contact</h2><div class="accent" aria-hidden="true"></div>
+    </div>
+
+    <form id="contactForm" style="max-width:640px;margin-top:12px">
+      <label class="muted">Name</label>
+      <input name="name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e7ee;margin-bottom:8px">
+      <label class="muted">Email</label>
+      <input name="email" type="email" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e7ee;margin-bottom:8px">
+      <label class="muted">Message</label>
+      <textarea name="message" rows="5" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e7ee;margin-bottom:12px"></textarea>
+      <div style="display:flex;gap:12px;align-items:center">
+        <button type="submit" class="cta">Send</button>
+        <div id="formResp" class="muted" aria-live="polite"></div>
+      </div>
     </form>
-    <p style="margin-top: 10px;">📧 Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a><br>📞 Phone: +91 98404 07627</p>
   </section>
+</main>
 
-  <footer>
-    © 2025 CrystalCore Business Solutions — All Rights Reserved
-  </footer>
+<footer role="contentinfo" style="border-top:1px solid rgba(16,24,40,0.04);background:#fff">
+  <div class="container" style="padding:28px 0;text-align:center;color:var(--muted)">
+    © <span id="footYear"></span> CrystalCore Business Solutions — Chennai, India
+  </div>
+</footer>
+
+<script>
+/* ============= Tiny JS: interactions (fast & small) ============= */
+
+/* header shrink on scroll */
+const header = document.getElementById('siteHeader');
+const hero = document.getElementById('hero');
+const headerHeight = header ? header.offsetHeight : 76;
+window.addEventListener('scroll', () => {
+  if (!header) return;
+  if (window.scrollY > 8) header.classList.add('shrink'); else header.classList.remove('shrink');
+});
+
+/* Active nav underline (IntersectionObserver) */
+const sections = Array.from(document.querySelectorAll('main section[id]'));
+const navItems = Array.from(document.querySelectorAll('.nav-item, .nav-list a'));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.target.id) return;
+    const id = entry.target.id;
+    const link = navItems.find(n => {
+      try { return n.getAttribute('href') === '#' + id || n.dataset.target === id; } catch(e){ return false; }
+    });
+    if (entry.isIntersecting) {
+      navItems.forEach(n => n.classList && n.classList.remove('active'));
+      if (link && link.classList) link.classList.add('active');
+      entry.target.classList.add('in');
+    }
+  });
+}, {threshold: 0.32});
+sections.forEach(s => observer.observe(s));
+
+/* mobile toggle (simple) */
+const mobileToggle = document.getElementById('mobileToggle');
+const navList = document.getElementById('navList');
+if (mobileToggle && navList) {
+  mobileToggle.addEventListener('click', () => {
+    const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+    mobileToggle.setAttribute('aria-expanded', String(!expanded));
+    navList.style.display = expanded ? 'flex' : 'block';
+  });
+}
+
+/* small form demo */
+const form = document.getElementById('contactForm');
+const resp = document.getElementById('formResp');
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    resp.textContent = 'Sending...';
+    try {
+      // TODO: attach real endpoint
+      await new Promise(r=>setTimeout(r,700));
+      resp.textContent = '✅ Sent — we will contact you soon.';
+      form.reset();
+    } catch(er) {
+      resp.textContent = '❌ Error — try again.';
+    }
+  });
+}
+
+/* set year */
+document.getElementById('footYear').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
