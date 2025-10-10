@@ -13,415 +13,343 @@
     --muted:#6b7280;
     --bg:#fbfbfe;
     --card:#ffffff;
-    --header-h:96px;
-    --max-w:1180px;
+    --header-h:220px; /* tall header block for stacked layout */
+    --max-w:1200px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
 
-  /* Header */
-  .site-header{position:sticky;top:0;z-index:140;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(15,23,42,0.04);height:var(--header-h);display:flex;align-items:center;transition:height .18s ease,box-shadow .18s ease;padding:0 12px}
-  .site-header.shrink{height:72px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
-  .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
-  .header-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:16px}
-  .brand{display:flex;align-items:center;gap:14px;flex:1}
-  .logo-monogram{width:64px;height:64px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;flex-shrink:0}
-  .title{line-height:1;display:flex;flex-direction:column}
-  .company{font-weight:900;color:var(--purple);font-size:22px;letter-spacing:0.2px}
-  .tag{font-size:14px;color:var(--muted);margin-top:6px}
+  /* Header stacked */
+  .site-header{position:sticky;top:0;z-index:140;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(15,23,42,0.04)}
+  .header-inner{max-width:var(--max-w);margin:0 auto;padding:24px 20px;text-align:center}
+  .logo{display:block;margin:0 auto 10px;width:96px;height:96px;border-radius:14px;background:var(--yellow);color:#111;font-weight:900;display:grid;place-items:center;font-size:36px}
+  .company{font-weight:900;color:var(--purple);font-size:28px;letter-spacing:0.2px;margin-top:6px}
+  .tag{font-size:15px;color:var(--muted);margin-top:6px}
 
-  /* Navigation */
-  .nav-wrap{display:flex;align-items:center;gap:18px}
-  .nav-list{display:flex;gap:18px;align-items:center;white-space:nowrap}
-  .nav-link, .nav-btn { padding:8px 12px;border-radius:8px;font-weight:700;font-size:15px;color:var(--ink);background:transparent;border:0;cursor:pointer }
-  .nav-link:hover, .nav-btn:hover { background: rgba(15,23,42,0.03); }
-  .cta { padding:8px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:800 }
-  .mobile-toggle{display:none}
+  /* Menu bar underneath */
+  .menu-bar{display:flex;justify-content:center;gap:22px;padding:12px 0;border-top:1px solid rgba(15,23,42,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98))}
+  .nav-link{padding:8px 12px;border-radius:8px;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer}
+  .nav-link:hover{background:rgba(15,23,42,0.03)}
+  .cta{padding:8px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:800}
 
-  /* Dropdown overlay - moved lower (top offset increased) */
-  .mega-overlay {
-    position:absolute;
-    top: calc(var(--header-h) + 6px); /* pushed lower */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    max-width: calc(100% - 40px);
-    background: var(--card);
-    border-radius: 10px;
-    padding: 6px;
-    box-shadow: 0 12px 40px rgba(16,24,40,0.06);
-    z-index: 220;
-    border: 1px solid rgba(14,20,39,0.04);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .14s ease, transform .12s ease, visibility .12s;
-    transform-origin: top center;
+  /* Dropdown panel (subtle + lower) */
+  .dropdown-wrap{position:relative;display:inline-block}
+  .dropdown-panel{
+    position:absolute;left:50%;transform:translateX(-50%);top:62px; /* sits below menu */
+    width:320px;background:var(--card);border-radius:10px;padding:8px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 16px 40px rgba(16,24,40,0.06);visibility:hidden;opacity:0;transition:opacity .12s ease,visibility .12s;
   }
-  .mega-overlay.open { opacity:1; visibility:visible; transform: translateX(-50%) translateY(8px); }
+  .dropdown-panel.open{visibility:visible;opacity:1}
+  .dropdown-list{list-style:none;margin:0;padding:6px;max-height:380px;overflow:auto}
+  .dropdown-list li{border-bottom:1px solid rgba(15,23,42,0.03)}
+  .dropdown-list li:last-child{border-bottom:0}
+  .dropdown-list a{display:block;padding:12px;border-radius:8px;font-weight:700;color:#222}
+  .dropdown-list a:hover{background:rgba(15,23,42,0.03)}
 
-  .mega-list { list-style:none;margin:0;padding:6px; max-height:420px; overflow:auto; }
-  .mega-list li { border-bottom:1px solid rgba(15,23,42,0.03); }
-  .mega-list li:last-child{ border-bottom:0; }
-  /* removed chevrons: simple text items */
-  .mega-list a { display:block;padding:12px;border-radius:8px;color:#222;font-weight:700;font-size:15px; }
-  .mega-list a:hover, .mega-list a:focus { background: rgba(15,23,42,0.03); outline:none; }
-
-  /* Layout basics */
-  main{padding-top:18px}
-  .hero{padding:36px 0 18px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
-  .hero-grid{display:flex;gap:28px;align-items:flex-start;max-width:var(--max-w);margin:0 auto;padding:0 20px}
-  .hero-left{flex:1}
-  .hero h1{font-size:34px;margin:12px 0 8px;line-height:1.03;color:var(--ink)}
-  .hero p{color:var(--muted);font-size:16px;margin:0}
-  .hero-cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+  /* Page layout */
+  main{padding:36px 0}
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 20px}
+  .hero{padding:28px 0 18px}
+  .hero h1{font-size:36px;margin:8px 0 12px;color:var(--ink);text-align:left}
+  .hero p{color:var(--muted);font-size:16px;max-width:760px;line-height:1.6}
 
   .section{padding:56px 0}
-  .container-sm{max-width:980px;margin:0 auto;padding:0 20px}
   .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
   .section-title h2{margin:0;font-size:22px;color:var(--purple)}
-  .section-title .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
+  .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
 
-  .we-work{text-align:center;margin-top:18px;margin-bottom:26px}
-  .we-work h3{display:inline-block;position:relative;padding:0 18px 6px 18px;font-size:20px;color:var(--purple);font-weight:800}
-  .we-work h3::before{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;width:120px;height:8px;background:var(--yellow);border-radius:999px;z-index:-1}
+  /* About formatting */
+  .about-content{display:grid;grid-template-columns:1fr;gap:18px}
+  .about-content p{color:var(--muted);line-height:1.7}
 
-  .dialogue-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:start}
-  .dialogue{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.04);text-align:center}
-  .dialogue .img-placeholder{height:140px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:800;margin-bottom:12px}
-  .dialogue .title{font-weight:700;color:var(--purple);margin-bottom:8px}
-  .dialogue .desc{color:var(--muted);font-size:15px;line-height:1.6}
+  /* Services grid + flip cards */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
+  .service-card{background:var(--card);border-radius:12px;padding:36px 18px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.04);text-align:center;min-height:160px}
+  .service-card .icon{width:88px;height:88px;margin:0 auto 12px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:900;font-size:20px}
+  .service-card .title{font-weight:800;color:var(--purple);margin-top:8px}
+  .service-card .desc{color:var(--muted);margin-top:8px;line-height:1.6}
 
-  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .flip-card{perspective:1200px}
-  .flip-inner{position:relative;width:100%;height:260px;transition:transform .7s cubic-bezier(.2,.9,.2,1);transform-style:preserve-3d;border-radius:12px}
-  .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
-  .flip-face{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(14,20,39,0.04);background:var(--card);box-shadow:0 12px 30px rgba(16,24,40,0.04)}
-  .flip-front .placeholder{width:96px;height:96px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-size:24px;font-weight:800}
-  .flip-back{transform:rotateY(180deg);text-align:left;padding:18px;color:#273341}
-  .back-list{list-style:none;padding:0;margin:0;font-size:14px;color:var(--muted)}
-  .back-list li{margin:8px 0;padding-left:8px;position:relative}
-  .back-list li::before{content:'•';position:absolute;left:0;color:var(--purple);font-weight:800}
+  /* Experts carousel style (cards) */
+  .experts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
+  .expert{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 28px rgba(16,24,40,0.04);text-align:left}
+  .expert .img{height:120px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
+  .expert .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
+  .expert .role{color:var(--muted);font-weight:700;margin-bottom:8px}
+  .expert .bio{color:var(--muted);font-size:14px;line-height:1.6}
 
-  .focus-service{box-shadow:0 18px 40px rgba(106,13,173,0.08) !important;transform:translateY(-4px) !important;transition:transform .28s ease, box-shadow .28s ease}
-
-  .carousel-wrap{max-width:var(--max-w);margin:0 auto;padding:28px 20px;position:relative}
-  .carousel-viewport{overflow:hidden;border-radius:12px}
-  .carousel-inner{display:flex;gap:18px;transition:transform .6s cubic-bezier(.2,.9,.2,1);will-change:transform}
-  .carousel-card{flex:0 0 32%;min-width:220px;max-width:360px;background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 8px 28px rgba(16,24,40,0.04);text-align:center;transition:transform .28s ease}
-  .carousel-card .img{height:120px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
-  .carousel-card .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
-  .carousel-card .role{color:var(--muted);font-weight:700;margin-bottom:8px}
-  .carousel-card .bio{color:var(--muted);font-size:14px;line-height:1.5}
-  .carousel-card.active{transform:scale(1.03);box-shadow:0 22px 48px rgba(106,13,173,0.06)}
-  .carousel-controls button{background:#fff;border-radius:999px;border:1px solid rgba(14,20,39,0.06);width:44px;height:44px;display:grid;place-items:center}
-
-  footer.site-footer{padding:40px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
+  footer{padding:28px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
 
   @media (max-width:900px){
-    .nav-list{display:none}
-    .mobile-toggle{display:inline-flex}
-    .mega-overlay{position:static;transform:none;left:auto;right:auto;width:100%;max-width:100%;border-radius:0;box-shadow:none}
-  }
-  @media (max-width:640px){
-    .company{font-size:18px}
+    .dropdown-panel{left:50%;transform:translateX(-50%);width:92%}
+    .hero h1{text-align:center}
+    .hero p{text-align:center;margin:0 auto}
   }
 </style>
 </head>
 <body>
 
-<header class="site-header" id="siteHeader" role="banner">
-  <div class="container header-row">
-    <div class="brand" style="gap:18px">
-      <div class="logo-monogram" aria-hidden="true">C</div>
-      <div class="title" style="margin-right:10px">
-        <div class="company">CrystalCore Business Solutions (CCBS)</div>
-        <div class="tag">Your strategic partner in clarity, precision, and innovation</div>
-      </div>
-    </div>
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <div class="logo" aria-hidden="true">C</div>
+    <div class="company">CrystalCore Business Solutions (CCBS)</div>
+    <div class="tag">Your strategic partner in clarity, precision, and innovation</div>
 
-    <div class="nav-wrap">
-      <nav class="primary" role="navigation" aria-label="Main navigation">
-        <div class="nav-list" id="navList">
-          <button class="nav-btn" id="servicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
-          <a class="nav-link" href="#why" data-target="why">Why You Need Us</a>
-          <a class="nav-link" href="#about" data-target="about">About</a>
-          <a class="nav-link" href="#experts" data-target="experts">Our Experts</a>
-          <a class="nav-link" href="#contact" data-target="contact">Contact</a>
-          <a class="nav-link cta" href="#request" data-target="request" id="bookCta">Book Consultation</a>
+    <!-- Menu bar (centered below tagline) -->
+    <div class="menu-bar" role="navigation" aria-label="Main menu">
+      <div class="nav-link"><a href="#about">About</a></div>
+
+      <div class="dropdown-wrap">
+        <button id="servicesBtn" class="nav-link" aria-haspopup="true" aria-expanded="false">Services ▾</button>
+        <div id="dropdown" class="dropdown-panel" role="menu" aria-hidden="true">
+          <ul class="dropdown-list" id="dropdownList">
+            <li><a href="#services-business-analysis" data-target="services-business-analysis">Business Analysis &amp; Planning</a></li>
+            <li><a href="#services-change-management" data-target="services-change-management">Change Management</a></li>
+            <li><a href="#services-compliance-documentation" data-target="services-compliance-documentation">Compliance &amp; Documentation</a></li>
+            <li><a href="#services-data-analysis" data-target="services-data-analysis">Data Analysis</a></li>
+            <li><a href="#services-digital-it" data-target="services-digital-it">Digital &amp; IT Consulting</a></li>
+            <li><a href="#services-digital-marketing" data-target="services-digital-marketing">Digital Marketing &amp; Online Visibility</a></li>
+            <li><a href="#services-financial-risk" data-target="services-financial-risk">Financial &amp; Risk Advisory</a></li>
+            <li><a href="#services-market-research" data-target="services-market-research">Market Research</a></li>
+            <li><a href="#services-project-management" data-target="services-project-management">Project Management</a></li>
+          </ul>
         </div>
-      </nav>
+      </div>
+
+      <div class="nav-link"><a href="#why">Why You Need Us</a></div>
+      <div class="nav-link"><a href="#request">Request</a></div>
+      <div class="nav-link"><a href="#contact">Contact</a></div>
+      <div class="nav-link cta"><a href="#request">Book Consultation</a></div>
     </div>
-
-    <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
-
-    <!-- subtle single-column overlay -->
-    <div id="megaOverlay" class="mega-overlay" role="menu" aria-label="Services list">
-      <ul class="mega-list" id="megaList" tabindex="0" role="listbox" aria-activedescendant="">
-        <li><a href="#services-business-analysis" data-target="services-business-analysis" role="option">Business Analysis &amp; Planning</a></li>
-        <li><a href="#services-change-management" data-target="services-change-management" role="option">Change Management</a></li>
-        <li><a href="#services-compliance-documentation" data-target="services-compliance-documentation" role="option">Compliance &amp; Documentation</a></li>
-        <li><a href="#services-data-analysis" data-target="services-data-analysis" role="option">Data Analysis</a></li>
-        <li><a href="#services-digital-it" data-target="services-digital-it" role="option">Digital &amp; IT Consulting</a></li>
-        <li><a href="#services-digital-marketing" data-target="services-digital-marketing" role="option">Digital Marketing &amp; Online Visibility</a></li>
-        <li><a href="#services-financial-risk" data-target="services-financial-risk" role="option">Financial &amp; Risk Advisory</a></li>
-        <li><a href="#services-market-research" data-target="services-market-research" role="option">Market Research</a></li>
-        <li><a href="#services-project-management" data-target="services-project-management" role="option">Project Management</a></li>
-      </ul>
-    </div>
-
   </div>
 </header>
 
 <main>
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero-grid">
-      <div class="hero-left">
+  <div class="container hero">
+    <div style="display:flex;gap:28px;align-items:flex-start;">
+      <div style="flex:1">
         <h1>Transforming businesses with smart analysis & strategy</h1>
-        <p style="margin-top:8px;color:var(--muted)">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
-
-        <div class="hero-cta" style="margin-top:18px">
-          <a class="cta" href="#services">Explore Services</a>
-        </div>
+        <p>CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
       </div>
-
-      <aside class="hero-card" style="width:320px;border-radius:12px;padding:16px;border:0;box-shadow:0 10px 30px rgba(16,24,40,0.04)">
-        <strong style="color:var(--purple)">Quick summary</strong>
-        <p style="color:var(--muted);margin-top:8px">We work with Startups, SMEs, and Large-scale Businesses — helping with BA, change management, IT consulting, compliance, and market research.</p>
+      <aside style="width:320px">
+        <div style="background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.04)">
+          <strong style="color:var(--purple)">Quick summary</strong>
+          <p style="color:var(--muted);margin-top:8px">We work with Startups, SMEs, and Large-scale Businesses — helping with BA, change management, IT consulting, compliance, and market research.</p>
+        </div>
       </aside>
     </div>
-  </section>
+  </div>
 
   <!-- About -->
-  <section id="about" class="section" style="background:#fff">
-    <div class="container-sm">
+  <section id="about" class="section">
+    <div class="container">
       <div class="section-title"><h2>About Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <p style="font-size:15px;line-height:1.6">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
+      <div class="about-content">
+        <p style="color:var(--muted)">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
-      <div class="we-work">
-        <h3>We work with</h3>
-      </div>
+        <div>
+          <strong style="display:block;margin-bottom:6px;color:var(--purple)">We work with:</strong>
+          <p style="color:var(--muted);margin:0 0 12px">Startups — helping them set strong foundations with lean processes and smart digital adoption.<br><br>
+          Small &amp; Medium Enterprises (SMEs) — enabling sustainable growth through structured planning, compliance, and market insights.<br><br>
+          Large-scale Businesses — guiding digital transformation, change management, and operational excellence at scale.</p>
 
-      <div class="dialogue-row" style="margin-top:8px">
-        <div class="dialogue">
-          <div class="img-placeholder">Startups</div>
-          <div class="title">Startups</div>
-          <div class="desc">helping them set strong foundations with lean processes and smart digital adoption.</div>
-        </div>
-
-        <div class="dialogue">
-          <div class="img-placeholder">SME</div>
-          <div class="title">Small &amp; Medium Enterprises (SMEs)</div>
-          <div class="desc">enabling sustainable growth through structured planning, compliance, and market insights.</div>
-        </div>
-
-        <div class="dialogue">
-          <div class="img-placeholder">Large</div>
-          <div class="title">Large-scale Businesses</div>
-          <div class="desc">guiding digital transformation, change management, and operational excellence at scale.</div>
+          <p style="color:var(--muted);margin-top:12px"><strong>Our expertise</strong> spans business analysis, transformation strategies, IT consulting, compliance, and market research, ensuring every client receives customized solutions aligned to their vision and goals.</p>
         </div>
       </div>
-
-      <p style="margin-top:20px;color:var(--muted)">Our expertise spans business analysis, transformation strategies, IT consulting, compliance, and market research, ensuring every client receives customized solutions aligned to their vision and goals.</p>
     </div>
   </section>
 
-  <!-- Services (flip cards) -->
+  <!-- Services -->
   <section id="services" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
-    <div class="container-sm">
+    <div class="container">
       <div class="section-title"><h2>Our Services</h2><div class="accent" aria-hidden="true"></div></div>
 
       <div class="services-grid" id="servicesGrid">
-        <!-- Cards omitted here for brevity - unchanged from previous implementation -->
-        <!-- (All 9 flip card blocks remain the same as before) -->
-        <!-- Business Analysis card example -->
-        <div id="services-business-analysis" class="flip-card" data-service="Business Analysis & Planning" tabindex="0">
-          <div class="flip-inner">
-            <div class="flip-face flip-front">
-              <div class="placeholder">BA</div>
-              <div style="margin-top:12px;text-align:center;">Business Analysis & Planning</div>
-            </div>
-            <div class="flip-face flip-back">
-              <strong style="color:var(--purple)">Business Analysis & Planning</strong>
-              <ul class="back-list" style="margin-top:8px">
-                <li>Planning & monitoring</li>
-                <li>BRD / FRD / SRS documentation</li>
-                <li>Business health check-up</li>
-              </ul>
-            </div>
-          </div>
+        <!-- Each card is a visible service with placeholder icon & details -->
+        <div id="services-business-analysis" class="service-card">
+          <div class="icon">BA</div>
+          <div class="title">Business Analysis &amp; Planning</div>
+          <div class="desc">Planning & monitoring • BRD / FRD / SRS documentation • Business health check-up</div>
         </div>
 
-        <!-- other cards unchanged... (Change Management, Compliance, Data, Digital IT, Digital Marketing, Financial, Market, PM) -->
-      </div>
+        <div id="services-change-management" class="service-card">
+          <div class="icon">CM</div>
+          <div class="title">Change Management</div>
+          <div class="desc">Business transformation • Transformation roadmaps • Process re-engineering</div>
+        </div>
 
+        <div id="services-compliance-documentation" class="service-card">
+          <div class="icon">CD</div>
+          <div class="title">Compliance &amp; Documentation</div>
+          <div class="desc">MSME & GST guidance • Certification & regulatory support</div>
+        </div>
+
+        <div id="services-data-analysis" class="service-card">
+          <div class="icon">DA</div>
+          <div class="title">Data Analysis</div>
+          <div class="desc">Dashboards & insights • Data cleansing</div>
+        </div>
+
+        <div id="services-digital-it" class="service-card">
+          <div class="icon">IT</div>
+          <div class="title">Digital &amp; IT Consulting</div>
+          <div class="desc">Digital strategy • CRM & ERP implementation • Workflow automation</div>
+        </div>
+
+        <div id="services-digital-marketing" class="service-card">
+          <div class="icon">DM</div>
+          <div class="title">Digital Marketing &amp; Online Visibility</div>
+          <div class="desc">SEO & Content Strategy • Social Media Campaigns • Performance Analytics</div>
+        </div>
+
+        <div id="services-financial-risk" class="service-card">
+          <div class="icon">FR</div>
+          <div class="title">Financial &amp; Risk Advisory</div>
+          <div class="desc">Financial planning • Risk mitigation • Risk analysis</div>
+        </div>
+
+        <div id="services-market-research" class="service-card">
+          <div class="icon">MR</div>
+          <div class="title">Market Research</div>
+          <div class="desc">Competitor analysis • Strategic growth roadmaps</div>
+        </div>
+
+        <div id="services-project-management" class="service-card">
+          <div class="icon">PM</div>
+          <div class="title">Project Management</div>
+          <div class="desc">Stakeholder management • Agile user stories</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Why You Need Us -->
-  <section id="why" class="section" style="background:#fff">
-    <div class="why-venn" style="display:flex;gap:36px;align-items:center;max-width:var(--max-w);margin:24px auto;padding:36px 20px">
-      <div style="flex:0 0 46%;display:grid;place-items:center">
-        <div style="width:100%;max-width:480px;height:420px;border-radius:18px;background:linear-gradient(180deg,#fff,#fbf3ff);display:grid;place-items:center;border:6px solid rgba(106,13,173,0.06)">
-          <!-- venn SVG placeholder -->
-          <svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="0" y="0" width="320" height="320" rx="18" fill="#fff"/>
-            <g opacity="0.95">
-              <circle cx="110" cy="120" r="80" fill="#f7e8ff"/>
-              <circle cx="205" cy="120" r="80" fill="#e9fff8"/>
-              <circle cx="158" cy="200" r="80" fill="#fff7ea"/>
-            </g>
-            <text x="160" y="170" text-anchor="middle" fill="#6A0DAD" font-weight="800" font-size="20">CLIENT</text>
-          </svg>
+  <section id="why" class="section">
+    <div class="container">
+      <div class="section-title"><h2>Why You Need Us</h2><div class="accent" aria-hidden="true"></div></div>
+      <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:320px">
+          <div style="font-size:20px;color:var(--purple);font-weight:800;margin-bottom:8px">We simplify complexity and deliver outcomes</div>
+          <p style="color:var(--muted);line-height:1.7">We simplify complex business problems with structured analysis, data-driven design, and measurable roadmaps that make transformation practical and achievable.</p>
         </div>
-      </div>
 
-      <div style="flex:1">
-        <div style="font-size:28px;color:var(--purple);font-weight:800;margin-bottom:12px">Why You Need Us</div>
-        <div style="color:var(--muted);margin-bottom:18px">We simplify complexity, accelerate decisions, and design scalable digital solutions that deliver measurable outcomes.</div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">Clarity in Complexity</div><div style="color:var(--muted)">We simplify challenges with structured analysis and practical insights to make confident decisions.</div></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">End-to-End Guidance</div><div style="color:var(--muted)">From startups to enterprises — support across strategy, implementation, and adoption.</div></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">Customized Solutions</div><div style="color:var(--muted)">Recommendations tailored to your goals, systems, and constraints.</div></div></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">Proven Expertise</div><div style="color:var(--muted)">10+ years of cross-industry experience delivering measurable impact.</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Our Experts (kept) -->
-  <section id="experts" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
-    <div class="container-sm">
-      <div class="section-title"><h2>Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
-      <p style="color:var(--muted);margin-bottom:18px">A team of experienced consultants delivering measurable outcomes across business analysis, transformation, technology, compliance, and finance.</p>
-      <div class="carousel-wrap">
-        <div class="carousel-viewport" id="carouselViewport" tabindex="0">
-          <div class="carousel-inner" id="carouselInner" aria-live="polite">
-            <div class="carousel-card" data-index="0" tabindex="0"><div class="img">Saravanan A</div><div class="name">Saravanan A — Founder</div><div class="role">Business Analyst & Consultant</div><div class="bio" style="color:var(--muted)">Founder with expertise in transformation and delivery.</div></div>
-            <div class="carousel-card" data-index="1" tabindex="0"><div class="img">Saraswathi</div><div class="name">Saraswathi — Software Developer</div><div class="role">Data & Dashboard</div><div class="bio" style="color:var(--muted)">Builds data-driven dashboards and integrations.</div></div>
-            <div class="carousel-card" data-index="2" tabindex="0"><div class="img">Umamageshwari</div><div class="name">Umamageshwari — Compliance</div><div class="role">Compliance & Market Research</div><div class="bio" style="color:var(--muted)">Expert in documentation and market insights.</div></div>
-            <div class="carousel-card" data-index="3" tabindex="0"><div class="img">Akshaya</div><div class="name">Akshaya — Finance</div><div class="role">Financial & Risk Advisory</div><div class="bio" style="color:var(--muted)">Financial planning and risk advisory.</div></div>
+        <div style="flex:1;min-width:300px">
+          <div style="background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 28px rgba(16,24,40,0.04)">
+            <div style="font-weight:700;color:var(--purple);margin-bottom:8px">Clarity in Complexity</div>
+            <div style="color:var(--muted);line-height:1.6">We break complexity into clear priorities and measurable actions.</div>
+            <div style="font-weight:700;color:var(--purple);margin-top:12px">End-to-End Guidance</div>
+            <div style="color:var(--muted);line-height:1.6">Support from strategy through implementation and adoption.</div>
           </div>
         </div>
-        <div style="display:flex;justify-content:center;margin-top:12px"><button id="carouselPrev">‹</button><button id="carouselNext" style="margin-left:8px">›</button></div>
       </div>
     </div>
   </section>
 
-  <!-- Request Form -->
+  <!-- Our Experts -->
+  <section id="experts" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
+    <div class="container">
+      <div class="section-title"><h2>Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
+      <p style="color:var(--muted);margin-bottom:12px">A team of experienced consultants delivering measurable outcomes across business analysis, transformation, technology, compliance, and finance.</p>
+
+      <div class="experts-grid">
+        <div class="expert">
+          <div class="img">SA</div>
+          <div class="name">Saravanan A — Founder</div>
+          <div class="role">Business Analyst &amp; Consultant</div>
+          <div class="bio">Founder with deep experience in business analysis, transformation roadmaps, and delivery. Focused on aligning people, process, and technology for measurable outcomes.</div>
+        </div>
+
+        <div class="expert">
+          <div class="img">SW</div>
+          <div class="name">Saraswathi — Software Developer</div>
+          <div class="role">Software Development &amp; Data Analysis</div>
+          <div class="bio">Experienced in building data-driven dashboards, integrations, and automation that help teams act faster on insights and scale sustainably.</div>
+        </div>
+
+        <div class="expert">
+          <div class="img">UM</div>
+          <div class="name">Umamageshwari — Compliance</div>
+          <div class="role">Compliance &amp; Market Research</div>
+          <div class="bio">Specialist in regulatory documentation, certification support, and market research to ensure compliant and informed decisions at scale.</div>
+        </div>
+
+        <div class="expert">
+          <div class="img">AK</div>
+          <div class="name">Akshaya — Finance</div>
+          <div class="role">Financial &amp; Risk Advisory</div>
+          <div class="bio">Focuses on financial planning, risk assessment, and pragmatic mitigation strategies to safeguard growth and profitability.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Request form placeholder -->
   <section id="request" class="section">
-    <div class="container-sm">
+    <div class="container">
       <div class="section-title"><h2>Client Information & Service Request</h2><div class="accent" aria-hidden="true"></div></div>
-      <form id="requestForm" class="card" style="margin-top:14px;padding:18px;border-radius:10px;background:#fff;border:1px solid rgba(14,20,39,0.04)">
-        <label for="rname">Name</label><input id="rname" name="name" required style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
-        <label for="rphone">Phone Number</label><input id="rphone" name="phone" required style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
-        <label for="remail">Email ID</label><input id="remail" name="email" type="email" required style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
-        <label for="rcompany">Company Name</label><input id="rcompany" name="company" style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
-        <label for="rmessage">Request Details</label><textarea id="rmessage" name="message" rows="5" style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%"></textarea>
-        <button type="submit" style="background:var(--purple);color:#fff;padding:10px 16px;border-radius:10px;border:none;margin-top:12px;font-weight:800">Submit Request</button>
-        <div id="requestResp" style="margin-top:10px;color:var(--muted)"></div>
+      <form id="requestForm" style="background:#fff;padding:18px;border-radius:10px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.04)">
+        <label for="name">Name</label><input id="name" name="name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin:6px 0 12px"/>
+        <label for="phone">Phone Number</label><input id="phone" name="phone" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin:6px 0 12px"/>
+        <label for="email">Email ID</label><input id="email" name="email" type="email" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin:6px 0 12px"/>
+        <label for="company">Company Name</label><input id="company" name="company" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin:6px 0 12px"/>
+        <label for="message">Request Details</label><textarea id="message" name="message" rows="5" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin:6px 0 12px"></textarea>
+        <button type="submit" class="cta">Submit Request</button>
+        <div id="resp" style="margin-top:10px;color:var(--muted)"></div>
       </form>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section" style="background:#fff">
-    <div class="container-sm">
+  <section id="contact" class="section">
+    <div class="container">
       <div class="section-title"><h2>Contact Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a><br>Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
+      <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a> • Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
     </div>
   </section>
 </main>
 
-<footer class="site-footer" style="padding:30px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff">
-  <div class="container">© <span id="year"></span> CrystalCore Business Solutions — Chennai, India</div>
+<footer>
+  <div class="container" style="padding:12px 0;color:var(--muted)">© <span id="year"></span> CrystalCore Business Solutions — Chennai, India</div>
 </footer>
 
 <script>
-/* small helpers */
-const $ = s => document.querySelector(s);
-const $$ = s => Array.from(document.querySelectorAll(s));
+// small helpers
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* header shrink */
-const header = document.getElementById('siteHeader');
-window.addEventListener('scroll', () => {
-  if (!header) return;
-  if (window.scrollY > 6) header.classList.add('shrink'); else header.classList.remove('shrink');
-});
-
-/* Mega overlay toggle (subtle) */
+// dropdown toggle
 const servicesBtn = document.getElementById('servicesBtn');
-const megaOverlay = document.getElementById('megaOverlay');
-let megaOpen = false;
-function openMega(){ megaOverlay.classList.add('open'); servicesBtn.setAttribute('aria-expanded','true'); megaOpen=true; }
-function closeMega(){ megaOverlay.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); megaOpen=false; }
-function toggleMega(){ megaOpen ? closeMega() : openMega(); }
+const dropdown = document.getElementById('dropdown');
 
-servicesBtn.addEventListener('click', (e)=>{ e.preventDefault(); toggleMega(); });
-servicesBtn.addEventListener('mouseenter', ()=> { if (window.innerWidth>900) openMega(); });
-servicesBtn.addEventListener('mouseleave', ()=> { if (window.innerWidth>900) setTimeout(()=>{ if (!megaOverlay.matches(':hover')) closeMega(); }, 180); });
-megaOverlay.addEventListener('mouseleave', ()=> { if (window.innerWidth>900) setTimeout(()=>{ if (!servicesBtn.matches(':hover')) closeMega(); }, 180); });
+function openDropdown(){ dropdown.classList.add('open'); servicesBtn.setAttribute('aria-expanded','true'); dropdown.setAttribute('aria-hidden','false'); }
+function closeDropdown(){ dropdown.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); dropdown.setAttribute('aria-hidden','true'); }
+servicesBtn.addEventListener('click', (e)=>{ e.preventDefault(); dropdown.classList.contains('open') ? closeDropdown() : openDropdown(); });
+document.addEventListener('click', (e)=>{ if (!servicesBtn.contains(e.target) && !dropdown.contains(e.target)) closeDropdown(); });
+document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeDropdown(); });
 
-document.addEventListener('click', (e)=>{
-  if (!megaOpen) return;
-  if (servicesBtn.contains(e.target)) return;
-  if (megaOverlay.contains(e.target)) return;
-  closeMega();
-});
-document.addEventListener('keydown',(e)=>{ if (e.key==='Escape') closeMega(); });
-
-/* Mega links scroll & highlight */
-const megaLinks = Array.from(document.querySelectorAll('#megaList a'));
-const HIGHLIGHT_MS = 2400;
-function focusAndFlipService(id){
+// dropdown links scroll to sections and highlight the service card briefly
+const links = Array.from(document.querySelectorAll('.dropdown-list a'));
+function highlightService(id){
   const el = document.getElementById(id);
   if (!el) return;
-  document.querySelector('#services')?.scrollIntoView({ behavior:'smooth', block:'start' });
-  setTimeout(()=>{
-    el.scrollIntoView({ behavior:'smooth', block:'center' });
-    el.classList.add('focus-service');
-    el.classList.add('flipped');
-    setTimeout(()=>{ el.classList.remove('focus-service'); el.classList.remove('flipped'); }, HIGHLIGHT_MS);
-  }, 360);
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  el.classList.add('focus'); // unused style but available for extension
+  el.style.boxShadow = '0 18px 40px rgba(106,13,173,0.08)';
+  setTimeout(()=>{ el.style.boxShadow = ''; el.classList.remove('focus'); }, 2000);
 }
-megaLinks.forEach(a=>{
+links.forEach(a=>{
   a.addEventListener('click', (ev)=>{
     ev.preventDefault();
-    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
-    closeMega();
-    if (tgt){ history.replaceState(null,'','#'+tgt); setTimeout(()=>focusAndFlipService(tgt), 260); }
+    const tgt = a.dataset.target;
+    closeDropdown();
+    if (tgt) setTimeout(()=>highlightService(tgt), 200);
   });
 });
 
-/* Flip cards */
-$$('.flip-card').forEach(card=>{
-  card.addEventListener('click', e=>{ if (e.target.closest('a')) return; card.classList.toggle('flipped'); });
-  card.addEventListener('keydown', e=>{ if (e.key==='Enter' || e.key===' ') { e.preventDefault(); card.classList.toggle('flipped'); } });
-});
-
-/* Basic carousel */
-const carouselInner = document.getElementById('carouselInner');
-const carouselViewport = document.getElementById('carouselViewport');
-const cards = carouselInner ? Array.from(carouselInner.children) : [];
-let currentIndex = 0;
-const INTERVAL = 3500;
-let timer = null;
-function renderCarousel(){ if (!carouselInner || cards.length===0) return; const cardWidth = cards[0].getBoundingClientRect().width + 18; const centerOffset = (carouselViewport.getBoundingClientRect().width - cardWidth) / 2; const translateX = -currentIndex * cardWidth + centerOffset; carouselInner.style.transform = `translateX(${translateX}px)`; cards.forEach((c,i)=>c.classList.toggle('active', i===currentIndex)); }
-function start(){ stop(); timer = setInterval(()=>{ currentIndex = (currentIndex+1) % cards.length; renderCarousel(); }, INTERVAL); }
-function stop(){ if (timer){ clearInterval(timer); timer=null; } }
-document.getElementById('carouselPrev')?.addEventListener('click', ()=>{ currentIndex = (currentIndex -1 + cards.length) % cards.length; renderCarousel(); stop(); });
-document.getElementById('carouselNext')?.addEventListener('click', ()=>{ currentIndex = (currentIndex +1) % cards.length; renderCarousel(); stop(); });
-window.addEventListener('resize', renderCarousel);
-setTimeout(()=>{ renderCarousel(); start(); }, 200);
-
-/* Request form placeholder */
+// simple form placeholder submit
 const reqForm = document.getElementById('requestForm');
-const reqResp = document.getElementById('requestResp');
+const resp = document.getElementById('resp');
 if (reqForm){
-  reqForm.addEventListener('submit', async (e)=>{ e.preventDefault(); reqResp.textContent='Sending...'; await new Promise(r=>setTimeout(r,600)); reqResp.textContent='✅ Thanks! Your request has been submitted.'; reqForm.reset(); });
+  reqForm.addEventListener('submit', async (e)=>{ e.preventDefault(); resp.textContent = 'Sending...'; await new Promise(r=>setTimeout(r,700)); resp.textContent = '✅ Thanks — we received your request.'; reqForm.reset(); });
 }
 </script>
 </body>
