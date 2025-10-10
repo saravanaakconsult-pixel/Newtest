@@ -21,85 +21,38 @@
   html{scroll-behavior:smooth}
   body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
 
   /* Header */
-  .site-header{
-    position:sticky;top:0;z-index:120;backdrop-filter:blur(6px);
-    background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.75));
-    border-bottom:1px solid rgba(15,23,42,0.04);
-    height:var(--header-h);display:flex;align-items:center;
-    transition:height .18s ease,box-shadow .18s ease,background .18s ease;
-  }
+  .site-header{position:sticky;top:0;z-index:120;backdrop-filter:blur(6px);background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.75));border-bottom:1px solid rgba(15,23,42,0.04);height:var(--header-h);display:flex;align-items:center;transition:height .18s ease,box-shadow .18s ease,background .18s ease}
   .site-header.shrink{height:70px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
   .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
   .header-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:16px}
-
   .brand{display:flex;align-items:center;gap:14px}
   .logo-monogram{width:52px;height:52px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;box-shadow:0 6px 20px rgba(106,13,173,0.07);flex-shrink:0}
   .title{line-height:1;display:flex;flex-direction:column}
-  .company{font-weight:800;color:var(--purple);font-size:20px;letter-spacing:0.2px}
+  .company{font-weight:900;color:var(--purple);font-size:20px;letter-spacing:0.2px}
   .tag{font-size:14px;color:var(--muted);margin-top:4px;max-width:520px}
 
-  /* NAV: no horizontal drag/scroll, wrap instead */
-  .nav-list{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    white-space:nowrap;
-    overflow:visible;                /* no horizontal scroll */
-    flex-wrap:wrap;                 /* wrap to next line if needed */
-    touch-action: pan-y;            /* prevent horizontal panning on touch */
-    padding-bottom:6px;
-  }
-  .nav-item, .nav-link{
-    position:relative;padding:10px 12px;border-radius:10px;font-weight:700;font-size:15px;color:var(--ink);transition:background .15s, color .12s;
-    flex:0 0 auto;
-  }
-  .nav-item:hover, .nav-link:hover{background:rgba(106,13,173,0.05)}
-  .nav-item::after, .nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
-  .nav-item:hover::after, .nav-link:hover::after, .nav-item.active::after, .nav-link.active::after{transform:scaleX(1)}
-
+  /* NAV */
+  .nav-list{display:flex;gap:12px;align-items:center;white-space:nowrap;overflow:visible;flex-wrap:wrap;touch-action: pan-y;padding-bottom:6px}
+  .nav-item,.nav-link{position:relative;padding:10px 12px;border-radius:10px;font-weight:700;font-size:15px;color:var(--ink);transition:background .15s,color .12s;flex:0 0 auto}
+  .nav-item:hover,.nav-link:hover{background:rgba(106,13,173,0.05)}
+  .nav-item::after,.nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
+  .nav-item:hover::after,.nav-link:hover::after,.nav-item.active::after,.nav-link.active::after{transform:scaleX(1)}
   .cta-link{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(106,13,173,0.08);font-weight:700}
   .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
+  .mega{position:absolute;top:100%;left:0;min-width:280px;max-width:720px;padding:12px;border-radius:12px;background:var(--card);box-shadow:0 18px 60px rgba(16,24,40,.12);transform-origin: top center;opacity:0;visibility:hidden;transition:opacity .18s ease, transform .18s ease, visibility .1s;transform: translateY(8px) scale(.99);z-index:95}
+  .nav-item.has-mega:focus-within .mega,.nav-item.has-mega:hover .mega{opacity:1;visibility:visible;transform:none}
+  .mega-grid{display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:12px;align-items:start}
+  .mega-grid a{padding:8px 6px;display:block;border-radius:8px;font-size:14px;color:#374151}
+  .mega-grid a:hover{background:#fbf7ff;color:var(--purple)}
 
-  /* Mega panel */
-  .mega{
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:280px;
-    max-width:720px;
-    width:auto;
-    padding:12px;
-    border-radius:12px;
-    background:var(--card);
-    box-shadow:0 18px 60px rgba(16,24,40,.12);
-    transform-origin: top center;
-    opacity:0;
-    visibility:hidden;
-    transition:opacity .18s ease, transform .18s ease, visibility .1s;
-    transform: translateY(6px) scale(.99);
-    z-index:95;
-  }
-  .nav-item.has-mega:focus-within .mega,
-  .nav-item.has-mega:hover .mega{
-    opacity:1;
-    visibility:visible;
-    transform:none;
-  }
-  .mega-grid{ display:grid; grid-template-columns:repeat(3,minmax(120px,1fr)); gap:12px; align-items:start; }
-  .mega-grid a{ padding:8px 6px; display:block; border-radius:8px; font-size:14px; color:#374151 }
-  .mega-grid a:hover{ background:#fbf7ff; color:var(--purple) }
-
-  @media (max-width:900px){
-    .nav-list{ display:none }
-    .mobile-toggle{ display:inline-flex }
-    .mega{ position:static; opacity:1; visibility:visible; transform:none; box-shadow:none; padding:12px; border-radius:10px; }
-  }
+  @media (max-width:900px){.nav-list{display:none}.mobile-toggle{display:inline-flex}.mega{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;padding:12px;border-radius:10px}}
 
   /* Hero */
   main{padding-top:18px}
-  .hero{padding:40px 0 20px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
+  .hero{padding:36px 0 18px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
   .hero-grid{display:flex;gap:28px;align-items:flex-start;max-width:var(--max-w);margin:0 auto;padding:0 20px}
   .hero-left{flex:1}
   .hero h1{font-size:34px;margin:12px 0 8px;line-height:1.03;color:var(--ink)}
@@ -114,17 +67,17 @@
   .section-title h2{margin:0;font-size:22px;color:var(--purple)}
   .section-title .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
 
-  /* We work with - centered heading with bar inside */
-  .we-work { text-align:center; margin-top:18px; margin-bottom:26px; }
-  .we-work h3 { display:inline-block; position:relative; padding:0 18px 6px 18px; font-size:20px; color:var(--purple); font-weight:800; }
-  .we-work h3::before { content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:-8px; width:120px; height:8px; background:var(--yellow); border-radius:999px; z-index:-1; }
+  /* We work with */
+  .we-work{text-align:center;margin-top:18px;margin-bottom:26px}
+  .we-work h3{display:inline-block;position:relative;padding:0 18px 6px 18px;font-size:20px;color:var(--purple);font-weight:800}
+  .we-work h3::before{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;width:120px;height:8px;background:var(--yellow);border-radius:999px;z-index:-1}
 
   /* Dialogue boxes */
   .dialogue-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:start}
-  .dialogue{ background:var(--card); padding:18px; border-radius:12px; border:1px solid rgba(14,20,39,0.04); box-shadow:0 10px 30px rgba(16,24,40,0.05); text-align:center; }
-  .dialogue .img-placeholder{ height:140px; border-radius:10px; background:linear-gradient(180deg,#f3f0ff,#efe9ff); display:grid; place-items:center; color:var(--purple); font-weight:800; margin-bottom:12px; }
-  .dialogue .title{ font-weight:700; color:var(--purple); margin-bottom:8px }
-  .dialogue .desc{ color:var(--muted); font-size:15px; line-height:1.6 }
+  .dialogue{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.05);text-align:center}
+  .dialogue .img-placeholder{height:140px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:800;margin-bottom:12px}
+  .dialogue .title{font-weight:700;color:var(--purple);margin-bottom:8px}
+  .dialogue .desc{color:var(--muted);font-size:15px;line-height:1.6}
 
   /* Services flip grid */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
@@ -138,16 +91,37 @@
   .back-list li{margin:8px 0;padding-left:8px;position:relative}
   .back-list li::before{content:'•';position:absolute;left:0;color:var(--purple);font-weight:800}
 
-  /* focus highlight class for clicked service */
-  .focus-service{ box-shadow:0 18px 40px rgba(106,13,173,0.14) !important; transform:translateY(-6px) scale(1.02) !important; border-color: rgba(106,13,173,0.18) !important; transition:transform .28s ease, box-shadow .28s ease; }
+  /* highlight class */
+  .focus-service{box-shadow:0 18px 40px rgba(106,13,173,0.14) !important;transform:translateY(-6px) scale(1.02) !important;border-color: rgba(106,13,173,0.18) !important;transition:transform .28s ease, box-shadow .28s ease}
 
-  /* Experts */
-  .experts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .expert{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.05);text-align:center}
-  .expert .img{height:120px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
-  .expert .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
-  .expert .role{color:var(--muted);font-weight:700;margin-bottom:8px}
-  .expert .bio{color:var(--muted);font-size:14px;line-height:1.5}
+  /* Experts carousel */
+  .carousel-wrap{max-width:var(--max-w);margin:0 auto;padding:28px 20px;position:relative}
+  .carousel-viewport{overflow:hidden;border-radius:12px}
+  .carousel-inner{display:flex;gap:18px;transition:transform .6s cubic-bezier(.2,.9,.2,1);will-change:transform}
+  .carousel-card{flex:0 0 32%;min-width:220px;max-width:360px;background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 8px 28px rgba(16,24,40,0.06);text-align:center;transform-origin:center center;transition:transform .28s ease,box-shadow .28s ease}
+  .carousel-card .img{height:120px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
+  .carousel-card .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
+  .carousel-card .role{color:var(--muted);font-weight:700;margin-bottom:8px}
+  .carousel-card .bio{color:var(--muted);font-size:14px;line-height:1.5}
+  .carousel-card.active{transform:scale(1.04);box-shadow:0 22px 48px rgba(106,13,173,0.12)}
+  .carousel-controls{position:absolute;left:12px;right:12px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
+  .carousel-controls button{pointer-events:auto;background:#fff;border-radius:999px;border:1px solid rgba(14,20,39,0.06);width:44px;height:44px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+  .carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+  .carousel-dots button{width:10px;height:10px;border-radius:999px;border:none;background:#e2e8f0}
+  .carousel-dots button.active{background:var(--purple)}
+
+  /* Venn + Why Need Us layout */
+  .why-venn{display:flex;gap:36px;align-items:center;max-width:var(--max-w);margin:24px auto;padding:36px 20px}
+  .venn-left{flex:0 0 46%;display:grid;place-items:center}
+  .venn-placeholder{width:100%;max-width:480px;height:420px;border-radius:18px;background:linear-gradient(180deg,#fff,#fbf3ff);display:grid;place-items:center;border:6px solid rgba(106,13,173,0.06)}
+  .venn-right{flex:1}
+  .why-title{font-size:28px;color:var(--purple);font-weight:800;margin-bottom:12px}
+  .why-sub{color:var(--muted);margin-bottom:18px}
+  .why-list{display:flex;flex-direction:column;gap:12px}
+  .why-item{display:flex;gap:12px;align-items:flex-start}
+  .why-dot{width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px;flex-shrink:0}
+  .why-item .item-title{font-weight:700;color:#222;font-size:16px}
+  .why-item .item-desc{color:var(--muted);font-size:14px;margin-top:6px}
 
   /* Form & footer */
   form.card{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.05)}
@@ -156,9 +130,14 @@
   button[type=submit]{background:var(--purple);color:#fff;padding:10px 16px;border-radius:999px;border:none;margin-top:12px;font-weight:800}
   footer.site-footer{padding:40px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
 
-  @media (max-width:900px){
-    .hero-grid{flex-direction:column}
-    .hero-card{width:100%}
+  @media (max-width:1000px){
+    .carousel-card{flex:0 0 45%}
+    .why-left{flex-basis:40%}
+    .why-venn{flex-direction:column;gap:18px;padding:20px}
+    .venn-left{width:100%}
+  }
+  @media (max-width:640px){
+    .carousel-card{flex:0 0 84%}
     .company{font-size:18px}
   }
 </style>
@@ -180,7 +159,6 @@
         <div class="nav-item has-mega" tabindex="0" data-target="services" aria-expanded="false">Services
           <div class="mega" role="menu" aria-label="Services menu">
             <div class="mega-grid" id="megaGrid">
-              <!-- Titles only: each link targets the service ID slug -->
               <a href="#services-business-analysis" data-target="services-business-analysis">Business Analysis & Planning</a>
               <a href="#services-change-management" data-target="services-change-management">Change Management</a>
               <a href="#services-compliance-documentation" data-target="services-compliance-documentation">Compliance & Documentation</a>
@@ -194,7 +172,7 @@
           </div>
         </div>
 
-        <a class="nav-link" href="#why" data-target="why">Why Choose Us</a>
+        <a class="nav-link" href="#why" data-target="why">Why You Need Us</a>
         <a class="nav-link" href="#about" data-target="about">About</a>
         <a class="nav-link" href="#experts" data-target="experts">Our Experts</a>
         <a class="nav-link" href="#contact" data-target="contact">Contact</a>
@@ -234,12 +212,10 @@
       <p style="font-size:15px;line-height:1.6">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation.
       We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
-      <!-- We work with centered heading -->
       <div class="we-work">
         <h3>We work with</h3>
       </div>
 
-      <!-- Dialogue boxes -->
       <div class="dialogue-row" style="margin-top:8px">
         <div class="dialogue">
           <div class="img-placeholder">Startups</div>
@@ -264,13 +240,13 @@
     </div>
   </section>
 
-  <!-- Services (flip cards) -->
+  <!-- Services -->
   <section id="services" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Our Services</h2><div class="accent" aria-hidden="true"></div></div>
 
       <div class="services-grid" id="servicesGrid">
-        <!-- 1. Business Analysis & Planning -->
+        <!-- 1 -->
         <div id="services-business-analysis" class="flip-card" data-service="Business Analysis & Planning" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -288,7 +264,7 @@
           </div>
         </div>
 
-        <!-- 2. Change Management (formerly Business Transformation) -->
+        <!-- 2 -->
         <div id="services-change-management" class="flip-card" data-service="Change Management" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -306,7 +282,7 @@
           </div>
         </div>
 
-        <!-- 3. Compliance & Documentation -->
+        <!-- 3 -->
         <div id="services-compliance-documentation" class="flip-card" data-service="Compliance & Documentation" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -323,7 +299,7 @@
           </div>
         </div>
 
-        <!-- 4. Data Analysis -->
+        <!-- 4 -->
         <div id="services-data-analysis" class="flip-card" data-service="Data Analysis" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -340,7 +316,7 @@
           </div>
         </div>
 
-        <!-- 5. Digital & IT Consulting -->
+        <!-- 5 -->
         <div id="services-digital-it" class="flip-card" data-service="Digital & IT Consulting" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -358,7 +334,7 @@
           </div>
         </div>
 
-        <!-- 6. Digital Marketing & Online Visibility -->
+        <!-- 6 -->
         <div id="services-digital-marketing" class="flip-card" data-service="Digital Marketing & Online Visibility" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -376,7 +352,7 @@
           </div>
         </div>
 
-        <!-- 7. Financial & Risk Advisory -->
+        <!-- 7 -->
         <div id="services-financial-risk" class="flip-card" data-service="Financial & Risk Advisory" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -394,7 +370,7 @@
           </div>
         </div>
 
-        <!-- 8. Market Research -->
+        <!-- 8 -->
         <div id="services-market-research" class="flip-card" data-service="Market Research" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -411,7 +387,7 @@
           </div>
         </div>
 
-        <!-- 9. Project Management -->
+        <!-- 9 -->
         <div id="services-project-management" class="flip-card" data-service="Project Management" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -432,56 +408,140 @@
     </div>
   </section>
 
-  <!-- Why Choose Us -->
+  <!-- Why You Need Us (Venn + bullets) -->
   <section id="why" class="section" style="background:#fff">
-    <div class="container-sm">
-      <div class="section-title"><h2>Why Choose Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <ul style="line-height:1.8;color:var(--muted);padding-left:18px">
-        <li><strong>Clarity in Complexity</strong> – we simplify challenges with structured analysis and insights.</li>
-        <li><strong>End-to-End Guidance</strong> – from startups to enterprises, we support every stage of growth.</li>
-        <li><strong>Customized Solutions</strong> – every recommendation is tailored to your goals.</li>
-        <li><strong>Proven Expertise</strong> – 10+ years of cross-industry experience with measurable results.</li>
-        <li><strong>Digital-First Approach</strong> – expertise in CRM, ERP, automation, and transformation.</li>
-        <li><strong>Reliable Partnership</strong> – compliance, risk mitigation, and change management support.</li>
-        <li><strong>24/7 Support</strong> – always available when you need us most.</li>
-      </ul>
+    <div class="why-venn">
+      <div class="venn-left">
+        <div class="venn-placeholder" aria-hidden="true">
+          <!-- Placeholder Venn diagram image -->
+          <svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="320" height="320" rx="18" fill="#fff"/>
+            <g opacity="0.95">
+              <circle cx="110" cy="120" r="80" fill="#f7e8ff"/>
+              <circle cx="205" cy="120" r="80" fill="#e9fff8"/>
+              <circle cx="158" cy="200" r="80" fill="#fff7ea"/>
+            </g>
+            <text x="160" y="170" text-anchor="middle" fill="#6A0DAD" font-weight="800" font-size="20">CLIENT</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="venn-right">
+        <div class="why-title">Why You Need Us</div>
+        <div class="why-sub">We simplify complexity, accelerate decisions, and design scalable digital solutions that deliver measurable outcomes.</div>
+
+        <div class="why-list" role="list">
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">Clarity in Complexity</div>
+              <div class="item-desc">We simplify challenges with structured analysis and practical insights to make confident decisions.</div>
+            </div>
+          </div>
+
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">End-to-End Guidance</div>
+              <div class="item-desc">From startups to enterprises — support across strategy, implementation, and adoption.</div>
+            </div>
+          </div>
+
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">Customized Solutions</div>
+              <div class="item-desc">Recommendations tailored to your goals, systems, and constraints.</div>
+            </div>
+          </div>
+
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">Proven Expertise</div>
+              <div class="item-desc">10+ years of cross-industry experience delivering measurable impact.</div>
+            </div>
+          </div>
+
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">Digital-First Approach</div>
+              <div class="item-desc">CRM, ERP, automation and analytics to scale your operations.</div>
+            </div>
+          </div>
+
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">Reliable Partnership</div>
+              <div class="item-desc">Compliance, risk mitigation and change management you can trust.</div>
+            </div>
+          </div>
+
+          <div class="why-item" role="listitem">
+            <div class="why-dot" aria-hidden="true"></div>
+            <div>
+              <div class="item-title">24/7 Support</div>
+              <div class="item-desc">Always available when you need us most.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Our Experts -->
+  <!-- Our Experts (carousel) -->
   <section id="experts" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
       <p style="color:var(--muted);margin-bottom:18px">A team of experienced consultants delivering measurable outcomes across business analysis, transformation, technology, compliance, and finance.</p>
 
-      <div class="experts-grid">
-        <div class="expert">
-          <div class="img">Saravanan A</div>
-          <div class="name">Saravanan A — Founder</div>
-          <div class="role">Business Analyst & Consultant — Project Management, Digital Marketing & Change Management</div>
-          <div class="bio">Saravanan is the founder of CrystalCore Business Solutions with 10+ years delivering transformation programs across startups and enterprises. He specializes in requirements-led change, agile project delivery, and digital go-to-market strategies.</div>
+      <div class="carousel-wrap" aria-roledescription="carousel">
+        <div class="carousel-viewport" id="carouselViewport" tabindex="0">
+          <div class="carousel-inner" id="carouselInner" aria-live="polite">
+            <!-- Card 1 -->
+            <div class="carousel-card" data-index="0" tabindex="0" aria-label="Slide 1: Saravanan A, Founder">
+              <div class="img">Saravanan A</div>
+              <div class="name">Saravanan A — Founder</div>
+              <div class="role">Business Analyst & Consultant — Project Management, Digital Marketing & Change Management</div>
+              <div class="bio">Saravanan is the founder of CrystalCore Business Solutions with 10+ years delivering transformation programs across startups and enterprises. He specializes in requirements-led change and agile delivery.</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="carousel-card" data-index="1" tabindex="0" aria-label="Slide 2: Saraswathi, Software Developer & Data Analyst">
+              <div class="img">Saraswathi</div>
+              <div class="name">Saraswathi — Software Developer & Data Analyst</div>
+              <div class="role">Software Development, Data Analysis & Dashboards</div>
+              <div class="bio">Saraswathi builds data-driven solutions and dashboards that turn raw data into actionable insights for leaders and teams.</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="carousel-card" data-index="2" tabindex="0" aria-label="Slide 3: Umamageshwari, Compliance & Market Research">
+              <div class="img">Umamageshwari</div>
+              <div class="name">Umamageshwari — Compliance & Market Research</div>
+              <div class="role">Compliance, Documentation & Market Research</div>
+              <div class="bio">Umamageshwari brings regulatory expertise and market research experience to ensure compliance readiness and strategic positioning.</div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="carousel-card" data-index="3" tabindex="0" aria-label="Slide 4: Akshaya, Financial & Risk Advisory">
+              <div class="img">Akshaya</div>
+              <div class="name">Akshaya — Financial & Risk Advisory</div>
+              <div class="role">Financial Planning, Risk Mitigation & Advisory</div>
+              <div class="bio">Akshaya guides financial planning and risk-management strategies that protect business value while enabling growth.</div>
+            </div>
+          </div>
         </div>
 
-        <div class="expert">
-          <div class="img">Saraswathi</div>
-          <div class="name">Saraswathi — Software Developer & Data Analyst</div>
-          <div class="role">Software Development, Data Analysis & Dashboards</div>
-          <div class="bio">Saraswathi builds data-driven solutions and dashboards that turn raw data into actionable insights. She combines engineering best practices with strong analytics to help teams measure impact and make confident decisions.</div>
+        <!-- controls -->
+        <div class="carousel-controls" aria-hidden="false">
+          <button id="carouselPrev" aria-label="Previous slide">‹</button>
+          <button id="carouselNext" aria-label="Next slide">›</button>
         </div>
 
-        <div class="expert">
-          <div class="img">Umamageshwari</div>
-          <div class="name">Umamageshwari — Compliance & Market Research</div>
-          <div class="role">Compliance, Documentation & Market Research</div>
-          <div class="bio">Umamageshwari brings deep regulatory expertise and market research experience to ensure compliance readiness and strategic positioning. She helps clients navigate certification pathways and competitive market analysis.</div>
-        </div>
-
-        <div class="expert">
-          <div class="img">Akshaya</div>
-          <div class="name">Akshaya — Financial & Risk Advisory</div>
-          <div class="role">Financial Planning, Risk Mitigation & Advisory</div>
-          <div class="bio">Akshaya guides financial planning and risk management strategies that protect business value while enabling growth. Her pragmatic approach blends quantitative analysis with operational insights to reduce exposure and improve forecasting.</div>
-        </div>
+        <!-- dots -->
+        <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Carousel dots" style="margin-top:12px;display:flex;justify-content:center"></div>
       </div>
     </div>
   </section>
@@ -518,7 +578,6 @@
       <p class="muted">📞💬 Need help? Connect with us — 24/7 support via call & chat.</p>
     </div>
   </section>
-
 </main>
 
 <footer class="site-footer">
@@ -528,7 +587,9 @@
 </footer>
 
 <script>
-/* interactions */
+/* Basic utilities */
+const el = sel => document.querySelector(sel);
+const els = sel => Array.from(document.querySelectorAll(sel));
 
 /* set year */
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -540,8 +601,97 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 10) header.classList.add('shrink'); else header.classList.remove('shrink');
 });
 
-/* reveal & active nav */
-const sections = Array.from(document.querySelectorAll('main section[id], main section'));
+/* Mega menu alignment to avoid pushing page flow */
+els('.nav-item.has-mega').forEach(item => {
+  const panel = item.querySelector('.mega');
+  if (!panel) return;
+  const align = () => {
+    const rect = item.getBoundingClientRect();
+    const parentRect = document.querySelector('.container').getBoundingClientRect();
+    let left = rect.left - parentRect.left;
+    left = Math.max(8, Math.min(left, parentRect.width - panel.offsetWidth - 24));
+    panel.style.left = left + 'px';
+  };
+  align();
+  window.addEventListener('resize', align, { passive: true });
+});
+
+/* Services: click from mega menu scroll & highlight */
+const HIGHLIGHT_MS = 2800;
+function focusAndFlipService(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('focus-service');
+    el.classList.add('flipped');
+    setTimeout(() => { el.classList.remove('focus-service'); el.classList.remove('flipped'); }, HIGHLIGHT_MS);
+  }, 420);
+}
+els('.mega-grid a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
+    if (tgt) {
+      history.replaceState(null, '', '#' + tgt);
+      focusAndFlipService(tgt);
+      (a.closest('.nav-item.has-mega'))?.blur();
+    }
+  });
+});
+
+/* Handle direct hash on load */
+function handleHashOnLoad() {
+  const h = location.hash.replace('#','');
+  if (!h) return;
+  const serviceIds = [
+    'services-business-analysis','services-change-management','services-compliance-documentation',
+    'services-data-analysis','services-digital-it','services-digital-marketing',
+    'services-financial-risk','services-market-research','services-project-management'
+  ];
+  if (serviceIds.includes(h)) {
+    setTimeout(() => focusAndFlipService(h), 400);
+  } else {
+    const el = document.getElementById(h);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+window.addEventListener('load', handleHashOnLoad);
+
+/* Flip card interactions (services) */
+els('.flip-card').forEach(card => {
+  card.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    card.classList.toggle('flipped');
+  });
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.classList.toggle('flipped');
+    }
+  });
+});
+
+/* Request form placeholder behavior */
+const reqForm = document.getElementById('requestForm');
+const reqResp = document.getElementById('requestResp');
+if (reqForm) {
+  reqForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    reqResp.textContent = 'Sending...';
+    try {
+      await new Promise(r => setTimeout(r, 700));
+      reqResp.textContent = '✅ Thanks! Your request has been submitted. We will contact within 1 business day.';
+      reqForm.reset();
+    } catch (err) {
+      reqResp.textContent = '❌ Error submitting. Please try again later.';
+    }
+  });
+}
+
+/* NAV active & reveal */
+const sections = Array.from(document.querySelectorAll('main section[id]'));
 const navNodes = Array.from(document.querySelectorAll('.nav-item, .nav-link'));
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -560,7 +710,7 @@ const observer = new IntersectionObserver((entries) => {
 }, {threshold: 0.32});
 sections.forEach(s => observer.observe(s));
 
-/* mobile toggle */
+/* Mobile toggle */
 const mobileToggle = document.getElementById('mobileToggle');
 const navList = document.getElementById('navList');
 if (mobileToggle && navList) {
@@ -571,115 +721,126 @@ if (mobileToggle && navList) {
   });
 }
 
-/* flip cards: hover works on desktop, click toggles on mobile & keyboard */
-document.querySelectorAll('.flip-card').forEach(card => {
-  const inner = card.querySelector('.flip-inner');
-  card.addEventListener('click', (e) => {
-    if (e.target.closest('a')) return;
-    card.classList.toggle('flipped');
-  });
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      card.classList.toggle('flipped');
-    }
-  });
-});
+/* ---------------------------
+   Experts carousel JS
+   --------------------------- */
+const CAROUSEL_INTERVAL = 3500; // ms
+const carouselInner = document.getElementById('carouselInner');
+const carouselViewport = document.getElementById('carouselViewport');
+const cards = Array.from(carouselInner.children);
+const dotsContainer = document.getElementById('carouselDots');
+let currentIndex = 0;
+let autoplayTimer = null;
+let visibleCount = 3;
 
-/* placeholder form handling */
-const reqForm = document.getElementById('requestForm');
-const reqResp = document.getElementById('requestResp');
-if (reqForm) {
-  reqForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    reqResp.textContent = 'Sending...';
-    try {
-      await new Promise(r => setTimeout(r, 700));
-      reqResp.textContent = '✅ Thanks! Your request has been submitted. We will contact within 1 business day.';
-      reqForm.reset();
-    } catch (err) {
-      reqResp.textContent = '❌ Error submitting. Please try again later.';
-    }
-  });
-}
-
-/* Mega menu links behavior:
-   - clicking any title will scroll to matching service card,
-   - add highlight class + flip card,
-   - remove highlight after timeout.
-*/
-const HIGHLIGHT_MS = 2800;
-
-function focusAndFlipService(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  // ensure services section is visible
-  document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // small delay to allow section to be visible
-  setTimeout(() => {
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // add highlight
-    el.classList.add('focus-service');
-    // flip
-    el.classList.add('flipped');
-    // clear after timeout
-    setTimeout(() => {
-      el.classList.remove('focus-service');
-      el.classList.remove('flipped');
-    }, HIGHLIGHT_MS);
-  }, 420);
-}
-
-// intercept mega menu links
-document.querySelectorAll('.mega-grid a').forEach(a => {
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
-    if (tgt) {
-      // update hash without immediate jump
-      history.replaceState(null, '', '#' + tgt);
-      focusAndFlipService(tgt);
-      // close mega (move focus)
-      (a.closest('.nav-item.has-mega'))?.blur();
-    }
-  });
-});
-
-// handle direct hash on load (user arrived with #services-...)
-function handleHashOnLoad() {
-  const h = location.hash.replace('#','');
-  if (!h) return;
-  // if it's a service id, focus it
-  const serviceIds = [
-    'services-business-analysis','services-change-management','services-compliance-documentation',
-    'services-data-analysis','services-digital-it','services-digital-marketing',
-    'services-financial-risk','services-market-research','services-project-management'
-  ];
-  if (serviceIds.includes(h)) {
-    // small delay once page paints
-    setTimeout(() => focusAndFlipService(h), 400);
-  } else {
-    // scroll to the section if exists
-    const el = document.getElementById(h);
-    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+// Build dots
+function buildDots() {
+  dotsContainer.innerHTML = '';
+  const pages = Math.ceil(cards.length);
+  for (let i=0;i<pages;i++){
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    b.dataset.index = i;
+    b.addEventListener('click', () => {
+      goTo(i);
+      pauseAutoplay();
+    });
+    dotsContainer.appendChild(b);
   }
 }
-window.addEventListener('load', handleHashOnLoad);
+function updateDots() {
+  const dots = Array.from(dotsContainer.children);
+  dots.forEach(d => d.classList.remove('active'));
+  const idx = currentIndex % cards.length;
+  if (dots[idx]) dots[idx].classList.add('active');
+}
 
-/* align mega panel (prevent overflow) */
-document.querySelectorAll('.nav-item.has-mega').forEach(item => {
-  const panel = item.querySelector('.mega');
-  if (!panel) return;
-  const align = () => {
-    const rect = item.getBoundingClientRect();
-    const parentRect = document.querySelector('.container').getBoundingClientRect();
-    let left = rect.left - parentRect.left;
-    left = Math.max(8, Math.min(left, parentRect.width - panel.offsetWidth - 24));
-    panel.style.left = left + 'px';
-  };
-  align();
-  window.addEventListener('resize', align, { passive: true });
+// Update visibleCount based on width
+function computeVisibleCount() {
+  const w = window.innerWidth;
+  if (w <= 640) visibleCount = 1;
+  else if (w <= 1000) visibleCount = 2;
+  else visibleCount = 3;
+}
+
+// position carousel to currentIndex (center the active card)
+function renderCarousel() {
+  computeVisibleCount();
+  // clamp index
+  currentIndex = ((currentIndex % cards.length) + cards.length) % cards.length;
+  const cardWidth = cards[0].getBoundingClientRect().width + 18; // gap
+  // Calculate offset so active card is centered when possible
+  const centerOffset = (carouselViewport.getBoundingClientRect().width - cardWidth) / 2;
+  const translateX = -currentIndex * cardWidth + centerOffset;
+  carouselInner.style.transform = `translateX(${translateX}px)`;
+  // active styling
+  cards.forEach((c, i) => c.classList.remove('active'));
+  const active = cards[currentIndex];
+  if (active) active.classList.add('active');
+  updateDots();
+  // announce for a11y
+  carouselViewport.setAttribute('aria-label', `Slide ${currentIndex+1} of ${cards.length} — ${active ? (active.querySelector('.name')?.textContent || '') : ''}`);
+}
+
+function prev() {
+  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+  renderCarousel();
+}
+function next() {
+  currentIndex = (currentIndex + 1) % cards.length;
+  renderCarousel();
+}
+function goTo(i) {
+  currentIndex = i % cards.length;
+  renderCarousel();
+}
+
+function startAutoplay() {
+  stopAutoplay();
+  autoplayTimer = setInterval(() => {
+    currentIndex = (currentIndex + 1) % cards.length;
+    renderCarousel();
+  }, CAROUSEL_INTERVAL);
+}
+function stopAutoplay() {
+  if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+}
+function pauseAutoplay() { stopAutoplay(); }
+function resumeAutoplay() { startAutoplay(); }
+
+// controls
+document.getElementById('carouselPrev').addEventListener('click', () => { prev(); pauseAutoplay(); });
+document.getElementById('carouselNext').addEventListener('click', () => { next(); pauseAutoplay(); });
+
+// build dots and initialize
+buildDots();
+updateDots();
+window.addEventListener('resize', () => { renderCarousel(); });
+
+// Pause on hover / focus
+carouselViewport.addEventListener('mouseenter', pauseAutoplay);
+carouselViewport.addEventListener('mouseleave', resumeAutoplay);
+carouselViewport.addEventListener('focusin', pauseAutoplay);
+carouselViewport.addEventListener('focusout', resumeAutoplay);
+
+// keyboard navigation
+carouselViewport.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') { prev(); pauseAutoplay(); }
+  if (e.key === 'ArrowRight') { next(); pauseAutoplay(); }
 });
+
+// Ensure cards are focusable and announce
+cards.forEach((c, idx) => {
+  c.setAttribute('tabindex', '0');
+  c.dataset.index = idx;
+  c.addEventListener('focus', () => { pauseAutoplay(); currentIndex = idx; renderCarousel(); });
+});
+
+// start
+setTimeout(() => { renderCarousel(); startAutoplay(); }, 300);
+
+/* End carousel */
 </script>
 </body>
 </html>
