@@ -13,7 +13,6 @@
     --muted:#6b7280;
     --bg:#fbfbfe;
     --card:#ffffff;
-    --glass:rgba(255,255,255,0.85);
     --header-h:92px;
     --max-w:1180px;
   }
@@ -21,171 +20,121 @@
   html{scroll-behavior:smooth}
   body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
 
-  /* Header */
-  .site-header{position:sticky;top:0;z-index:140;backdrop-filter:blur(6px);background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.75));border-bottom:1px solid rgba(15,23,42,0.04);height:var(--header-h);display:flex;align-items:center;transition:height .18s ease,box-shadow .18s ease,background .18s ease}
+  /* Header - clean */
+  .site-header{position:sticky;top:0;z-index:140;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(15,23,42,0.04);height:var(--header-h);display:flex;align-items:center;transition:height .18s ease,box-shadow .18s ease}
   .site-header.shrink{height:70px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
   .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
   .header-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:16px}
   .brand{display:flex;align-items:center;gap:14px}
-  .logo-monogram{width:52px;height:52px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;box-shadow:0 6px 20px rgba(106,13,173,0.07);flex-shrink:0}
+  .logo-monogram{width:64px;height:64px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;flex-shrink:0}
   .title{line-height:1;display:flex;flex-direction:column}
-  .company{font-weight:900;color:var(--purple);font-size:20px;letter-spacing:0.2px}
-  .tag{font-size:14px;color:var(--muted);margin-top:4px;max-width:520px}
+  .company{font-weight:900;color:var(--purple);font-size:22px;letter-spacing:0.2px}
+  .tag{font-size:14px;color:var(--muted);margin-top:4px}
 
-  /* NAV */
-  .nav-list{display:flex;gap:12px;align-items:center;white-space:nowrap;overflow:visible;flex-wrap:wrap;touch-action: pan-y;padding-bottom:6px;position:relative}
-  .nav-item,.nav-link{position:relative;padding:10px 12px;border-radius:10px;font-weight:700;font-size:15px;color:var(--ink);transition:background .15s,color .12s;flex:0 0 auto}
-  .nav-item:hover,.nav-link:hover{background:rgba(106,13,173,0.05)}
-  .nav-item::after,.nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
-  .nav-item:hover::after,.nav-link:hover::after,.nav-item.active::after,.nav-link.active::after{transform:scaleX(1)}
-  .cta-link{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(106,13,173,0.08);font-weight:700}
-  .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
+  /* Navigation (uniform look) */
+  .nav-list{display:flex;gap:18px;align-items:center;white-space:nowrap}
+  .nav-link, .nav-btn {
+    padding:8px 12px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:15px;
+    color:var(--ink);
+    background:transparent;
+    border:0;
+    cursor:pointer;
+  }
+  .nav-link:hover, .nav-btn:hover { background: rgba(15,23,42,0.03); }
+  .cta { padding:8px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:800 }
+  .mobile-toggle{display:none}
 
-  /* NEW: single-column overlay mega menu */
+  /* Subtle dropdown panel */
   .mega-overlay {
-    position: absolute;
-    top: calc(var(--header-h) - 6px); /* just below header */
-    right: auto;
+    position:absolute;
+    top: calc(var(--header-h) - 8px);
     left: 50%;
     transform: translateX(-50%);
-    width: 360px;
+    width: 320px;
     max-width: calc(100% - 40px);
     background: var(--card);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 6px;
-    box-shadow: 0 28px 70px rgba(16,24,40,0.18);
-    z-index: 200;
-    border: 1px solid rgba(14,20,39,0.06);
+    box-shadow: 0 10px 28px rgba(16,24,40,0.06);
+    z-index: 220;
+    border: 1px solid rgba(14,20,39,0.04);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .18s ease, transform .16s ease, visibility .12s;
+    transition: opacity .14s ease, transform .12s ease, visibility .12s;
     transform-origin: top center;
-    will-change: opacity, transform;
   }
-  .mega-overlay.open{ opacity: 1; visibility: visible; transform: translateX(-50%) translateY(6px); }
+  .mega-overlay.open { opacity:1; visibility:visible; transform: translateX(-50%) translateY(6px); }
 
-  .mega-list{ list-style:none;margin:0;padding:6px; max-height:420px; overflow:auto; -webkit-overflow-scrolling:touch;}
-  .mega-list li{ border-bottom:1px solid rgba(15,23,42,0.04); }
+  .mega-list { list-style:none;margin:0;padding:6px; max-height:420px; overflow:auto; }
+  .mega-list li { border-bottom:1px solid rgba(15,23,42,0.03); }
   .mega-list li:last-child{ border-bottom:0; }
-  .mega-list a{
-    display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:8px;color:#222;font-weight:700;font-size:15px;
-    transition: background .12s, padding-left .12s;
+  .mega-list a {
+    display:flex;align-items:center;gap:8px;padding:12px;border-radius:8px;color:#222;font-weight:700;font-size:15px;
   }
-  .mega-list a .chev{ margin-left:auto; font-weight:700; color:var(--muted); font-size:14px; }
-  .mega-list a:hover, .mega-list a:focus{
-    background: rgba(106,13,173,0.04);
-    outline: none;
-    padding-left: 18px;
-  }
-  .mega-list a:focus{ box-shadow: inset 6px 0 0 var(--purple); }
-  .mega-list a:hover::before{
-    content: '';
-    position: absolute;
-  }
-  /* Purple left accent when hovered/focused */
-  .mega-list a.active, .mega-list a:hover, .mega-list a:focus{
-    box-shadow: inset 6px 0 0 var(--purple); border-radius:8px;
-  }
+  .mega-list a:hover, .mega-list a:focus { background: rgba(15,23,42,0.03); outline:none; }
+  .mega-list .chev { margin-left:auto;color:var(--muted);font-weight:700 }
 
-  @media (max-width:900px){
-    .nav-list{display:none}
-    .mobile-toggle{display:inline-flex}
-    .mega-overlay{position:static; transform:none; left:auto; right:auto; width:100%; max-width:100%; box-shadow:none; border-radius:0; border-left:0; border-right:0;}
-    .mega-list a{padding:14px 16px}
-  }
-
-  /* Remaining page styles (kept from previous) */
-
-  /* Hero */
+  /* Layout basics */
   main{padding-top:18px}
   .hero{padding:36px 0 18px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
   .hero-grid{display:flex;gap:28px;align-items:flex-start;max-width:var(--max-w);margin:0 auto;padding:0 20px}
   .hero-left{flex:1}
   .hero h1{font-size:34px;margin:12px 0 8px;line-height:1.03;color:var(--ink)}
   .hero p{color:var(--muted);font-size:16px;margin:0}
-  .hero-cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-  .hero-card{width:360px;border-radius:14px;padding:18px;background:var(--card);border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 40px rgba(16,24,40,0.06)}
 
-  /* Sections */
   .section{padding:56px 0}
   .container-sm{max-width:980px;margin:0 auto;padding:0 20px}
   .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
   .section-title h2{margin:0;font-size:22px;color:var(--purple)}
   .section-title .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
 
-  /* We work with */
   .we-work{text-align:center;margin-top:18px;margin-bottom:26px}
   .we-work h3{display:inline-block;position:relative;padding:0 18px 6px 18px;font-size:20px;color:var(--purple);font-weight:800}
   .we-work h3::before{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;width:120px;height:8px;background:var(--yellow);border-radius:999px;z-index:-1}
 
-  /* Dialogue boxes */
   .dialogue-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:start}
-  .dialogue{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.05);text-align:center}
+  .dialogue{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.04);text-align:center}
   .dialogue .img-placeholder{height:140px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:800;margin-bottom:12px}
   .dialogue .title{font-weight:700;color:var(--purple);margin-bottom:8px}
   .dialogue .desc{color:var(--muted);font-size:15px;line-height:1.6}
 
-  /* Services flip grid */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
   .flip-card{perspective:1200px}
   .flip-inner{position:relative;width:100%;height:260px;transition:transform .7s cubic-bezier(.2,.9,.2,1);transform-style:preserve-3d;border-radius:12px}
   .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
-  .flip-face{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(14,20,39,0.04);background:var(--card);box-shadow:0 12px 30px rgba(16,24,40,0.06)}
+  .flip-face{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(14,20,39,0.04);background:var(--card);box-shadow:0 12px 30px rgba(16,24,40,0.04)}
   .flip-front .placeholder{width:96px;height:96px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-size:24px;font-weight:800}
   .flip-back{transform:rotateY(180deg);text-align:left;padding:18px;color:#273341}
   .back-list{list-style:none;padding:0;margin:0;font-size:14px;color:var(--muted)}
   .back-list li{margin:8px 0;padding-left:8px;position:relative}
   .back-list li::before{content:'•';position:absolute;left:0;color:var(--purple);font-weight:800}
 
-  /* highlight class */
-  .focus-service{box-shadow:0 18px 40px rgba(106,13,173,0.14) !important;transform:translateY(-6px) scale(1.02) !important;border-color: rgba(106,13,173,0.18) !important;transition:transform .28s ease, box-shadow .28s ease}
+  .focus-service{box-shadow:0 18px 40px rgba(106,13,173,0.08) !important;transform:translateY(-4px) !important;transition:transform .28s ease, box-shadow .28s ease}
 
-  /* Experts carousel */
+  /* Simple carousel styles kept minimal */
   .carousel-wrap{max-width:var(--max-w);margin:0 auto;padding:28px 20px;position:relative}
   .carousel-viewport{overflow:hidden;border-radius:12px}
   .carousel-inner{display:flex;gap:18px;transition:transform .6s cubic-bezier(.2,.9,.2,1);will-change:transform}
-  .carousel-card{flex:0 0 32%;min-width:220px;max-width:360px;background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 8px 28px rgba(16,24,40,0.06);text-align:center;transform-origin:center center;transition:transform .28s ease,box-shadow .28s ease}
+  .carousel-card{flex:0 0 32%;min-width:220px;max-width:360px;background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 8px 28px rgba(16,24,40,0.04);text-align:center;transition:transform .28s ease}
   .carousel-card .img{height:120px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
   .carousel-card .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
   .carousel-card .role{color:var(--muted);font-weight:700;margin-bottom:8px}
   .carousel-card .bio{color:var(--muted);font-size:14px;line-height:1.5}
-  .carousel-card.active{transform:scale(1.04);box-shadow:0 22px 48px rgba(106,13,173,0.12)}
-  .carousel-controls{position:absolute;left:12px;right:12px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
-  .carousel-controls button{pointer-events:auto;background:#fff;border-radius:999px;border:1px solid rgba(14,20,39,0.06);width:44px;height:44px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
-  .carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
-  .carousel-dots button{width:10px;height:10px;border-radius:999px;border:none;background:#e2e8f0}
-  .carousel-dots button.active{background:var(--purple)}
+  .carousel-card.active{transform:scale(1.03);box-shadow:0 22px 48px rgba(106,13,173,0.06)}
+  .carousel-controls button{background:#fff;border-radius:999px;border:1px solid rgba(14,20,39,0.06);width:44px;height:44px;display:grid;place-items:center}
 
-  /* Venn + Why Need Us layout */
-  .why-venn{display:flex;gap:36px;align-items:center;max-width:var(--max-w);margin:24px auto;padding:36px 20px}
-  .venn-left{flex:0 0 46%;display:grid;place-items:center}
-  .venn-placeholder{width:100%;max-width:480px;height:420px;border-radius:18px;background:linear-gradient(180deg,#fff,#fbf3ff);display:grid;place-items:center;border:6px solid rgba(106,13,173,0.06)}
-  .venn-right{flex:1}
-  .why-title{font-size:28px;color:var(--purple);font-weight:800;margin-bottom:12px}
-  .why-sub{color:var(--muted);margin-bottom:18px}
-  .why-list{display:flex;flex-direction:column;gap:12px}
-  .why-item{display:flex;gap:12px;align-items:flex-start}
-  .why-dot{width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px;flex-shrink:0}
-  .why-item .item-title{font-weight:700;color:#222;font-size:16px}
-  .why-item .item-desc{color:var(--muted);font-size:14px;margin-top:6px}
-
-  /* Form & footer */
-  form.card{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.05)}
-  label{display:block;font-weight:700;margin-bottom:6px;margin-top:10px}
-  input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e7ee}
-  button[type=submit]{background:var(--purple);color:#fff;padding:10px 16px;border-radius:999px;border:none;margin-top:12px;font-weight:800}
   footer.site-footer{padding:40px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
 
-  @media (max-width:1000px){
-    .carousel-card{flex:0 0 45%}
-    .why-left{flex-basis:40%}
-    .why-venn{flex-direction:column;gap:18px;padding:20px}
-    .venn-left{width:100%}
+  @media (max-width:900px){
+    .nav-list{display:none}
+    .mobile-toggle{display:inline-flex}
+    .mega-overlay{position:static;transform:none;left:auto;right:auto;width:100%;max-width:100%;border-radius:0;box-shadow:none}
   }
   @media (max-width:640px){
-    .carousel-card{flex:0 0 84%}
     .company{font-size:18px}
   }
 </style>
@@ -194,18 +143,17 @@
 
 <header class="site-header" id="siteHeader" role="banner">
   <div class="container header-row">
-    <div class="brand" aria-hidden="false">
+    <div class="brand">
       <div class="logo-monogram" aria-hidden="true">C</div>
       <div class="title">
-        <div class="company">CrystalCore Business Solutions</div>
+        <div class="company">CrystalCore Business Solutions (CCBS)</div>
         <div class="tag">Your strategic partner in clarity, precision, and innovation</div>
       </div>
     </div>
 
     <nav class="primary" role="navigation" aria-label="Main navigation">
       <div class="nav-list" id="navList">
-        <button class="nav-item" id="servicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
-
+        <button class="nav-btn" id="servicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
         <a class="nav-link" href="#why" data-target="why">Why You Need Us</a>
         <a class="nav-link" href="#about" data-target="about">About</a>
         <a class="nav-link" href="#experts" data-target="experts">Our Experts</a>
@@ -215,7 +163,7 @@
 
       <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
 
-      <!-- Single-column overlay panel -->
+      <!-- subtle single-column overlay -->
       <div id="megaOverlay" class="mega-overlay" role="menu" aria-label="Services list">
         <ul class="mega-list" id="megaList" tabindex="0" role="listbox" aria-activedescendant="">
           <li><a href="#services-business-analysis" data-target="services-business-analysis" role="option">Business Analysis &amp; Planning <span class="chev">›</span></a></li>
@@ -242,11 +190,11 @@
         <p style="margin-top:8px;color:var(--muted)">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
         <div class="hero-cta" style="margin-top:18px">
-          <a class="cta-link" href="#services">Explore Services</a>
+          <a class="cta" href="#services">Explore Services</a>
         </div>
       </div>
 
-      <aside class="hero-card">
+      <aside class="hero-card" style="width:320px;border-radius:12px;padding:16px;border:0;box-shadow:0 10px 30px rgba(16,24,40,0.04)">
         <strong style="color:var(--purple)">Quick summary</strong>
         <p style="color:var(--muted);margin-top:8px">We work with Startups, SMEs, and Large-scale Businesses — helping with BA, change management, IT consulting, compliance, and market research.</p>
       </aside>
@@ -257,9 +205,7 @@
   <section id="about" class="section" style="background:#fff">
     <div class="container-sm">
       <div class="section-title"><h2>About Us</h2><div class="accent" aria-hidden="true"></div></div>
-
-      <p style="font-size:15px;line-height:1.6">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation.
-      We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
+      <p style="font-size:15px;line-height:1.6">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
       <div class="we-work">
         <h3>We work with</h3>
@@ -289,13 +235,13 @@
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- Services (flip cards) -->
   <section id="services" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Our Services</h2><div class="accent" aria-hidden="true"></div></div>
 
       <div class="services-grid" id="servicesGrid">
-        <!-- 1 -->
+        <!-- Business Analysis -->
         <div id="services-business-analysis" class="flip-card" data-service="Business Analysis & Planning" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -313,7 +259,7 @@
           </div>
         </div>
 
-        <!-- 2 -->
+        <!-- Change Management -->
         <div id="services-change-management" class="flip-card" data-service="Change Management" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -331,7 +277,7 @@
           </div>
         </div>
 
-        <!-- 3 -->
+        <!-- Compliance -->
         <div id="services-compliance-documentation" class="flip-card" data-service="Compliance & Documentation" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -348,7 +294,7 @@
           </div>
         </div>
 
-        <!-- 4 -->
+        <!-- Data Analysis -->
         <div id="services-data-analysis" class="flip-card" data-service="Data Analysis" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -365,7 +311,7 @@
           </div>
         </div>
 
-        <!-- 5 -->
+        <!-- Digital & IT -->
         <div id="services-digital-it" class="flip-card" data-service="Digital & IT Consulting" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -383,7 +329,7 @@
           </div>
         </div>
 
-        <!-- 6 -->
+        <!-- Digital Marketing -->
         <div id="services-digital-marketing" class="flip-card" data-service="Digital Marketing & Online Visibility" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -401,7 +347,7 @@
           </div>
         </div>
 
-        <!-- 7 -->
+        <!-- Financial & Risk -->
         <div id="services-financial-risk" class="flip-card" data-service="Financial & Risk Advisory" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -419,7 +365,7 @@
           </div>
         </div>
 
-        <!-- 8 -->
+        <!-- Market Research -->
         <div id="services-market-research" class="flip-card" data-service="Market Research" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -436,7 +382,7 @@
           </div>
         </div>
 
-        <!-- 9 -->
+        <!-- Project Management -->
         <div id="services-project-management" class="flip-card" data-service="Project Management" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -452,16 +398,17 @@
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
   </section>
 
-  <!-- Why You Need Us (Venn + bullets) -->
+  <!-- Why You Need Us -->
   <section id="why" class="section" style="background:#fff">
-    <div class="why-venn">
-      <div class="venn-left">
-        <div class="venn-placeholder" aria-hidden="true">
+    <div class="why-venn" style="display:flex;gap:36px;align-items:center;max-width:var(--max-w);margin:24px auto;padding:36px 20px">
+      <div style="flex:0 0 46%;display:grid;place-items:center">
+        <div style="width:100%;max-width:480px;height:420px;border-radius:18px;background:linear-gradient(180deg,#fff,#fbf3ff);display:grid;place-items:center;border:6px solid rgba(106,13,173,0.06)">
+          <!-- placeholder venn -->
           <svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <rect x="0" y="0" width="320" height="320" rx="18" fill="#fff"/>
             <g opacity="0.95">
@@ -474,122 +421,34 @@
         </div>
       </div>
 
-      <div class="venn-right">
-        <div class="why-title">Why You Need Us</div>
-        <div class="why-sub">We simplify complexity, accelerate decisions, and design scalable digital solutions that deliver measurable outcomes.</div>
-
-        <div class="why-list" role="list">
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">Clarity in Complexity</div>
-              <div class="item-desc">We simplify challenges with structured analysis and practical insights to make confident decisions.</div>
-            </div>
-          </div>
-
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">End-to-End Guidance</div>
-              <div class="item-desc">From startups to enterprises — support across strategy, implementation, and adoption.</div>
-            </div>
-          </div>
-
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">Customized Solutions</div>
-              <div class="item-desc">Recommendations tailored to your goals, systems, and constraints.</div>
-            </div>
-          </div>
-
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">Proven Expertise</div>
-              <div class="item-desc">10+ years of cross-industry experience delivering measurable impact.</div>
-            </div>
-          </div>
-
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">Digital-First Approach</div>
-              <div class="item-desc">CRM, ERP, automation and analytics to scale your operations.</div>
-            </div>
-          </div>
-
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">Reliable Partnership</div>
-              <div class="item-desc">Compliance, risk mitigation and change management you can trust.</div>
-            </div>
-          </div>
-
-          <div class="why-item" role="listitem">
-            <div class="why-dot" aria-hidden="true"></div>
-            <div>
-              <div class="item-title">24/7 Support</div>
-              <div class="item-desc">Always available when you need us most.</div>
-            </div>
-          </div>
+      <div style="flex:1">
+        <div style="font-size:28px;color:var(--purple);font-weight:800;margin-bottom:12px">Why You Need Us</div>
+        <div style="color:var(--muted);margin-bottom:18px">We simplify complexity, accelerate decisions, and design scalable digital solutions that deliver measurable outcomes.</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">Clarity in Complexity</div><div style="color:var(--muted)">We simplify challenges with structured analysis and practical insights to make confident decisions.</div></div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">End-to-End Guidance</div><div style="color:var(--muted)">From startups to enterprises — support across strategy, implementation, and adoption.</div></div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">Customized Solutions</div><div style="color:var(--muted)">Recommendations tailored to your goals, systems, and constraints.</div></div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:10px;height:10px;border-radius:50%;background:var(--purple);margin-top:6px"></div><div><div style="font-weight:700">Proven Expertise</div><div style="color:var(--muted)">10+ years of cross-industry experience delivering measurable impact.</div></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Our Experts (carousel) -->
+  <!-- Our Experts (simple carousel) -->
   <section id="experts" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
       <p style="color:var(--muted);margin-bottom:18px">A team of experienced consultants delivering measurable outcomes across business analysis, transformation, technology, compliance, and finance.</p>
-
-      <div class="carousel-wrap" aria-roledescription="carousel">
+      <div class="carousel-wrap">
         <div class="carousel-viewport" id="carouselViewport" tabindex="0">
           <div class="carousel-inner" id="carouselInner" aria-live="polite">
-            <!-- Card 1 -->
-            <div class="carousel-card" data-index="0" tabindex="0" aria-label="Slide 1: Saravanan A, Founder">
-              <div class="img">Saravanan A</div>
-              <div class="name">Saravanan A — Founder</div>
-              <div class="role">Business Analyst & Consultant — Project Management, Digital Marketing & Change Management</div>
-              <div class="bio">Saravanan is the founder of CrystalCore Business Solutions with 10+ years delivering transformation programs across startups and enterprises. He specializes in requirements-led change and agile delivery.</div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="carousel-card" data-index="1" tabindex="0" aria-label="Slide 2: Saraswathi, Software Developer & Data Analyst">
-              <div class="img">Saraswathi</div>
-              <div class="name">Saraswathi — Software Developer & Data Analyst</div>
-              <div class="role">Software Development, Data Analysis & Dashboards</div>
-              <div class="bio">Saraswathi builds data-driven solutions and dashboards that turn raw data into actionable insights for leaders and teams.</div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="carousel-card" data-index="2" tabindex="0" aria-label="Slide 3: Umamageshwari, Compliance & Market Research">
-              <div class="img">Umamageshwari</div>
-              <div class="name">Umamageshwari — Compliance & Market Research</div>
-              <div class="role">Compliance, Documentation & Market Research</div>
-              <div class="bio">Umamageshwari brings regulatory expertise and market research experience to ensure compliance readiness and strategic positioning.</div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="carousel-card" data-index="3" tabindex="0" aria-label="Slide 4: Akshaya, Financial & Risk Advisory">
-              <div class="img">Akshaya</div>
-              <div class="name">Akshaya — Financial & Risk Advisory</div>
-              <div class="role">Financial Planning, Risk Mitigation & Advisory</div>
-              <div class="bio">Akshaya guides financial planning and risk-management strategies that protect business value while enabling growth.</div>
-            </div>
+            <div class="carousel-card" data-index="0" tabindex="0"><div class="img">Saravanan A</div><div class="name">Saravanan A — Founder</div><div class="role">Business Analyst & Consultant</div><div class="bio" style="color:var(--muted)">Founder with expertise in transformation and delivery.</div></div>
+            <div class="carousel-card" data-index="1" tabindex="0"><div class="img">Saraswathi</div><div class="name">Saraswathi — Software Developer</div><div class="role">Data & Dashboard</div><div class="bio" style="color:var(--muted)">Builds data-driven dashboards and integrations.</div></div>
+            <div class="carousel-card" data-index="2" tabindex="0"><div class="img">Umamageshwari</div><div class="name">Umamageshwari — Compliance</div><div class="role">Compliance & Market Research</div><div class="bio" style="color:var(--muted)">Expert in documentation and market insights.</div></div>
+            <div class="carousel-card" data-index="3" tabindex="0"><div class="img">Akshaya</div><div class="name">Akshaya — Finance</div><div class="role">Financial & Risk Advisory</div><div class="bio" style="color:var(--muted)">Financial planning and risk advisory.</div></div>
           </div>
         </div>
-
-        <!-- controls -->
-        <div class="carousel-controls" aria-hidden="false">
-          <button id="carouselPrev" aria-label="Previous slide">‹</button>
-          <button id="carouselNext" aria-label="Next slide">›</button>
-        </div>
-
-        <!-- dots -->
-        <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Carousel dots" style="margin-top:12px;display:flex;justify-content:center"></div>
+        <div style="display:flex;justify-content:center;margin-top:12px"><button id="carouselPrev">‹</button><button id="carouselNext" style="margin-left:8px">›</button></div>
       </div>
     </div>
   </section>
@@ -598,22 +457,14 @@
   <section id="request" class="section">
     <div class="container-sm">
       <div class="section-title"><h2>Client Information & Service Request</h2><div class="accent" aria-hidden="true"></div></div>
-      <p class="muted">Please fill in your details and we’ll get back to you within 1 business day.</p>
-
-      <form id="requestForm" class="card" style="margin-top:14px" aria-label="Service request form">
-        <label for="rname">Name</label>
-        <input id="rname" name="name" required />
-        <label for="rphone">Phone Number</label>
-        <input id="rphone" name="phone" required />
-        <label for="remail">Email ID</label>
-        <input id="remail" name="email" type="email" required />
-        <label for="rcompany">Company Name</label>
-        <input id="rcompany" name="company" />
-        <label for="rmessage">Request Details</label>
-        <textarea id="rmessage" name="message" rows="5"></textarea>
-
-        <button type="submit">Submit Request</button>
-        <div id="requestResp" class="muted" style="margin-top:10px"></div>
+      <form id="requestForm" class="card" style="margin-top:14px;padding:18px;border-radius:10px;background:#fff;border:1px solid rgba(14,20,39,0.04)">
+        <label for="rname">Name</label><input id="rname" name="name" required style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
+        <label for="rphone">Phone Number</label><input id="rphone" name="phone" required style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
+        <label for="remail">Email ID</label><input id="remail" name="email" type="email" required style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
+        <label for="rcompany">Company Name</label><input id="rcompany" name="company" style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%" />
+        <label for="rmessage">Request Details</label><textarea id="rmessage" name="message" rows="5" style="padding:10px;border-radius:8px;border:1px solid #eee;width:100%"></textarea>
+        <button type="submit" style="background:var(--purple);color:#fff;padding:10px 16px;border-radius:10px;border:none;margin-top:12px;font-weight:800">Submit Request</button>
+        <div id="requestResp" style="margin-top:10px;color:var(--muted)"></div>
       </form>
     </div>
   </section>
@@ -622,331 +473,106 @@
   <section id="contact" class="section" style="background:#fff">
     <div class="container-sm">
       <div class="section-title"><h2>Contact Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <p class="muted">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a><br>Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
-      <p class="muted">📞💬 Need help? Connect with us — 24/7 support via call & chat.</p>
+      <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a><br>Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="container">
-    © <span id="year"></span> CrystalCore Business Solutions — Chennai, India
-  </div>
+<footer class="site-footer" style="padding:30px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff">
+  <div class="container">© <span id="year"></span> CrystalCore Business Solutions — Chennai, India</div>
 </footer>
 
 <script>
-/* Utilities */
+/* Simple helpers */
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
-
-/* Year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* Header shrink */
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   if (!header) return;
-  if (window.scrollY > 10) header.classList.add('shrink'); else header.classList.remove('shrink');
+  if (window.scrollY > 6) header.classList.add('shrink'); else header.classList.remove('shrink');
 });
 
-/* Mega overlay behavior */
+/* Subtle mega overlay toggle */
 const servicesBtn = document.getElementById('servicesBtn');
 const megaOverlay = document.getElementById('megaOverlay');
-const megaList = document.getElementById('megaList');
 let megaOpen = false;
+function openMega(){ megaOverlay.classList.add('open'); servicesBtn.setAttribute('aria-expanded','true'); megaOpen=true; }
+function closeMega(){ megaOverlay.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); megaOpen=false; }
+function toggleMega(){ megaOpen ? closeMega() : openMega(); }
 
-function openMega() {
-  megaOverlay.classList.add('open');
-  servicesBtn.setAttribute('aria-expanded', 'true');
-  megaOpen = true;
-}
-function closeMega() {
-  megaOverlay.classList.remove('open');
-  servicesBtn.setAttribute('aria-expanded', 'false');
-  megaOpen = false;
-}
-function toggleMega() {
-  if (megaOpen) closeMega(); else openMega();
-}
+servicesBtn.addEventListener('click', (e)=>{ e.preventDefault(); toggleMega(); });
+servicesBtn.addEventListener('mouseenter', ()=> { if (window.innerWidth>900) openMega(); });
+servicesBtn.addEventListener('mouseleave', ()=> { if (window.innerWidth>900) setTimeout(()=>{ if (!megaOverlay.matches(':hover')) closeMega(); }, 180); });
+megaOverlay.addEventListener('mouseleave', ()=> { if (window.innerWidth>900) setTimeout(()=>{ if (!servicesBtn.matches(':hover')) closeMega(); }, 180); });
 
-/* Open on hover (desktop) and toggle on click (mobile/touch) */
-let hoverTimeout = null;
-servicesBtn.addEventListener('mouseenter', () => {
-  if (window.innerWidth > 900) {
-    clearTimeout(hoverTimeout);
-    openMega();
-  }
-});
-servicesBtn.addEventListener('mouseleave', () => {
-  if (window.innerWidth > 900) {
-    hoverTimeout = setTimeout(closeMega, 220);
-  }
-});
-megaOverlay.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
-megaOverlay.addEventListener('mouseleave', () => { if (window.innerWidth > 900) hoverTimeout = setTimeout(closeMega, 220); });
-
-servicesBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleMega();
-});
-
-/* close on outside click */
-document.addEventListener('click', (e) => {
+document.addEventListener('click', (e)=>{
   if (!megaOpen) return;
-  if (e.target === servicesBtn || servicesBtn.contains(e.target)) return;
+  if (servicesBtn.contains(e.target)) return;
   if (megaOverlay.contains(e.target)) return;
   closeMega();
 });
+document.addEventListener('keydown',(e)=>{ if (e.key==='Escape') closeMega(); });
 
-/* close on Escape */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeMega();
-});
-
-/* keyboard navigation inside mega list (Up/Down/Enter) */
-let megaIndex = -1;
-const megaLinks = Array.from(megaList.querySelectorAll('a'));
-function setMegaActive(index) {
-  megaIndex = index;
-  megaLinks.forEach((a, i) => {
-    a.classList.toggle('active', i === index);
-    if (i === index) a.focus();
-  });
-  // set aria-activedescendant
-  const id = megaLinks[index] ? ('mega-item-' + index) : '';
-  megaList.setAttribute('aria-activedescendant', id);
-}
-megaLinks.forEach((a, idx) => {
-  a.id = 'mega-item-' + idx;
-  a.addEventListener('click', (ev) => {
-    ev.preventDefault();
-    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
-    if (tgt) {
-      // close then navigate (small delay so overlay goes away)
-      closeMega();
-      setTimeout(() => focusAndFlipService(tgt), 240);
-      history.replaceState(null, '', '#' + tgt);
-    }
-  });
-});
-megaList.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    setMegaActive(Math.min(megaIndex + 1, megaLinks.length - 1));
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    setMegaActive(Math.max(megaIndex - 1, 0));
-  } else if (e.key === 'Enter' && megaIndex >= 0) {
-    megaLinks[megaIndex].click();
-  }
-});
-megaList.addEventListener('focus', () => { if (megaIndex === -1) setMegaActive(0); });
-
-/* Mobile toggle for nav list */
-const mobileToggle = document.getElementById('mobileToggle');
-const navList = document.getElementById('navList');
-if (mobileToggle && navList) {
-  mobileToggle.addEventListener('click', () => {
-    const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-    mobileToggle.setAttribute('aria-expanded', String(!expanded));
-    navList.style.display = expanded ? 'flex' : 'flex';
-    // On small screens the overlay sits inside nav so it will be visible
-  });
-}
-
-/* Services: click from mega menu scroll & highlight */
-const HIGHLIGHT_MS = 2800;
-function focusAndFlipService(id) {
+/* Mega links scroll+highlight */
+const megaLinks = Array.from(document.querySelectorAll('#megaList a'));
+const HIGHLIGHT_MS = 2400;
+function focusAndFlipService(id){
   const el = document.getElementById(id);
   if (!el) return;
-  document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => {
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.querySelector('#services')?.scrollIntoView({ behavior:'smooth', block:'start' });
+  setTimeout(()=>{
+    el.scrollIntoView({ behavior:'smooth', block:'center' });
     el.classList.add('focus-service');
     el.classList.add('flipped');
-    setTimeout(() => { el.classList.remove('focus-service'); el.classList.remove('flipped'); }, HIGHLIGHT_MS);
-  }, 420);
+    setTimeout(()=>{ el.classList.remove('focus-service'); el.classList.remove('flipped'); }, HIGHLIGHT_MS);
+  }, 360);
 }
-
-/* Handle direct hash on load */
-function handleHashOnLoad() {
-  const h = location.hash.replace('#','');
-  if (!h) return;
-  const serviceIds = [
-    'services-business-analysis','services-change-management','services-compliance-documentation',
-    'services-data-analysis','services-digital-it','services-digital-marketing',
-    'services-financial-risk','services-market-research','services-project-management'
-  ];
-  if (serviceIds.includes(h)) {
-    setTimeout(() => focusAndFlipService(h), 400);
-  } else {
-    const el = document.getElementById(h);
-    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-}
-window.addEventListener('load', handleHashOnLoad);
-
-/* Flip card interactions (services) */
-$$('.flip-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    if (e.target.closest('a')) return;
-    card.classList.toggle('flipped');
-  });
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      card.classList.toggle('flipped');
-    }
+megaLinks.forEach(a=>{
+  a.addEventListener('click', (ev)=>{
+    ev.preventDefault();
+    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
+    closeMega();
+    if (tgt){ history.replaceState(null,'','#'+tgt); setTimeout(()=>focusAndFlipService(tgt), 260); }
   });
 });
 
-/* Request form placeholder behavior */
-const reqForm = document.getElementById('requestForm');
-const reqResp = document.getElementById('requestResp');
-if (reqForm) {
-  reqForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    reqResp.textContent = 'Sending...';
-    try {
-      await new Promise(r => setTimeout(r, 700));
-      reqResp.textContent = '✅ Thanks! Your request has been submitted. We will contact within 1 business day.';
-      reqForm.reset();
-    } catch (err) {
-      reqResp.textContent = '❌ Error submitting. Please try again later.';
-    }
-  });
-}
+/* Flip cards */
+$$('.flip-card').forEach(card=>{
+  card.addEventListener('click', e=>{ if (e.target.closest('a')) return; card.classList.toggle('flipped'); });
+  card.addEventListener('keydown', e=>{ if (e.key==='Enter' || e.key===' ') { e.preventDefault(); card.classList.toggle('flipped'); } });
+});
 
-/* NAV active & reveal */
-const sections = Array.from(document.querySelectorAll('main section[id]'));
-const navNodes = Array.from(document.querySelectorAll('.nav-item, .nav-link'));
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const id = entry.target.id;
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      navNodes.forEach(n => {
-        try {
-          const href = n.getAttribute('href');
-          const tgt = n.dataset.target || (href && href.replace('#',''));
-          if (tgt === id) n.classList.add('active'); else n.classList.remove('active');
-        } catch(e){}
-      });
-    }
-  });
-}, {threshold: 0.32});
-sections.forEach(s => observer.observe(s));
-
-/* ---------------------------
-   Experts carousel JS
-   --------------------------- */
-const CAROUSEL_INTERVAL = 3500; // ms
+/* Basic carousel (keeps rotating) */
 const carouselInner = document.getElementById('carouselInner');
 const carouselViewport = document.getElementById('carouselViewport');
-const cards = Array.from(carouselInner.children);
-const dotsContainer = document.getElementById('carouselDots');
+const cards = carouselInner ? Array.from(carouselInner.children) : [];
 let currentIndex = 0;
-let autoplayTimer = null;
-let visibleCount = 3;
-
-// Build dots
-function buildDots() {
-  dotsContainer.innerHTML = '';
-  const pages = Math.ceil(cards.length);
-  for (let i=0;i<pages;i++){
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-label', 'Go to slide ' + (i+1));
-    b.dataset.index = i;
-    b.addEventListener('click', () => {
-      goTo(i);
-      pauseAutoplay();
-    });
-    dotsContainer.appendChild(b);
-  }
-}
-function updateDots() {
-  const dots = Array.from(dotsContainer.children);
-  dots.forEach(d => d.classList.remove('active'));
-  const idx = currentIndex % cards.length;
-  if (dots[idx]) dots[idx].classList.add('active');
-}
-
-// Update visibleCount based on width
-function computeVisibleCount() {
-  const w = window.innerWidth;
-  if (w <= 640) visibleCount = 1;
-  else if (w <= 1000) visibleCount = 2;
-  else visibleCount = 3;
-}
-
-// position carousel to currentIndex (center the active card)
-function renderCarousel() {
-  computeVisibleCount();
-  currentIndex = ((currentIndex % cards.length) + cards.length) % cards.length;
-  const cardWidth = cards[0].getBoundingClientRect().width + 18; // gap
+const INTERVAL = 3500;
+let timer = null;
+function renderCarousel(){
+  if (!carouselInner || cards.length===0) return;
+  const cardWidth = cards[0].getBoundingClientRect().width + 18;
   const centerOffset = (carouselViewport.getBoundingClientRect().width - cardWidth) / 2;
   const translateX = -currentIndex * cardWidth + centerOffset;
   carouselInner.style.transform = `translateX(${translateX}px)`;
-  cards.forEach((c, i) => c.classList.remove('active'));
-  const active = cards[currentIndex];
-  if (active) active.classList.add('active');
-  updateDots();
-  carouselViewport.setAttribute('aria-label', `Slide ${currentIndex+1} of ${cards.length} — ${active ? (active.querySelector('.name')?.textContent || '') : ''}`);
+  cards.forEach((c,i)=>c.classList.toggle('active', i===currentIndex));
 }
+function start(){ stop(); timer = setInterval(()=>{ currentIndex = (currentIndex+1) % cards.length; renderCarousel(); }, INTERVAL); }
+function stop(){ if (timer){ clearInterval(timer); timer=null; } }
+document.getElementById('carouselPrev')?.addEventListener('click', ()=>{ currentIndex = (currentIndex -1 + cards.length) % cards.length; renderCarousel(); stop(); });
+document.getElementById('carouselNext')?.addEventListener('click', ()=>{ currentIndex = (currentIndex +1) % cards.length; renderCarousel(); stop(); });
+window.addEventListener('resize', renderCarousel);
+setTimeout(()=>{ renderCarousel(); start(); }, 200);
 
-function prev() {
-  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-  renderCarousel();
+/* Request form placeholder */
+const reqForm = document.getElementById('requestForm');
+const reqResp = document.getElementById('requestResp');
+if (reqForm){
+  reqForm.addEventListener('submit', async (e)=>{ e.preventDefault(); reqResp.textContent='Sending...'; await new Promise(r=>setTimeout(r,600)); reqResp.textContent='✅ Thanks! Your request has been submitted.'; reqForm.reset(); });
 }
-function next() {
-  currentIndex = (currentIndex + 1) % cards.length;
-  renderCarousel();
-}
-function goTo(i) {
-  currentIndex = i % cards.length;
-  renderCarousel();
-}
-
-function startAutoplay() {
-  stopAutoplay();
-  autoplayTimer = setInterval(() => {
-    currentIndex = (currentIndex + 1) % cards.length;
-    renderCarousel();
-  }, CAROUSEL_INTERVAL);
-}
-function stopAutoplay() {
-  if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
-}
-function pauseAutoplay() { stopAutoplay(); }
-function resumeAutoplay() { startAutoplay(); }
-
-document.getElementById('carouselPrev').addEventListener('click', () => { prev(); pauseAutoplay(); });
-document.getElementById('carouselNext').addEventListener('click', () => { next(); pauseAutoplay(); });
-
-buildDots();
-updateDots();
-window.addEventListener('resize', () => { renderCarousel(); });
-
-carouselViewport.addEventListener('mouseenter', pauseAutoplay);
-carouselViewport.addEventListener('mouseleave', resumeAutoplay);
-carouselViewport.addEventListener('focusin', pauseAutoplay);
-carouselViewport.addEventListener('focusout', resumeAutoplay);
-
-carouselViewport.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') { prev(); pauseAutoplay(); }
-  if (e.key === 'ArrowRight') { next(); pauseAutoplay(); }
-});
-
-cards.forEach((c, idx) => {
-  c.setAttribute('tabindex', '0');
-  c.dataset.index = idx;
-  c.addEventListener('focus', () => { pauseAutoplay(); currentIndex = idx; renderCarousel(); });
-});
-
-setTimeout(() => { renderCarousel(); startAutoplay(); }, 300);
-
-/* End carousel */
 </script>
 </body>
 </html>
