@@ -37,20 +37,65 @@
   .brand{display:flex;align-items:center;gap:14px}
   .logo-monogram{width:52px;height:52px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;box-shadow:0 6px 20px rgba(106,13,173,0.07);flex-shrink:0}
   .title{line-height:1;display:flex;flex-direction:column}
-  .company{font-weight:800;color:var(--purple);font-size:20px;letter-spacing:0.2px} /* increased size */
-  .tag{font-size:14px;color:var(--muted);margin-top:4px;max-width:520px} /* tagline under company name */
+  .company{font-weight:800;color:var(--purple);font-size:20px;letter-spacing:0.2px}
+  .tag{font-size:14px;color:var(--muted);margin-top:4px;max-width:520px}
 
-  /* Nav */
-  nav.primary{display:flex;align-items:center;gap:18px}
-  .nav-list{display:flex;gap:6px;align-items:center}
-  .nav-item, .nav-link{position:relative;padding:10px 12px;border-radius:10px;font-weight:600;font-size:15px;color:var(--ink);transition:background .15s, color .12s}
-  .nav-item:hover, .nav-link:hover{background:rgba(106,13,173,0.04)}
+  /* NAV + MEGA IMPROVEMENTS */
+  .nav-list{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    white-space:nowrap;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:6px;
+  }
+
+  .nav-item, .nav-link{
+    position:relative;padding:12px 14px;border-radius:12px;font-weight:700;font-size:16px;color:var(--ink);transition:background .15s, color .12s;
+  }
+  .nav-item:hover, .nav-link:hover{background:rgba(106,13,173,0.05)}
   .nav-item::after, .nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
   .nav-item:hover::after, .nav-link:hover::after, .nav-item.active::after, .nav-link.active::after{transform:scaleX(1)}
-  .cta{margin-left:12px;padding:10px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:700;box-shadow:0 8px 28px rgba(106,13,173,0.12)}
 
+  .cta{margin-left:12px;padding:10px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:700;box-shadow:0 8px 28px rgba(106,13,173,0.12)}
   .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
-  @media (max-width:900px){.nav-list{display:none}.mobile-toggle{display:inline-flex}.title .tag{display:none}}
+
+  /* Mega panel */
+  .mega{
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:300px;
+    max-width:640px;
+    width:auto;
+    padding:14px;
+    border-radius:12px;
+    background:var(--card);
+    box-shadow:0 18px 60px rgba(16,24,40,.12);
+    transform-origin: top center;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .18s ease, transform .18s ease, visibility .1s;
+    transform: translateY(6px) scale(.99);
+    z-index:95;
+  }
+  .nav-item.has-mega:focus-within .mega,
+  .nav-item.has-mega:hover .mega{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+
+  .mega-grid{ display:grid; grid-template-columns:repeat(2,minmax(120px,1fr)); gap:12px; }
+  .mega-grid a{ padding:8px 6px; display:block; border-radius:8px; font-size:14px; color:#374151 }
+  .mega-grid a:hover{ background:#fbf7ff; color:var(--purple) }
+
+  @media (max-width:900px){
+    .nav-list{ display:none }
+    .mobile-toggle{ display:inline-flex }
+    .mega{ position:static; opacity:1; visibility:visible; transform:none; box-shadow:none; padding:12px; border-radius:10px; }
+  }
 
   /* Hero */
   main{padding-top:18px}
@@ -70,44 +115,18 @@
   .section-title .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
 
   /* We work with - centered heading with bar inside */
-  .we-work {
-    text-align:center;
-    margin-top:18px;
-    margin-bottom:26px;
-  }
-  .we-work h3 {
-    display:inline-block;
-    position:relative;
-    padding:0 18px 6px 18px;
-    font-size:20px;
-    color:var(--purple);
-    font-weight:800;
-  }
-  .we-work h3::before {
-    content:"";
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:-8px;
-    width:120px;
-    height:8px;
-    background:var(--yellow);
-    border-radius:999px;
-    z-index:-1;
-  }
+  .we-work { text-align:center; margin-top:18px; margin-bottom:26px; }
+  .we-work h3 { display:inline-block; position:relative; padding:0 18px 6px 18px; font-size:20px; color:var(--purple); font-weight:800; }
+  .we-work h3::before { content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:-8px; width:120px; height:8px; background:var(--yellow); border-radius:999px; z-index:-1; }
 
-  /* Dialogue boxes (image placeholder above, text below) */
+  /* Dialogue boxes */
   .dialogue-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:start}
-  .dialogue{
-    background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.05);text-align:center;
-  }
-  .dialogue .img-placeholder{
-    height:140px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:800;margin-bottom:12px;
-  }
-  .dialogue .title{font-weight:700;color:var(--purple);margin-bottom:8px}
-  .dialogue .desc{color:var(--muted);font-size:15px;line-height:1.6}
+  .dialogue{ background:var(--card); padding:18px; border-radius:12px; border:1px solid rgba(14,20,39,0.04); box-shadow:0 10px 30px rgba(16,24,40,0.05); text-align:center; }
+  .dialogue .img-placeholder{ height:140px; border-radius:10px; background:linear-gradient(180deg,#f3f0ff,#efe9ff); display:grid; place-items:center; color:var(--purple); font-weight:800; margin-bottom:12px; }
+  .dialogue .title{ font-weight:700; color:var(--purple); margin-bottom:8px }
+  .dialogue .desc{ color:var(--muted); font-size:15px; line-height:1.6 }
 
-  /* Services flip grid (kept) */
+  /* Services flip grid */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
   .flip-card{perspective:1200px}
   .flip-inner{position:relative;width:100%;height:260px;transition:transform .7s cubic-bezier(.2,.9,.2,1);transform-style:preserve-3d;border-radius:12px}
@@ -149,21 +168,18 @@
       <div class="nav-list" id="navList">
         <div class="nav-item has-mega" tabindex="0" data-target="services">Services
           <div class="mega" role="menu" aria-label="Services menu">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div class="mega-grid">
               <div>
                 <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Business Consulting</h4>
-                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Business Analysis & Planning</a>
-                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Change Management</a>
+                <a href="#services" role="menuitem">Business Analysis & Planning</a>
+                <a href="#services" role="menuitem">Change Management</a>
+                <a href="#services" role="menuitem">Project Management</a>
               </div>
               <div>
                 <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Data & Strategy</h4>
-                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Data Analysis & Reporting</a>
-                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Market Research</a>
-              </div>
-              <div>
-                <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Operations</h4>
-                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Record Management</a>
-                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">BRD / FRD / SRS</a>
+                <a href="#services" role="menuitem">Data Analysis & Reporting</a>
+                <a href="#services" role="menuitem">Market Research</a>
+                <a href="#services" role="menuitem">Financial & Risk</a>
               </div>
             </div>
           </div>
@@ -263,7 +279,6 @@
           </div>
         </div>
 
-        <!-- other flip cards... keep same as before -->
         <div class="flip-card" data-service="Business Transformation" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -451,6 +466,8 @@
 
 <script>
 /* interactions */
+
+/* set year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* header shrink on scroll */
@@ -521,6 +538,23 @@ if (reqForm) {
     }
   });
 }
+
+/* ========== NEW: Align mega panel to parent nav item ========== */
+document.querySelectorAll('.nav-item.has-mega').forEach(item => {
+  const panel = item.querySelector('.mega');
+  if (!panel) return;
+  const align = () => {
+    const rect = item.getBoundingClientRect();
+    const parentRect = document.querySelector('.container').getBoundingClientRect();
+    let left = rect.left - parentRect.left;
+    // ensure left is non-negative and not too large
+    left = Math.max(8, Math.min(left, parentRect.width - panel.offsetWidth - 24));
+    panel.style.left = left + 'px';
+  };
+  // align on load and on window resize
+  align();
+  window.addEventListener('resize', align, { passive: true });
+});
 </script>
 </body>
 </html>
