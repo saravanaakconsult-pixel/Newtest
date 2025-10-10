@@ -24,7 +24,7 @@
   img{max-width:100%;display:block}
 
   /* Header */
-  .site-header{position:sticky;top:0;z-index:120;backdrop-filter:blur(6px);background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.75));border-bottom:1px solid rgba(15,23,42,0.04);height:var(--header-h);display:flex;align-items:center;transition:height .18s ease,box-shadow .18s ease,background .18s ease}
+  .site-header{position:sticky;top:0;z-index:140;backdrop-filter:blur(6px);background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.75));border-bottom:1px solid rgba(15,23,42,0.04);height:var(--header-h);display:flex;align-items:center;transition:height .18s ease,box-shadow .18s ease,background .18s ease}
   .site-header.shrink{height:70px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
   .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
   .header-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:16px}
@@ -35,20 +35,68 @@
   .tag{font-size:14px;color:var(--muted);margin-top:4px;max-width:520px}
 
   /* NAV */
-  .nav-list{display:flex;gap:12px;align-items:center;white-space:nowrap;overflow:visible;flex-wrap:wrap;touch-action: pan-y;padding-bottom:6px}
+  .nav-list{display:flex;gap:12px;align-items:center;white-space:nowrap;overflow:visible;flex-wrap:wrap;touch-action: pan-y;padding-bottom:6px;position:relative}
   .nav-item,.nav-link{position:relative;padding:10px 12px;border-radius:10px;font-weight:700;font-size:15px;color:var(--ink);transition:background .15s,color .12s;flex:0 0 auto}
   .nav-item:hover,.nav-link:hover{background:rgba(106,13,173,0.05)}
   .nav-item::after,.nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
   .nav-item:hover::after,.nav-link:hover::after,.nav-item.active::after,.nav-link.active::after{transform:scaleX(1)}
   .cta-link{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(106,13,173,0.08);font-weight:700}
   .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
-  .mega{position:absolute;top:100%;left:0;min-width:280px;max-width:720px;padding:12px;border-radius:12px;background:var(--card);box-shadow:0 18px 60px rgba(16,24,40,.12);transform-origin: top center;opacity:0;visibility:hidden;transition:opacity .18s ease, transform .18s ease, visibility .1s;transform: translateY(8px) scale(.99);z-index:95}
-  .nav-item.has-mega:focus-within .mega,.nav-item.has-mega:hover .mega{opacity:1;visibility:visible;transform:none}
-  .mega-grid{display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:12px;align-items:start}
-  .mega-grid a{padding:8px 6px;display:block;border-radius:8px;font-size:14px;color:#374151}
-  .mega-grid a:hover{background:#fbf7ff;color:var(--purple)}
 
-  @media (max-width:900px){.nav-list{display:none}.mobile-toggle{display:inline-flex}.mega{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;padding:12px;border-radius:10px}}
+  /* NEW: single-column overlay mega menu */
+  .mega-overlay {
+    position: absolute;
+    top: calc(var(--header-h) - 6px); /* just below header */
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    max-width: calc(100% - 40px);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 28px 70px rgba(16,24,40,0.18);
+    z-index: 200;
+    border: 1px solid rgba(14,20,39,0.06);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .18s ease, transform .16s ease, visibility .12s;
+    transform-origin: top center;
+    will-change: opacity, transform;
+  }
+  .mega-overlay.open{ opacity: 1; visibility: visible; transform: translateX(-50%) translateY(6px); }
+
+  .mega-list{ list-style:none;margin:0;padding:6px; max-height:420px; overflow:auto; -webkit-overflow-scrolling:touch;}
+  .mega-list li{ border-bottom:1px solid rgba(15,23,42,0.04); }
+  .mega-list li:last-child{ border-bottom:0; }
+  .mega-list a{
+    display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:8px;color:#222;font-weight:700;font-size:15px;
+    transition: background .12s, padding-left .12s;
+  }
+  .mega-list a .chev{ margin-left:auto; font-weight:700; color:var(--muted); font-size:14px; }
+  .mega-list a:hover, .mega-list a:focus{
+    background: rgba(106,13,173,0.04);
+    outline: none;
+    padding-left: 18px;
+  }
+  .mega-list a:focus{ box-shadow: inset 6px 0 0 var(--purple); }
+  .mega-list a:hover::before{
+    content: '';
+    position: absolute;
+  }
+  /* Purple left accent when hovered/focused */
+  .mega-list a.active, .mega-list a:hover, .mega-list a:focus{
+    box-shadow: inset 6px 0 0 var(--purple); border-radius:8px;
+  }
+
+  @media (max-width:900px){
+    .nav-list{display:none}
+    .mobile-toggle{display:inline-flex}
+    .mega-overlay{position:static; transform:none; left:auto; right:auto; width:100%; max-width:100%; box-shadow:none; border-radius:0; border-left:0; border-right:0;}
+    .mega-list a{padding:14px 16px}
+  }
+
+  /* Remaining page styles (kept from previous) */
 
   /* Hero */
   main{padding-top:18px}
@@ -156,21 +204,7 @@
 
     <nav class="primary" role="navigation" aria-label="Main navigation">
       <div class="nav-list" id="navList">
-        <div class="nav-item has-mega" tabindex="0" data-target="services" aria-expanded="false">Services
-          <div class="mega" role="menu" aria-label="Services menu">
-            <div class="mega-grid" id="megaGrid">
-              <a href="#services-business-analysis" data-target="services-business-analysis">Business Analysis & Planning</a>
-              <a href="#services-change-management" data-target="services-change-management">Change Management</a>
-              <a href="#services-compliance-documentation" data-target="services-compliance-documentation">Compliance & Documentation</a>
-              <a href="#services-data-analysis" data-target="services-data-analysis">Data Analysis</a>
-              <a href="#services-digital-it" data-target="services-digital-it">Digital & IT Consulting</a>
-              <a href="#services-digital-marketing" data-target="services-digital-marketing">Digital Marketing & Online Visibility</a>
-              <a href="#services-financial-risk" data-target="services-financial-risk">Financial & Risk Advisory</a>
-              <a href="#services-market-research" data-target="services-market-research">Market Research</a>
-              <a href="#services-project-management" data-target="services-project-management">Project Management</a>
-            </div>
-          </div>
-        </div>
+        <button class="nav-item" id="servicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
 
         <a class="nav-link" href="#why" data-target="why">Why You Need Us</a>
         <a class="nav-link" href="#about" data-target="about">About</a>
@@ -180,6 +214,21 @@
       </div>
 
       <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
+
+      <!-- Single-column overlay panel -->
+      <div id="megaOverlay" class="mega-overlay" role="menu" aria-label="Services list">
+        <ul class="mega-list" id="megaList" tabindex="0" role="listbox" aria-activedescendant="">
+          <li><a href="#services-business-analysis" data-target="services-business-analysis" role="option">Business Analysis &amp; Planning <span class="chev">›</span></a></li>
+          <li><a href="#services-change-management" data-target="services-change-management" role="option">Change Management <span class="chev">›</span></a></li>
+          <li><a href="#services-compliance-documentation" data-target="services-compliance-documentation" role="option">Compliance &amp; Documentation <span class="chev">›</span></a></li>
+          <li><a href="#services-data-analysis" data-target="services-data-analysis" role="option">Data Analysis <span class="chev">›</span></a></li>
+          <li><a href="#services-digital-it" data-target="services-digital-it" role="option">Digital &amp; IT Consulting <span class="chev">›</span></a></li>
+          <li><a href="#services-digital-marketing" data-target="services-digital-marketing" role="option">Digital Marketing &amp; Online Visibility <span class="chev">›</span></a></li>
+          <li><a href="#services-financial-risk" data-target="services-financial-risk" role="option">Financial &amp; Risk Advisory <span class="chev">›</span></a></li>
+          <li><a href="#services-market-research" data-target="services-market-research" role="option">Market Research <span class="chev">›</span></a></li>
+          <li><a href="#services-project-management" data-target="services-project-management" role="option">Project Management <span class="chev">›</span></a></li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
@@ -413,7 +462,6 @@
     <div class="why-venn">
       <div class="venn-left">
         <div class="venn-placeholder" aria-hidden="true">
-          <!-- Placeholder Venn diagram image -->
           <svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <rect x="0" y="0" width="320" height="320" rx="18" fill="#fff"/>
             <g opacity="0.95">
@@ -587,34 +635,124 @@
 </footer>
 
 <script>
-/* Basic utilities */
-const el = sel => document.querySelector(sel);
-const els = sel => Array.from(document.querySelectorAll(sel));
+/* Utilities */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
-/* set year */
+/* Year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* header shrink on scroll */
+/* Header shrink */
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   if (!header) return;
   if (window.scrollY > 10) header.classList.add('shrink'); else header.classList.remove('shrink');
 });
 
-/* Mega menu alignment to avoid pushing page flow */
-els('.nav-item.has-mega').forEach(item => {
-  const panel = item.querySelector('.mega');
-  if (!panel) return;
-  const align = () => {
-    const rect = item.getBoundingClientRect();
-    const parentRect = document.querySelector('.container').getBoundingClientRect();
-    let left = rect.left - parentRect.left;
-    left = Math.max(8, Math.min(left, parentRect.width - panel.offsetWidth - 24));
-    panel.style.left = left + 'px';
-  };
-  align();
-  window.addEventListener('resize', align, { passive: true });
+/* Mega overlay behavior */
+const servicesBtn = document.getElementById('servicesBtn');
+const megaOverlay = document.getElementById('megaOverlay');
+const megaList = document.getElementById('megaList');
+let megaOpen = false;
+
+function openMega() {
+  megaOverlay.classList.add('open');
+  servicesBtn.setAttribute('aria-expanded', 'true');
+  megaOpen = true;
+}
+function closeMega() {
+  megaOverlay.classList.remove('open');
+  servicesBtn.setAttribute('aria-expanded', 'false');
+  megaOpen = false;
+}
+function toggleMega() {
+  if (megaOpen) closeMega(); else openMega();
+}
+
+/* Open on hover (desktop) and toggle on click (mobile/touch) */
+let hoverTimeout = null;
+servicesBtn.addEventListener('mouseenter', () => {
+  if (window.innerWidth > 900) {
+    clearTimeout(hoverTimeout);
+    openMega();
+  }
 });
+servicesBtn.addEventListener('mouseleave', () => {
+  if (window.innerWidth > 900) {
+    hoverTimeout = setTimeout(closeMega, 220);
+  }
+});
+megaOverlay.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+megaOverlay.addEventListener('mouseleave', () => { if (window.innerWidth > 900) hoverTimeout = setTimeout(closeMega, 220); });
+
+servicesBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  toggleMega();
+});
+
+/* close on outside click */
+document.addEventListener('click', (e) => {
+  if (!megaOpen) return;
+  if (e.target === servicesBtn || servicesBtn.contains(e.target)) return;
+  if (megaOverlay.contains(e.target)) return;
+  closeMega();
+});
+
+/* close on Escape */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMega();
+});
+
+/* keyboard navigation inside mega list (Up/Down/Enter) */
+let megaIndex = -1;
+const megaLinks = Array.from(megaList.querySelectorAll('a'));
+function setMegaActive(index) {
+  megaIndex = index;
+  megaLinks.forEach((a, i) => {
+    a.classList.toggle('active', i === index);
+    if (i === index) a.focus();
+  });
+  // set aria-activedescendant
+  const id = megaLinks[index] ? ('mega-item-' + index) : '';
+  megaList.setAttribute('aria-activedescendant', id);
+}
+megaLinks.forEach((a, idx) => {
+  a.id = 'mega-item-' + idx;
+  a.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
+    if (tgt) {
+      // close then navigate (small delay so overlay goes away)
+      closeMega();
+      setTimeout(() => focusAndFlipService(tgt), 240);
+      history.replaceState(null, '', '#' + tgt);
+    }
+  });
+});
+megaList.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    setMegaActive(Math.min(megaIndex + 1, megaLinks.length - 1));
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    setMegaActive(Math.max(megaIndex - 1, 0));
+  } else if (e.key === 'Enter' && megaIndex >= 0) {
+    megaLinks[megaIndex].click();
+  }
+});
+megaList.addEventListener('focus', () => { if (megaIndex === -1) setMegaActive(0); });
+
+/* Mobile toggle for nav list */
+const mobileToggle = document.getElementById('mobileToggle');
+const navList = document.getElementById('navList');
+if (mobileToggle && navList) {
+  mobileToggle.addEventListener('click', () => {
+    const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+    mobileToggle.setAttribute('aria-expanded', String(!expanded));
+    navList.style.display = expanded ? 'flex' : 'flex';
+    // On small screens the overlay sits inside nav so it will be visible
+  });
+}
 
 /* Services: click from mega menu scroll & highlight */
 const HIGHLIGHT_MS = 2800;
@@ -629,17 +767,6 @@ function focusAndFlipService(id) {
     setTimeout(() => { el.classList.remove('focus-service'); el.classList.remove('flipped'); }, HIGHLIGHT_MS);
   }, 420);
 }
-els('.mega-grid a').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
-    if (tgt) {
-      history.replaceState(null, '', '#' + tgt);
-      focusAndFlipService(tgt);
-      (a.closest('.nav-item.has-mega'))?.blur();
-    }
-  });
-});
 
 /* Handle direct hash on load */
 function handleHashOnLoad() {
@@ -660,12 +787,12 @@ function handleHashOnLoad() {
 window.addEventListener('load', handleHashOnLoad);
 
 /* Flip card interactions (services) */
-els('.flip-card').forEach(card => {
-  card.addEventListener('click', e => {
+$$('.flip-card').forEach(card => {
+  card.addEventListener('click', (e) => {
     if (e.target.closest('a')) return;
     card.classList.toggle('flipped');
   });
-  card.addEventListener('keydown', e => {
+  card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       card.classList.toggle('flipped');
@@ -709,17 +836,6 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, {threshold: 0.32});
 sections.forEach(s => observer.observe(s));
-
-/* Mobile toggle */
-const mobileToggle = document.getElementById('mobileToggle');
-const navList = document.getElementById('navList');
-if (mobileToggle && navList) {
-  mobileToggle.addEventListener('click', () => {
-    const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-    mobileToggle.setAttribute('aria-expanded', String(!expanded));
-    navList.style.display = expanded ? 'none' : 'flex';
-  });
-}
 
 /* ---------------------------
    Experts carousel JS
@@ -767,19 +883,15 @@ function computeVisibleCount() {
 // position carousel to currentIndex (center the active card)
 function renderCarousel() {
   computeVisibleCount();
-  // clamp index
   currentIndex = ((currentIndex % cards.length) + cards.length) % cards.length;
   const cardWidth = cards[0].getBoundingClientRect().width + 18; // gap
-  // Calculate offset so active card is centered when possible
   const centerOffset = (carouselViewport.getBoundingClientRect().width - cardWidth) / 2;
   const translateX = -currentIndex * cardWidth + centerOffset;
   carouselInner.style.transform = `translateX(${translateX}px)`;
-  // active styling
   cards.forEach((c, i) => c.classList.remove('active'));
   const active = cards[currentIndex];
   if (active) active.classList.add('active');
   updateDots();
-  // announce for a11y
   carouselViewport.setAttribute('aria-label', `Slide ${currentIndex+1} of ${cards.length} — ${active ? (active.querySelector('.name')?.textContent || '') : ''}`);
 }
 
@@ -809,35 +921,29 @@ function stopAutoplay() {
 function pauseAutoplay() { stopAutoplay(); }
 function resumeAutoplay() { startAutoplay(); }
 
-// controls
 document.getElementById('carouselPrev').addEventListener('click', () => { prev(); pauseAutoplay(); });
 document.getElementById('carouselNext').addEventListener('click', () => { next(); pauseAutoplay(); });
 
-// build dots and initialize
 buildDots();
 updateDots();
 window.addEventListener('resize', () => { renderCarousel(); });
 
-// Pause on hover / focus
 carouselViewport.addEventListener('mouseenter', pauseAutoplay);
 carouselViewport.addEventListener('mouseleave', resumeAutoplay);
 carouselViewport.addEventListener('focusin', pauseAutoplay);
 carouselViewport.addEventListener('focusout', resumeAutoplay);
 
-// keyboard navigation
 carouselViewport.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { prev(); pauseAutoplay(); }
   if (e.key === 'ArrowRight') { next(); pauseAutoplay(); }
 });
 
-// Ensure cards are focusable and announce
 cards.forEach((c, idx) => {
   c.setAttribute('tabindex', '0');
   c.dataset.index = idx;
   c.addEventListener('focus', () => { pauseAutoplay(); currentIndex = idx; renderCarousel(); });
 });
 
-// start
 setTimeout(() => { renderCarousel(); startAutoplay(); }, 300);
 
 /* End carousel */
