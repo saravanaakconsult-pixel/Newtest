@@ -6,161 +6,130 @@
 <title>CrystalCore Business Solutions (CCBS)</title>
 <meta name="description" content="CrystalCore Business Solutions — Your strategic partner in clarity, precision, and innovation." />
 <style>
-  /* ===== Brand & Base ===== */
   :root{
-    --purple: #6A0DAD;
-    --yellow: #FFD700;
-    --ink: #0f1724;
-    --muted: #6b7280;
-    --bg: #fbfbfe;
-    --card: #ffffff;
-    --glass: rgba(255,255,255,0.85);
-    --header-h: 84px;
-    --max-w: 1180px;
-    --radius: 14px;
+    --purple:#6A0DAD;
+    --yellow:#FFD700;
+    --ink:#0f1724;
+    --muted:#6b7280;
+    --bg:#fbfbfe;
+    --card:#ffffff;
+    --glass:rgba(255,255,255,0.85);
+    --header-h:92px;
+    --max-w:1180px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
 
-  /* ===== Header ===== */
+  /* Header */
   .site-header{
-    position:sticky;top:0;z-index:120;
-    backdrop-filter:blur(6px);
+    position:sticky;top:0;z-index:120;backdrop-filter:blur(6px);
     background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.75));
     border-bottom:1px solid rgba(15,23,42,0.04);
-    height:var(--header-h);
-    display:flex;align-items:center;
+    height:var(--header-h);display:flex;align-items:center;
     transition:height .18s ease,box-shadow .18s ease,background .18s ease;
   }
-  .site-header.shrink{height:64px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
+  .site-header.shrink{height:70px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
   .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
   .header-row{display:flex;align-items:center;justify-content:space-between;width:100%}
 
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo-monogram{
-    width:48px;height:48px;border-radius:10px;background:var(--yellow);
-    display:inline-grid;place-items:center;font-weight:800;color:#111;
-    box-shadow:0 6px 20px rgba(106,13,173,0.07);
-    flex-shrink:0;
-  }
-  .brand .title{line-height:1}
-  .company{font-weight:700;color:var(--purple);letter-spacing:0.2px}
-  .tag{font-size:13px;color:var(--muted)}
+  .brand{display:flex;align-items:center;gap:14px}
+  .logo-monogram{width:52px;height:52px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;box-shadow:0 6px 20px rgba(106,13,173,0.07);flex-shrink:0}
+  .title{line-height:1;display:flex;flex-direction:column}
+  .company{font-weight:800;color:var(--purple);font-size:20px;letter-spacing:0.2px} /* increased size */
+  .tag{font-size:14px;color:var(--muted);margin-top:4px;max-width:520px} /* tagline under company name */
 
   /* Nav */
   nav.primary{display:flex;align-items:center;gap:18px}
   .nav-list{display:flex;gap:6px;align-items:center}
-  .nav-item, .nav-link{
-    position:relative;padding:10px 12px;border-radius:10px;font-weight:600;font-size:15px;color:var(--ink);
-    transition:background .15s, color .12s;
-  }
-  /* highlight background on hover */
+  .nav-item, .nav-link{position:relative;padding:10px 12px;border-radius:10px;font-weight:600;font-size:15px;color:var(--ink);transition:background .15s, color .12s}
   .nav-item:hover, .nav-link:hover{background:rgba(106,13,173,0.04)}
-  /* animated underline */
-  .nav-item::after, .nav-link::after{
-    content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;
-    transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;
-    background:var(--yellow);
-  }
+  .nav-item::after, .nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
   .nav-item:hover::after, .nav-link:hover::after, .nav-item.active::after, .nav-link.active::after{transform:scaleX(1)}
-
-  /* Mega menu */
-  .nav-item.has-mega{cursor:default}
-  .mega{
-    position:absolute;left:0;top:calc(var(--header-h) + 8px);width:760px;max-width:calc(100vw - 48px);
-    padding:18px;border-radius:12px;background:var(--card);box-shadow:0 18px 60px rgba(16,24,40,.12);display:none;
-    transform-origin:top center;transition:opacity .18s ease,transform .18s ease;
-  }
-  .nav-item.has-mega:focus-within .mega, .nav-item.has-mega:hover .mega{display:block}
-  .mega-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .mega h4{margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase}
-  .mega a{display:block;padding:8px;border-radius:8px;color:#374151;font-size:14px}
-  .mega a:hover{background:#fbf7ff;color:var(--purple)}
-
-  /* CTA button */
   .cta{margin-left:12px;padding:10px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:700;box-shadow:0 8px 28px rgba(106,13,173,0.12)}
-  .cta:active{transform:translateY(1px)}
 
-  /* Mobile */
   .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
-  @media (max-width:900px){
-    .nav-list{display:none}
-    .mobile-toggle{display:inline-flex}
-    .mega{position:static;width:100%;box-shadow:none;border-radius:10px;margin-top:8px}
-  }
+  @media (max-width:900px){.nav-list{display:none}.mobile-toggle{display:inline-flex}.title .tag{display:none}}
 
-  /* ===== Hero & Sections ===== */
+  /* Hero */
   main{padding-top:18px}
-  .hero{padding:64px 0 40px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
-  .hero-grid{display:flex;gap:28px;align-items:center;max-width:var(--max-w);margin:0 auto;padding:0 20px}
+  .hero{padding:40px 0 20px;background:linear-gradient(180deg,#fff,#fbfbff);border-bottom:1px solid rgba(15,23,42,0.02)}
+  .hero-grid{display:flex;gap:28px;align-items:flex-start;max-width:var(--max-w);margin:0 auto;padding:0 20px}
   .hero-left{flex:1}
-  .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(106,13,173,0.07);color:var(--purple);font-weight:700;font-size:13px}
-  .hero h1{font-size:40px;margin:12px 0 8px;line-height:1.03;color:var(--ink)}
+  .hero h1{font-size:34px;margin:12px 0 8px;line-height:1.03;color:var(--ink)}
   .hero p{color:var(--muted);font-size:16px;margin:0}
   .hero-cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+  .hero-card{width:360px;border-radius:14px;padding:18px;background:var(--card);border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 40px rgba(16,24,40,0.06)}
 
-  /* hero card */
-  .hero-card{width:380px;border-radius:14px;padding:18px;background:var(--card);border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 40px rgba(16,24,40,0.06)}
-
-  /* reveal helper */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  /* Section titles with accent */
+  /* Sections */
   .section{padding:56px 0}
   .container-sm{max-width:980px;margin:0 auto;padding:0 20px}
   .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
   .section-title h2{margin:0;font-size:22px;color:var(--purple)}
   .section-title .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
 
-  /* Section backgrounds */
-  .bg-soft{background:#fff}
-  .bg-alt{background:linear-gradient(180deg,#fbfbff,#fcfbff)}
+  /* We work with - centered heading with bar inside */
+  .we-work {
+    text-align:center;
+    margin-top:18px;
+    margin-bottom:26px;
+  }
+  .we-work h3 {
+    display:inline-block;
+    position:relative;
+    padding:0 18px 6px 18px;
+    font-size:20px;
+    color:var(--purple);
+    font-weight:800;
+  }
+  .we-work h3::before {
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:-8px;
+    width:120px;
+    height:8px;
+    background:var(--yellow);
+    border-radius:999px;
+    z-index:-1;
+  }
 
-  /* ===== Services flip grid ===== */
+  /* Dialogue boxes (image placeholder above, text below) */
+  .dialogue-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:start}
+  .dialogue{
+    background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.05);text-align:center;
+  }
+  .dialogue .img-placeholder{
+    height:140px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:800;margin-bottom:12px;
+  }
+  .dialogue .title{font-weight:700;color:var(--purple);margin-bottom:8px}
+  .dialogue .desc{color:var(--muted);font-size:15px;line-height:1.6}
+
+  /* Services flip grid (kept) */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .flip-card{
-    perspective:1200px;
-  }
-  .flip-inner{
-    position:relative;width:100%;height:260px;transition:transform .7s cubic-bezier(.2,.9,.2,1);transform-style:preserve-3d;border-radius:12px;
-  }
+  .flip-card{perspective:1200px}
+  .flip-inner{position:relative;width:100%;height:260px;transition:transform .7s cubic-bezier(.2,.9,.2,1);transform-style:preserve-3d;border-radius:12px}
   .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
-  .flip-face{
-    position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(14,20,39,0.04);background:var(--card);
-    box-shadow:0 12px 30px rgba(16,24,40,0.06);
-  }
-  .flip-front{font-weight:700;color:var(--purple);gap:12px}
-  .flip-front .placeholder{
-    width:96px;height:96px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-size:24px;font-weight:800}
-  }
-  .flip-back{
-    transform:rotateY(180deg);text-align:left;padding:18px;color:#273341;gap:12px;
-  }
+  .flip-face{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border:1px solid rgba(14,20,39,0.04);background:var(--card);box-shadow:0 12px 30px rgba(16,24,40,0.06)}
+  .flip-front .placeholder{width:96px;height:96px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-size:24px;font-weight:800}
+  .flip-back{transform:rotateY(180deg);text-align:left;padding:18px;color:#273341}
   .back-list{list-style:none;padding:0;margin:0;font-size:14px;color:var(--muted)}
   .back-list li{margin:8px 0;padding-left:8px;position:relative}
   .back-list li::before{content:'•';position:absolute;left:0;color:var(--purple);font-weight:800}
 
-  /* mobile: flip on tap (no hover) */
-  @media (hover:none){
-    .flip-inner{transition:transform .45s ease}
-    .flip-card{cursor:pointer}
-  }
-
-  /* ===== Form & Footer ===== */
+  /* Form & footer */
   form.card{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.05)}
   label{display:block;font-weight:700;margin-bottom:6px;margin-top:10px}
-  input,textarea,select{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e7ee}
+  input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e7ee}
   button[type=submit]{background:var(--purple);color:#fff;padding:10px 16px;border-radius:999px;border:none;margin-top:12px;font-weight:800}
-  .muted{color:var(--muted)}
-
   footer.site-footer{padding:40px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
+
   @media (max-width:900px){
     .hero-grid{flex-direction:column}
     .hero-card{width:100%}
-    .hero h1{font-size:28px}
+    .company{font-size:18px}
   }
 </style>
 </head>
@@ -172,7 +141,7 @@
       <div class="logo-monogram" aria-hidden="true">C</div>
       <div class="title">
         <div class="company">CrystalCore Business Solutions</div>
-        <div class="tag muted">Business Analyst & Consultant</div>
+        <div class="tag">Your strategic partner in clarity, precision, and innovation</div>
       </div>
     </div>
 
@@ -180,35 +149,32 @@
       <div class="nav-list" id="navList">
         <div class="nav-item has-mega" tabindex="0" data-target="services">Services
           <div class="mega" role="menu" aria-label="Services menu">
-            <div class="mega-grid">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
               <div>
-                <h4>Business Consulting</h4>
-                <a href="#services" role="menuitem">Business Analysis & Planning</a>
-                <a href="#services" role="menuitem">Change Management</a>
-                <a href="#services" role="menuitem">Project Management</a>
+                <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Business Consulting</h4>
+                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Business Analysis & Planning</a>
+                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Change Management</a>
               </div>
               <div>
-                <h4>Data & Strategy</h4>
-                <a href="#services" role="menuitem">Data Analysis & Reporting</a>
-                <a href="#services" role="menuitem">Financial & Risk</a>
-                <a href="#services" role="menuitem">Market Research</a>
+                <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Data & Strategy</h4>
+                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Data Analysis & Reporting</a>
+                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Market Research</a>
               </div>
               <div>
-                <h4>Operations</h4>
-                <a href="#services" role="menuitem">Record Management</a>
-                <a href="#services" role="menuitem">Requirements (BRD/FRD)</a>
+                <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Operations</h4>
+                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">Record Management</a>
+                <a href="#services" style="display:block;padding:6px 6px;border-radius:8px;color:#374151;font-size:14px">BRD / FRD / SRS</a>
               </div>
             </div>
           </div>
         </div>
 
         <a class="nav-link" href="#about" data-target="about">About</a>
-        <a class="nav-link" href="#insights" data-target="insights">Insights</a>
+        <a class="nav-link" href="#experts" data-target="experts">Our Experts</a>
         <a class="nav-link" href="#contact" data-target="contact">Contact</a>
       </div>
 
       <a class="cta" href="#contact">Book Consultation</a>
-
       <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
     </nav>
   </div>
@@ -219,58 +185,67 @@
   <section class="hero" id="hero">
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="eyebrow">Your strategic partner in clarity, precision, and innovation</div>
-        <h1 class="reveal">Transforming businesses with smart analysis & strategy</h1>
-        <p class="muted reveal" style="transition-delay:.05s">
-          CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity,
-          precision, and innovation. We empower organizations through tailored consulting services that drive growth,
-          efficiency, and digital excellence.
-        </p>
+        <h1>Transforming businesses with smart analysis & strategy</h1>
+        <p style="margin-top:8px;color:var(--muted)">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
-        <div class="hero-cta reveal" style="transition-delay:.12s">
+        <div class="hero-cta" style="margin-top:18px">
           <a class="cta" href="#contact">Book a Consultation</a>
           <a class="nav-item" href="#services" style="background:transparent;border-radius:12px;padding:10px 12px;border:1px solid rgba(106,13,173,0.08);">Explore Services</a>
         </div>
       </div>
 
-      <aside class="hero-card reveal" style="transition-delay:.18s">
+      <aside class="hero-card">
         <strong style="color:var(--purple)">Quick summary</strong>
-        <p class="muted" style="margin-top:8px">
-          We work with Startups, SMEs, and Large-scale Businesses — helping with BA, transformation, IT consulting, compliance, and market research.
-        </p>
+        <p style="color:var(--muted);margin-top:8px">We work with Startups, SMEs, and Large-scale Businesses — helping with BA, transformation, IT consulting, compliance, and market research.</p>
       </aside>
     </div>
   </section>
 
   <!-- About -->
-  <section id="about" class="section bg-soft">
+  <section id="about" class="section" style="background:#fff">
     <div class="container-sm">
       <div class="section-title"><h2>About Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <p style="font-size:15px;line-height:1.6">
-        CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation.
-        We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.
-      </p>
 
-      <p class="muted" style="margin-top:12px">
-        <strong>We work with:</strong><br>
-        • <strong>Startups</strong> — helping them set strong foundations with lean processes and smart digital adoption.<br>
-        • <strong>Small & Medium Enterprises (SMEs)</strong> — enabling sustainable growth through structured planning, compliance, and market insights.<br>
-        • <strong>Large-scale Businesses</strong> — guiding digital transformation, change management, and operational excellence at scale.
-      </p>
+      <p style="font-size:15px;line-height:1.6">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation.
+      We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
-      <p class="muted" style="margin-top:12px">
-        Our expertise spans business analysis, transformation strategies, IT consulting, compliance, and market research, ensuring every client receives customized solutions aligned to their vision and goals.
-      </p>
+      <!-- We work with centered heading -->
+      <div class="we-work">
+        <h3>We work with</h3>
+      </div>
+
+      <!-- Dialogue boxes -->
+      <div class="dialogue-row" style="margin-top:8px">
+        <div class="dialogue">
+          <div class="img-placeholder">Startups</div>
+          <div class="title">Startups</div>
+          <div class="desc">helping them set strong foundations with lean processes and smart digital adoption.</div>
+        </div>
+
+        <div class="dialogue">
+          <div class="img-placeholder">SME</div>
+          <div class="title">Small &amp; Medium Enterprises (SMEs)</div>
+          <div class="desc">enabling sustainable growth through structured planning, compliance, and market insights.</div>
+        </div>
+
+        <div class="dialogue">
+          <div class="img-placeholder">Large</div>
+          <div class="title">Large-scale Businesses</div>
+          <div class="desc">guiding digital transformation, change management, and operational excellence at scale.</div>
+        </div>
+      </div>
+
+      <p style="margin-top:20px;color:var(--muted)">Our expertise spans business analysis, transformation strategies, IT consulting, compliance, and market research, ensuring every client receives customized solutions aligned to their vision and goals.</p>
     </div>
   </section>
 
-  <!-- Services -->
-  <section id="services" class="section bg-alt">
+  <!-- Services (flip cards) -->
+  <section id="services" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Our Services</h2><div class="accent" aria-hidden="true"></div></div>
 
       <div class="services-grid" id="servicesGrid">
-        <!-- Card example: repeat for each service -->
+        <!-- repeat flip cards (kept as earlier) -->
         <div class="flip-card" data-service="Business Analysis & Planning" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -288,6 +263,7 @@
           </div>
         </div>
 
+        <!-- other flip cards... keep same as before -->
         <div class="flip-card" data-service="Business Transformation" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -424,24 +400,16 @@
     </div>
   </section>
 
-  <!-- Why Choose Us -->
-  <section id="why" class="section bg-soft">
+  <!-- Our Experts placeholder -->
+  <section id="experts" class="section" style="background:#fff">
     <div class="container-sm">
-      <div class="section-title"><h2>Why Choose Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <ul class="muted" style="line-height:1.8">
-        <li><strong>Clarity in Complexity</strong> – we simplify challenges with structured analysis and insights.</li>
-        <li><strong>End-to-End Guidance</strong> – from startups to enterprises, we support every stage of growth.</li>
-        <li><strong>Customized Solutions</strong> – every recommendation is tailored to your goals.</li>
-        <li><strong>Proven Expertise</strong> – 10+ years of cross-industry experience with measurable results.</li>
-        <li><strong>Digital-First Approach</strong> – expertise in CRM, ERP, automation, and transformation.</li>
-        <li><strong>Reliable Partnership</strong> – compliance, risk mitigation, and change management support.</li>
-        <li><strong>24/7 Support</strong> – always available when you need us most.</li>
-      </ul>
+      <div class="section-title"><h2>Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
+      <p class="muted">Profiles and bios of our experienced consultants will go here. (placeholder)</p>
     </div>
   </section>
 
   <!-- Request Form -->
-  <section id="request" class="section bg-alt">
+  <section id="request" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Client Information & Service Request</h2><div class="accent" aria-hidden="true"></div></div>
       <p class="muted">Please fill in your details and we’ll get back to you within 1 business day.</p>
@@ -465,7 +433,7 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section bg-soft">
+  <section id="contact" class="section" style="background:#fff">
     <div class="container-sm">
       <div class="section-title"><h2>Contact Us</h2><div class="accent" aria-hidden="true"></div></div>
       <p class="muted">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a><br>Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
@@ -482,9 +450,7 @@
 </footer>
 
 <script>
-/* ===== Interactions ===== */
-
-/* set year */
+/* interactions */
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* header shrink on scroll */
@@ -494,16 +460,14 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 10) header.classList.add('shrink'); else header.classList.remove('shrink');
 });
 
-/* intersection observer for reveal and active nav */
+/* reveal & active nav */
 const sections = Array.from(document.querySelectorAll('main section[id]'));
 const navNodes = Array.from(document.querySelectorAll('.nav-item, .nav-link'));
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const id = entry.target.id;
     if (entry.isIntersecting) {
-      // reveal animation
       entry.target.classList.add('in');
-      // set active nav
       navNodes.forEach(n => {
         try {
           const href = n.getAttribute('href');
@@ -516,7 +480,7 @@ const observer = new IntersectionObserver((entries) => {
 }, {threshold: 0.32});
 sections.forEach(s => observer.observe(s));
 
-/* mobile menu toggle */
+/* mobile toggle */
 const mobileToggle = document.getElementById('mobileToggle');
 const navList = document.getElementById('navList');
 if (mobileToggle && navList) {
@@ -527,17 +491,12 @@ if (mobileToggle && navList) {
   });
 }
 
-/* flip cards: hover works on desktop, click toggles on mobile */
+/* flip cards: toggle on click / keyboard */
 document.querySelectorAll('.flip-card').forEach(card => {
-  const inner = card.querySelector('.flip-inner');
-  // hover handled by CSS (desktop)
-  // click toggles flipped state for mobile
   card.addEventListener('click', (e) => {
-    // avoid toggling when clicking links inside
     if (e.target.closest('a')) return;
     card.classList.toggle('flipped');
   });
-  // accessibility: keyboard toggle on Enter/Space
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -546,7 +505,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
   });
 });
 
-/* simple request form placeholder submission (no endpoint yet) */
+/* placeholder form handling */
 const reqForm = document.getElementById('requestForm');
 const reqResp = document.getElementById('requestResp');
 if (reqForm) {
@@ -554,7 +513,6 @@ if (reqForm) {
     e.preventDefault();
     reqResp.textContent = 'Sending...';
     try {
-      // placeholder: replace with real endpoint (Apps Script or API) later
       await new Promise(r => setTimeout(r, 700));
       reqResp.textContent = '✅ Thanks! Your request has been submitted. We will contact within 1 business day.';
       reqForm.reset();
