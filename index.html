@@ -32,7 +32,7 @@
   }
   .site-header.shrink{height:70px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
   .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;width:100%}
-  .header-row{display:flex;align-items:center;justify-content:space-between;width:100%}
+  .header-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:16px}
 
   .brand{display:flex;align-items:center;gap:14px}
   .logo-monogram{width:52px;height:52px;border-radius:12px;background:var(--yellow);display:inline-grid;place-items:center;font-weight:800;color:#111;box-shadow:0 6px 20px rgba(106,13,173,0.07);flex-shrink:0}
@@ -43,24 +43,23 @@
   /* NAV: no horizontal drag/scroll, wrap instead */
   .nav-list{
     display:flex;
-    gap:18px;
+    gap:12px;
     align-items:center;
     white-space:nowrap;
-    overflow:visible;                /* <-- no horizontal scroll */
-    flex-wrap:wrap;                 /* <-- wrap items to next line if needed */
-    touch-action: pan-y;            /* prevent horizontal panning on touch devices */
+    overflow:visible;                /* no horizontal scroll */
+    flex-wrap:wrap;                 /* wrap to next line if needed */
+    touch-action: pan-y;            /* prevent horizontal panning on touch */
     padding-bottom:6px;
   }
-
   .nav-item, .nav-link{
-    position:relative;padding:12px 14px;border-radius:12px;font-weight:700;font-size:16px;color:var(--ink);transition:background .15s, color .12s;
-    flex:0 0 auto; /* don't stretch; allow wrapping */
+    position:relative;padding:10px 12px;border-radius:10px;font-weight:700;font-size:15px;color:var(--ink);transition:background .15s, color .12s;
+    flex:0 0 auto;
   }
   .nav-item:hover, .nav-link:hover{background:rgba(106,13,173,0.05)}
   .nav-item::after, .nav-link::after{content:"";position:absolute;left:12px;right:12px;height:4px;bottom:6px;border-radius:999px;transform:scaleX(0);transform-origin:center;transition:transform .22s cubic-bezier(.2,.9,.2,1),background .12s;background:var(--yellow)}
   .nav-item:hover::after, .nav-link:hover::after, .nav-item.active::after, .nav-link.active::after{transform:scaleX(1)}
 
-  .cta{margin-left:12px;padding:10px 14px;border-radius:12px;background:var(--purple);color:#fff;font-weight:700;box-shadow:0 8px 28px rgba(106,13,173,0.12)}
+  .cta-link{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(106,13,173,0.08);font-weight:700}
   .mobile-toggle{display:none;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:8px;background:#fff}
 
   /* Mega panel */
@@ -68,10 +67,10 @@
     position:absolute;
     top:100%;
     left:0;
-    min-width:300px;
-    max-width:640px;
+    min-width:280px;
+    max-width:720px;
     width:auto;
-    padding:14px;
+    padding:12px;
     border-radius:12px;
     background:var(--card);
     box-shadow:0 18px 60px rgba(16,24,40,.12);
@@ -88,8 +87,7 @@
     visibility:visible;
     transform:none;
   }
-
-  .mega-grid{ display:grid; grid-template-columns:repeat(2,minmax(120px,1fr)); gap:12px; }
+  .mega-grid{ display:grid; grid-template-columns:repeat(3,minmax(120px,1fr)); gap:12px; align-items:start; }
   .mega-grid a{ padding:8px 6px; display:block; border-radius:8px; font-size:14px; color:#374151 }
   .mega-grid a:hover{ background:#fbf7ff; color:var(--purple) }
 
@@ -140,6 +138,17 @@
   .back-list li{margin:8px 0;padding-left:8px;position:relative}
   .back-list li::before{content:'•';position:absolute;left:0;color:var(--purple);font-weight:800}
 
+  /* focus highlight class for clicked service */
+  .focus-service{ box-shadow:0 18px 40px rgba(106,13,173,0.14) !important; transform:translateY(-6px) scale(1.02) !important; border-color: rgba(106,13,173,0.18) !important; transition:transform .28s ease, box-shadow .28s ease; }
+
+  /* Experts */
+  .experts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .expert{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.05);text-align:center}
+  .expert .img{height:120px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
+  .expert .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
+  .expert .role{color:var(--muted);font-weight:700;margin-bottom:8px}
+  .expert .bio{color:var(--muted);font-size:14px;line-height:1.5}
+
   /* Form & footer */
   form.card{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.05)}
   label{display:block;font-weight:700;margin-bottom:6px;margin-top:10px}
@@ -170,29 +179,28 @@
       <div class="nav-list" id="navList">
         <div class="nav-item has-mega" tabindex="0" data-target="services" aria-expanded="false">Services
           <div class="mega" role="menu" aria-label="Services menu">
-            <div class="mega-grid">
-              <div>
-                <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Business Consulting</h4>
-                <a href="#services" role="menuitem">Business Analysis & Planning</a>
-                <a href="#services" role="menuitem">Change Management</a>
-                <a href="#services" role="menuitem">Project Management</a>
-              </div>
-              <div>
-                <h4 style="margin:0 0 8px;font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase">Data & Strategy</h4>
-                <a href="#services" role="menuitem">Data Analysis & Reporting</a>
-                <a href="#services" role="menuitem">Market Research</a>
-                <a href="#services" role="menuitem">Financial & Risk</a>
-              </div>
+            <div class="mega-grid" id="megaGrid">
+              <!-- Titles only: each link targets the service ID slug -->
+              <a href="#services-business-analysis" data-target="services-business-analysis">Business Analysis & Planning</a>
+              <a href="#services-change-management" data-target="services-change-management">Change Management</a>
+              <a href="#services-compliance-documentation" data-target="services-compliance-documentation">Compliance & Documentation</a>
+              <a href="#services-data-analysis" data-target="services-data-analysis">Data Analysis</a>
+              <a href="#services-digital-it" data-target="services-digital-it">Digital & IT Consulting</a>
+              <a href="#services-digital-marketing" data-target="services-digital-marketing">Digital Marketing & Online Visibility</a>
+              <a href="#services-financial-risk" data-target="services-financial-risk">Financial & Risk Advisory</a>
+              <a href="#services-market-research" data-target="services-market-research">Market Research</a>
+              <a href="#services-project-management" data-target="services-project-management">Project Management</a>
             </div>
           </div>
         </div>
 
+        <a class="nav-link" href="#why" data-target="why">Why Choose Us</a>
         <a class="nav-link" href="#about" data-target="about">About</a>
         <a class="nav-link" href="#experts" data-target="experts">Our Experts</a>
         <a class="nav-link" href="#contact" data-target="contact">Contact</a>
+        <a class="nav-link" href="#request" data-target="request">Book Consultation</a>
       </div>
 
-      <a class="cta" href="#contact">Book Consultation</a>
       <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
     </nav>
   </div>
@@ -207,14 +215,13 @@
         <p style="margin-top:8px;color:var(--muted)">CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organizations through tailored consulting services that drive growth, efficiency, and digital excellence.</p>
 
         <div class="hero-cta" style="margin-top:18px">
-          <a class="cta" href="#contact">Book a Consultation</a>
-          <a class="nav-item" href="#services" style="background:transparent;border-radius:12px;padding:10px 12px;border:1px solid rgba(106,13,173,0.08);">Explore Services</a>
+          <a class="cta-link" href="#services">Explore Services</a>
         </div>
       </div>
 
       <aside class="hero-card">
         <strong style="color:var(--purple)">Quick summary</strong>
-        <p style="color:var(--muted);margin-top:8px">We work with Startups, SMEs, and Large-scale Businesses — helping with BA, transformation, IT consulting, compliance, and market research.</p>
+        <p style="color:var(--muted);margin-top:8px">We work with Startups, SMEs, and Large-scale Businesses — helping with BA, change management, IT consulting, compliance, and market research.</p>
       </aside>
     </div>
   </section>
@@ -263,8 +270,8 @@
       <div class="section-title"><h2>Our Services</h2><div class="accent" aria-hidden="true"></div></div>
 
       <div class="services-grid" id="servicesGrid">
-        <!-- flip cards... (unchanged) -->
-        <div class="flip-card" data-service="Business Analysis & Planning" tabindex="0">
+        <!-- 1. Business Analysis & Planning -->
+        <div id="services-business-analysis" class="flip-card" data-service="Business Analysis & Planning" tabindex="0">
           <div class="flip-inner">
             <div class="flip-face flip-front">
               <div class="placeholder">BA</div>
@@ -281,21 +288,206 @@
           </div>
         </div>
 
-        <!-- other flip cards omitted for brevity in this snippet (they remain the same) -->
+        <!-- 2. Change Management (formerly Business Transformation) -->
+        <div id="services-change-management" class="flip-card" data-service="Change Management" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">CM</div>
+              <div style="margin-top:12px;text-align:center;">Change Management</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Change Management</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>Business transformation</li>
+                <li>Transformation roadmaps</li>
+                <li>Process re-engineering</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Compliance & Documentation -->
+        <div id="services-compliance-documentation" class="flip-card" data-service="Compliance & Documentation" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">CD</div>
+              <div style="margin-top:12px;text-align:center;">Compliance & Documentation</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Compliance & Documentation</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>MSME & GST guidance</li>
+                <li>Certification & regulatory support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Data Analysis -->
+        <div id="services-data-analysis" class="flip-card" data-service="Data Analysis" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">DA</div>
+              <div style="margin-top:12px;text-align:center;">Data Analysis</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Data Analysis</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>Dashboards & insights</li>
+                <li>Data cleansing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Digital & IT Consulting -->
+        <div id="services-digital-it" class="flip-card" data-service="Digital & IT Consulting" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">IT</div>
+              <div style="margin-top:12px;text-align:center;">Digital & IT Consulting</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Digital & IT Consulting</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>Digital strategy</li>
+                <li>CRM & ERP implementation</li>
+                <li>Workflow automation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Digital Marketing & Online Visibility -->
+        <div id="services-digital-marketing" class="flip-card" data-service="Digital Marketing & Online Visibility" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">DM</div>
+              <div style="margin-top:12px;text-align:center;">Digital Marketing & Online Visibility</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Digital Marketing & Online Visibility</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>SEO & Content Strategy</li>
+                <li>Social Media Campaigns</li>
+                <li>Performance Analytics & Reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Financial & Risk Advisory -->
+        <div id="services-financial-risk" class="flip-card" data-service="Financial & Risk Advisory" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">FR</div>
+              <div style="margin-top:12px;text-align:center;">Financial & Risk Advisory</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Financial & Risk Advisory</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>Financial planning</li>
+                <li>Risk mitigation</li>
+                <li>Risk analysis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Market Research -->
+        <div id="services-market-research" class="flip-card" data-service="Market Research" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">MR</div>
+              <div style="margin-top:12px;text-align:center;">Market Research</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Market Research</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>Competitor analysis</li>
+                <li>Strategic growth roadmaps</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Project Management -->
+        <div id="services-project-management" class="flip-card" data-service="Project Management" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div class="placeholder">PM</div>
+              <div style="margin-top:12px;text-align:center;">Project Management</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong style="color:var(--purple)">Project Management</strong>
+              <ul class="back-list" style="margin-top:8px">
+                <li>Stakeholder management</li>
+                <li>Agile user stories</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- Why Choose Us -->
+  <section id="why" class="section" style="background:#fff">
+    <div class="container-sm">
+      <div class="section-title"><h2>Why Choose Us</h2><div class="accent" aria-hidden="true"></div></div>
+      <ul style="line-height:1.8;color:var(--muted);padding-left:18px">
+        <li><strong>Clarity in Complexity</strong> – we simplify challenges with structured analysis and insights.</li>
+        <li><strong>End-to-End Guidance</strong> – from startups to enterprises, we support every stage of growth.</li>
+        <li><strong>Customized Solutions</strong> – every recommendation is tailored to your goals.</li>
+        <li><strong>Proven Expertise</strong> – 10+ years of cross-industry experience with measurable results.</li>
+        <li><strong>Digital-First Approach</strong> – expertise in CRM, ERP, automation, and transformation.</li>
+        <li><strong>Reliable Partnership</strong> – compliance, risk mitigation, and change management support.</li>
+        <li><strong>24/7 Support</strong> – always available when you need us most.</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- Our Experts -->
-  <section id="experts" class="section" style="background:#fff">
+  <section id="experts" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container-sm">
       <div class="section-title"><h2>Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
-      <p class="muted">Profiles and bios of our experienced consultants will go here. (placeholder)</p>
+      <p style="color:var(--muted);margin-bottom:18px">A team of experienced consultants delivering measurable outcomes across business analysis, transformation, technology, compliance, and finance.</p>
+
+      <div class="experts-grid">
+        <div class="expert">
+          <div class="img">Saravanan A</div>
+          <div class="name">Saravanan A — Founder</div>
+          <div class="role">Business Analyst & Consultant — Project Management, Digital Marketing & Change Management</div>
+          <div class="bio">Saravanan is the founder of CrystalCore Business Solutions with 10+ years delivering transformation programs across startups and enterprises. He specializes in requirements-led change, agile project delivery, and digital go-to-market strategies.</div>
+        </div>
+
+        <div class="expert">
+          <div class="img">Saraswathi</div>
+          <div class="name">Saraswathi — Software Developer & Data Analyst</div>
+          <div class="role">Software Development, Data Analysis & Dashboards</div>
+          <div class="bio">Saraswathi builds data-driven solutions and dashboards that turn raw data into actionable insights. She combines engineering best practices with strong analytics to help teams measure impact and make confident decisions.</div>
+        </div>
+
+        <div class="expert">
+          <div class="img">Umamageshwari</div>
+          <div class="name">Umamageshwari — Compliance & Market Research</div>
+          <div class="role">Compliance, Documentation & Market Research</div>
+          <div class="bio">Umamageshwari brings deep regulatory expertise and market research experience to ensure compliance readiness and strategic positioning. She helps clients navigate certification pathways and competitive market analysis.</div>
+        </div>
+
+        <div class="expert">
+          <div class="img">Akshaya</div>
+          <div class="name">Akshaya — Financial & Risk Advisory</div>
+          <div class="role">Financial Planning, Risk Mitigation & Advisory</div>
+          <div class="bio">Akshaya guides financial planning and risk management strategies that protect business value while enabling growth. Her pragmatic approach blends quantitative analysis with operational insights to reduce exposure and improve forecasting.</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Request Form -->
-  <section id="request" class="section" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
+  <section id="request" class="section">
     <div class="container-sm">
       <div class="section-title"><h2>Client Information & Service Request</h2><div class="accent" aria-hidden="true"></div></div>
       <p class="muted">Please fill in your details and we’ll get back to you within 1 business day.</p>
@@ -349,7 +541,7 @@ window.addEventListener('scroll', () => {
 });
 
 /* reveal & active nav */
-const sections = Array.from(document.querySelectorAll('main section[id]'));
+const sections = Array.from(document.querySelectorAll('main section[id], main section'));
 const navNodes = Array.from(document.querySelectorAll('.nav-item, .nav-link'));
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -375,12 +567,13 @@ if (mobileToggle && navList) {
   mobileToggle.addEventListener('click', () => {
     const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
     mobileToggle.setAttribute('aria-expanded', String(!expanded));
-    navList.style.display = expanded ? 'flex' : 'block';
+    navList.style.display = expanded ? 'none' : 'flex';
   });
 }
 
-/* flip cards: toggle on click / keyboard */
+/* flip cards: hover works on desktop, click toggles on mobile & keyboard */
 document.querySelectorAll('.flip-card').forEach(card => {
+  const inner = card.querySelector('.flip-inner');
   card.addEventListener('click', (e) => {
     if (e.target.closest('a')) return;
     card.classList.toggle('flipped');
@@ -410,7 +603,70 @@ if (reqForm) {
   });
 }
 
-/* align mega panel to parent nav item (keeps it from overflowing) */
+/* Mega menu links behavior:
+   - clicking any title will scroll to matching service card,
+   - add highlight class + flip card,
+   - remove highlight after timeout.
+*/
+const HIGHLIGHT_MS = 2800;
+
+function focusAndFlipService(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // ensure services section is visible
+  document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // small delay to allow section to be visible
+  setTimeout(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // add highlight
+    el.classList.add('focus-service');
+    // flip
+    el.classList.add('flipped');
+    // clear after timeout
+    setTimeout(() => {
+      el.classList.remove('focus-service');
+      el.classList.remove('flipped');
+    }, HIGHLIGHT_MS);
+  }, 420);
+}
+
+// intercept mega menu links
+document.querySelectorAll('.mega-grid a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const tgt = a.dataset.target || a.getAttribute('href')?.replace('#','');
+    if (tgt) {
+      // update hash without immediate jump
+      history.replaceState(null, '', '#' + tgt);
+      focusAndFlipService(tgt);
+      // close mega (move focus)
+      (a.closest('.nav-item.has-mega'))?.blur();
+    }
+  });
+});
+
+// handle direct hash on load (user arrived with #services-...)
+function handleHashOnLoad() {
+  const h = location.hash.replace('#','');
+  if (!h) return;
+  // if it's a service id, focus it
+  const serviceIds = [
+    'services-business-analysis','services-change-management','services-compliance-documentation',
+    'services-data-analysis','services-digital-it','services-digital-marketing',
+    'services-financial-risk','services-market-research','services-project-management'
+  ];
+  if (serviceIds.includes(h)) {
+    // small delay once page paints
+    setTimeout(() => focusAndFlipService(h), 400);
+  } else {
+    // scroll to the section if exists
+    const el = document.getElementById(h);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+window.addEventListener('load', handleHashOnLoad);
+
+/* align mega panel (prevent overflow) */
 document.querySelectorAll('.nav-item.has-mega').forEach(item => {
   const panel = item.querySelector('.mega');
   if (!panel) return;
