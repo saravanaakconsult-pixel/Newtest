@@ -31,11 +31,10 @@
   /* Menu bar underneath */
   .menu-bar{display:flex;justify-content:center;gap:18px;padding:12px 0;border-top:1px solid rgba(15,23,42,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98))}
   .nav-link{padding:8px 12px;border-radius:8px;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;position:relative;background:transparent}
-  /* remove heavy grey box; we use an underline pseudo-element */
   .nav-link:hover,
   .nav-link:focus{ color:var(--purple); outline: none; }
 
-  /* Underline (Option A) */
+  /* Underline (Option A previously chosen) */
   .nav-link::after{
     content:"";
     position:absolute;
@@ -58,7 +57,7 @@
   .menu-bar .cta{ border-radius:10px; box-shadow:0 6px 18px rgba(106,13,173,0.08); transition:transform .12s ease, box-shadow .12s ease;}
   .menu-bar .cta:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(106,13,173,0.10); }
 
-  /* Dropdown panel (subtle + lower) */
+  /* Dropdown panel */
   .dropdown-wrap{position:relative;display:inline-block}
   .dropdown-panel{
     position:absolute;left:50%;transform:translateX(-50%);top:62px;
@@ -95,12 +94,40 @@
   .about-content{display:grid;grid-template-columns:1fr;gap:18px}
   .about-content p{color:var(--muted);line-height:1.7}
 
-  /* Services grid + flip cards */
+  /* Services grid - FLAT style (no outline/box) */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
-  .service-card{background:var(--card);border-radius:12px;padding:36px 18px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.04);text-align:center;min-height:160px}
-  .service-card .icon{width:88px;height:88px;margin:0 auto 12px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;color:var(--purple);font-weight:900;font-size:20px}
-  .service-card .title{font-weight:800;color:var(--purple);margin-top:8px}
-  .service-card .desc{color:var(--muted);margin-top:8px;line-height:1.6}
+  .service-card{
+    background:transparent;      /* plain background */
+    border: none;                /* remove outline */
+    box-shadow: none;            /* remove shadow */
+    padding:22px 8px;           /* keep spacing */
+    text-align:left; 
+    min-height:140px;
+    transition:color .16s ease;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .service-card .icon{
+    width:56px;height:56px;
+    border-radius:8px;
+    background:transparent;      /* no colored box */
+    display:grid;place-items:center;
+    color:var(--muted);           /* muted by default */
+    font-weight:900;font-size:18px;
+    transition:transform .18s ease, color .18s ease;
+    flex:0 0 56px;
+  }
+  .service-card .content{flex:1}
+  .service-card .title{
+    font-weight:800;color:var(--ink);margin-top:0;font-size:16px;
+    transition:color .18s ease;
+  }
+  .service-card .desc{color:var(--muted);margin-top:6px;line-height:1.5;font-size:14px}
+
+  /* Hover: plain but with a small purple color change (Option B) */
+  .service-card:hover .icon{ color:var(--purple); transform:translateY(-6px); }
+  .service-card:hover .title{ color:var(--purple); }
 
   /* Experts carousel style (cards) */
   .experts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
@@ -123,6 +150,8 @@
     .section-title{ justify-content:center; gap:8px; }
     .menu-bar{flex-wrap:wrap;padding:10px 12px;gap:8px}
     .nav-link{font-size:14px;padding:8px 10px}
+    .service-card{ padding:18px 6px; min-height:120px; }
+    .service-card .icon{ width:48px;height:48px; flex:0 0 48px; font-size:16px; }
   }
 
   /* utility: visually-hidden (a11y) */
@@ -207,58 +236,76 @@
       <div class="section-title"><h2>Our Services</h2><div class="accent" aria-hidden="true"></div></div>
 
       <div class="services-grid" id="servicesGrid">
-        <div id="services-business-analysis" class="service-card">
-          <div class="icon">BA</div>
-          <div class="title">Business Analysis &amp; Planning</div>
-          <div class="desc">Planning & monitoring • BRD / FRD / SRS documentation • Business health check-up</div>
+        <div id="services-business-analysis" class="service-card" role="article" aria-labelledby="svc-ba-title">
+          <div class="icon" aria-hidden="true">BA</div>
+          <div class="content">
+            <div id="svc-ba-title" class="title">Business Analysis &amp; Planning</div>
+            <div class="desc">Planning & monitoring • BRD / FRD / SRS documentation • Business health check-up</div>
+          </div>
         </div>
 
-        <div id="services-change-management" class="service-card">
-          <div class="icon">CM</div>
-          <div class="title">Change Management</div>
-          <div class="desc">Business transformation • Transformation roadmaps • Process re-engineering</div>
+        <div id="services-change-management" class="service-card" role="article" aria-labelledby="svc-cm-title">
+          <div class="icon" aria-hidden="true">CM</div>
+          <div class="content">
+            <div id="svc-cm-title" class="title">Change Management</div>
+            <div class="desc">Business transformation • Transformation roadmaps • Process re-engineering</div>
+          </div>
         </div>
 
-        <div id="services-compliance-documentation" class="service-card">
-          <div class="icon">CD</div>
-          <div class="title">Compliance &amp; Documentation</div>
-          <div class="desc">MSME & GST guidance • Certification & regulatory support</div>
+        <div id="services-compliance-documentation" class="service-card" role="article" aria-labelledby="svc-cd-title">
+          <div class="icon" aria-hidden="true">CD</div>
+          <div class="content">
+            <div id="svc-cd-title" class="title">Compliance &amp; Documentation</div>
+            <div class="desc">MSME & GST guidance • Certification & regulatory support</div>
+          </div>
         </div>
 
-        <div id="services-data-analysis" class="service-card">
-          <div class="icon">DA</div>
-          <div class="title">Data Analysis</div>
-          <div class="desc">Dashboards & insights • Data cleansing</div>
+        <div id="services-data-analysis" class="service-card" role="article" aria-labelledby="svc-da-title">
+          <div class="icon" aria-hidden="true">DA</div>
+          <div class="content">
+            <div id="svc-da-title" class="title">Data Analysis</div>
+            <div class="desc">Dashboards & insights • Data cleansing</div>
+          </div>
         </div>
 
-        <div id="services-digital-it" class="service-card">
-          <div class="icon">IT</div>
-          <div class="title">Digital &amp; IT Consulting</div>
-          <div class="desc">Digital strategy • CRM & ERP implementation • Workflow automation</div>
+        <div id="services-digital-it" class="service-card" role="article" aria-labelledby="svc-it-title">
+          <div class="icon" aria-hidden="true">IT</div>
+          <div class="content">
+            <div id="svc-it-title" class="title">Digital &amp; IT Consulting</div>
+            <div class="desc">Digital strategy • CRM & ERP implementation • Workflow automation</div>
+          </div>
         </div>
 
-        <div id="services-digital-marketing" class="service-card">
-          <div class="icon">DM</div>
-          <div class="title">Digital Marketing &amp; Online Visibility</div>
-          <div class="desc">SEO & Content Strategy • Social Media Campaigns • Performance Analytics</div>
+        <div id="services-digital-marketing" class="service-card" role="article" aria-labelledby="svc-dm-title">
+          <div class="icon" aria-hidden="true">DM</div>
+          <div class="content">
+            <div id="svc-dm-title" class="title">Digital Marketing &amp; Online Visibility</div>
+            <div class="desc">SEO & Content Strategy • Social Media Campaigns • Performance Analytics</div>
+          </div>
         </div>
 
-        <div id="services-financial-risk" class="service-card">
-          <div class="icon">FR</div>
-          <div class="title">Financial &amp; Risk Advisory</div>
-          <div class="desc">Financial planning • Risk mitigation • Risk analysis</div>
+        <div id="services-financial-risk" class="service-card" role="article" aria-labelledby="svc-fr-title">
+          <div class="icon" aria-hidden="true">FR</div>
+          <div class="content">
+            <div id="svc-fr-title" class="title">Financial &amp; Risk Advisory</div>
+            <div class="desc">Financial planning • Risk mitigation • Risk analysis</div>
+          </div>
         </div>
 
-        <div id="services-market-research" class="service-card">
-          <div class="icon">MR</div>
-          <div class="title">Market Research</div>
-          <div class="desc">Competitor analysis • Strategic growth roadmaps</div>
+        <div id="services-market-research" class="service-card" role="article" aria-labelledby="svc-mr-title">
+          <div class="icon" aria-hidden="true">MR</div>
+          <div class="content">
+            <div id="svc-mr-title" class="title">Market Research</div>
+            <div class="desc">Competitor analysis • Strategic growth roadmaps</div>
+          </div>
         </div>
 
-        <div id="services-project-management" class="service-card">
-          <div class="icon">PM</div>
-          <div class="title">Project Management</div>
-          <div class="desc">Stakeholder management • Agile user stories</div>
+        <div id="services-project-management" class="service-card" role="article" aria-labelledby="svc-pm-title">
+          <div class="icon" aria-hidden="true">PM</div>
+          <div class="content">
+            <div id="svc-pm-title" class="title">Project Management</div>
+            <div class="desc">Stakeholder management • Agile user stories</div>
+          </div>
         </div>
       </div>
     </div>
@@ -357,7 +404,7 @@
 // dynamic year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// dropdown toggle (unchanged behavior)
+// dropdown toggle
 const servicesBtn = document.getElementById('servicesBtn');
 const dropdown = document.getElementById('dropdown');
 function openDropdown(){ dropdown.classList.add('open'); servicesBtn.setAttribute('aria-expanded','true'); dropdown.setAttribute('aria-hidden','false'); }
@@ -372,8 +419,8 @@ function highlightService(id){
   const el = document.getElementById(id);
   if (!el) return;
   el.scrollIntoView({behavior:'smooth', block:'center'});
-  el.style.boxShadow = '0 18px 40px rgba(106,13,173,0.08)';
-  setTimeout(()=>{ el.style.boxShadow = ''; }, 2000);
+  el.style.boxShadow = '0 18px 40px rgba(106,13,173,0.05)';
+  setTimeout(()=>{ el.style.boxShadow = ''; }, 1600);
 }
 links.forEach(a=>{
   a.addEventListener('click', (ev)=>{
@@ -392,29 +439,18 @@ if (reqForm){
 }
 
 // --- Navigation active underline sync (click + scroll)
-// set active class on closest nav-link (for the underline)
 const navLinks = Array.from(document.querySelectorAll('.menu-bar .nav-link'));
 const sectionAnchors = Array.from(document.querySelectorAll('main section[id], main [id]')).filter(el=>el.id);
 const anchorMap = {};
-
-// map anchors to nav-link elements by href matching
 navLinks.forEach(nl=>{
   const a = nl.querySelector('a');
   if (a && a.getAttribute('href') && a.getAttribute('href').startsWith('#')){
     anchorMap[a.getAttribute('href').replace('#','')] = nl;
-    // click behavior: add active
-    a.addEventListener('click', (ev)=> {
-      // small delay because of smooth scroll
-      setActiveNav(nl);
-    });
+    a.addEventListener('click', (ev)=> { setActiveNav(nl); });
   }
 });
-
-// helper to set active nav
 function clearActiveNav(){ navLinks.forEach(n=>n.classList.remove('active')); }
 function setActiveNav(n){ clearActiveNav(); if (n) n.classList.add('active'); }
-
-// use IntersectionObserver to watch sections and set active nav
 const obsOptions = { root: null, rootMargin: '0px 0px -45% 0px', threshold: 0 };
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
@@ -425,10 +461,7 @@ const observer = new IntersectionObserver((entries)=>{
     }
   });
 }, obsOptions);
-
 sectionAnchors.forEach(s=>observer.observe(s));
-
-// on load, try to set active based on current hash
 if (location.hash){
   const h = location.hash.replace('#','');
   if (anchorMap[h]) setActiveNav(anchorMap[h]);
