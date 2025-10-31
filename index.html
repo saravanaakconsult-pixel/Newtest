@@ -235,4 +235,42 @@ document.querySelectorAll('.nav-link').forEach(btn=>{
   });
 });
 
-// dropdown
+// dropdown open/close
+const servicesBtn=document.getElementById('servicesBtn');
+const dropdown=document.getElementById('dropdown');
+
+servicesBtn.addEventListener('click',e=>{
+  e.preventDefault();
+  dropdown.classList.toggle('open');
+});
+document.addEventListener('click',e=>{
+  if(!servicesBtn.contains(e.target)&&!dropdown.contains(e.target)){
+    dropdown.classList.remove('open');
+  }
+});
+
+// dropdown links scroll mapping
+document.querySelectorAll('.dropdown-list a').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const id=link.getAttribute('href').replace('#','');
+    const el=document.getElementById(id);
+    if(el){
+      dropdown.classList.remove('open');
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+
+// scroll-to-top button
+const topBtn=document.getElementById('topBtn');
+window.addEventListener('scroll',()=>{
+  if(document.body.scrollTop>100||document.documentElement.scrollTop>100){
+    topBtn.style.display="block";
+  }else{
+    topBtn.style.display="none";
+  }
+});
+topBtn.addEventListener('click',()=>{
+  window.scrollTo({top:
+
