@@ -1,508 +1,373 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CrystalCore Business Solutions (CCBS)</title>
-<meta name="description" content="CrystalCore Business Solutions — Your strategic partner in clarity, precision, and innovation." />
-<style>
-  :root{
-    --logo-purple: #6A0DAD; /* brand purple */
-    --logo-yellow: #FFD700;
-    --black: #000000;
-    --bg: #faf8fb;
-    --card-bg: #ffffff;
-    --muted: #6b6b6b;
-    --section-gap: 90px; /* space between sections (confirmed) */
-    --container-width: 1100px;
-    --border-radius: 10px;
-    --shadow: 0 6px 18px rgba(20,20,40,0.06);
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CrystalCore Business Solutions (CCBS)</title>
+  <meta name="description" content="CrystalCore Business Solutions — Business Analyst & Consultant Service" />
+  <!-- Brand fav -->
+  <link rel="icon" href="logo.png" />
 
-  /* Reset */
-  *{box-sizing:border-box}
-  body{
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    margin:0;
-    color:var(--muted);
-    background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.45;
-  }
+  <style>
+    :root{
+      --brand-purple:#6A0DAD; /* your requested logo purple */
+      --brand-yellow:#FFD700;
+      --black:#000000;
+      --muted:#666666;
+      --bg:#fafafa;
+      --card:#ffffff;
+      --gap:1rem;
+      --radius:12px;
+      --container:1100px;
+      --max-width:1200px;
+      --section-pad:48px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
 
-  a{color:inherit; text-decoration:none}
+    /* Reset-ish */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg, rgba(255,215,0,0.02), rgba(255,215,0,0.00)),var(--bg); color:#111; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    a{color:inherit}
 
-  /* Header / Nav */
-  header {
-    background: white;
-    border-bottom: 1px solid #eee;
-    position: sticky;
-    top:0;
-    z-index:1000;
-  }
+    /* Container */
+    .wrap{max-width:var(--container); margin:0 auto; padding:0 1rem;}
 
-  .topbar {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 18px 20px;
-    display:flex;
-    align-items:center;
-    gap:18px;
-  }
+    /* Header / Nav */
+    header{position:sticky; top:0; z-index:60; background:rgba(255,255,255,0.96); backdrop-filter: blur(6px); border-bottom:1px solid rgba(0,0,0,0.04);}
+    .nav{display:flex; align-items:center; gap:1rem; padding:.6rem 1rem; justify-content:space-between;}
+    .brand{display:flex; gap:.8rem; align-items:center; text-decoration:none;}
+    .brand img{height:44px; width:auto; display:block;}
+    .brand .title{font-weight:700; color:var(--brand-purple); letter-spacing:.2px}
+    .menu{display:flex; gap:.6rem; align-items:center;}
+    .menu a{padding:.45rem .6rem; border-radius:8px; text-decoration:none; color:var(--black); font-weight:600; font-size:.95rem; transition:all .18s ease;}
+    .menu a:hover, .menu a:focus{color:var(--brand-purple); background:rgba(106,13,173,0.06); outline:none;}
+    .cta-btn{background:var(--brand-purple); color:#fff; padding:.5rem .85rem; border-radius:10px; text-decoration:none; font-weight:700; box-shadow:0 8px 20px rgba(106,13,173,0.12);}
 
-  .logo {
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .logo .mark{
-    width:56px;
-    height:56px;
-    background:var(--logo-yellow);
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow: 0 4px 12px rgba(106,13,173,0.08);
-  }
-  .logo svg {width:34px; height:34px; fill:var(--logo-purple)}
-  .logo .title{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
-  .logo .title h1{
-    margin:0;
-    font-size:16px;
-    font-weight:700;
-    color:var(--logo-purple); /* site title in logo purple */
-    letter-spacing:0.2px;
-  }
-  .logo .title p{
-    margin:0;
-    font-size:12px;
-    color:var(--logo-purple); /* tagline also logo purple */
-  }
+    /* Mobile */
+    .hamburger{display:none; cursor:pointer; border:0; background:none; padding:.4rem; border-radius:8px;}
+    @media (max-width:900px){
+      .menu{display:none}
+      .hamburger{display:inline-flex}
+    }
 
-  nav.site-nav{
-    margin-left:auto;
-  }
+    /* Hero */
+    .hero{padding:3.2rem 0; display:grid; gap:1.2rem; align-items:center;}
+    .hero-inner{display:flex; gap:2rem; align-items:center; justify-content:space-between;}
+    .hero-copy{max-width:720px;}
+    .hero h1{margin:0; font-size:clamp(1.6rem,3.6vw,2.6rem); color:var(--brand-purple);}
+    .hero p.lead{margin:.6rem 0 1.2rem; color:var(--muted); font-size:1.05rem}
+    .hero-actions{display:flex; gap:.8rem; align-items:center;}
+    .secondary{background:transparent; border:1px solid rgba(0,0,0,0.08); padding:.5rem .75rem; border-radius:8px; font-weight:600}
 
-  .nav-list{
-    display:flex;
-    gap:18px;
-    align-items:center;
-    list-style:none;
-    padding:0;
-    margin:0;
-  }
+    /* Sections */
+    section{padding:var(--section-pad) 0; border-bottom:1px solid rgba(0,0,0,0.03);}
+    section h2{margin:0 0 .6rem; font-size:1.15rem; color:var(--black); font-weight:800;}
+    section h2:hover{color:var(--brand-purple)}
+    section .subtitle{color:var(--muted); margin-bottom:.9rem}
 
-  .nav-list > li > a{
-    display:inline-block;
-    padding:8px 6px;
-    color:var(--black); /* keep main menu black as requested */
-    font-weight:600;
-  }
+    .grid{display:grid; gap:1rem}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){ .cols-3, .cols-2{grid-template-columns:1fr} .hero-inner{flex-direction:column; align-items:flex-start} }
 
-  .book-btn{
-    background:var(--logo-purple);
-    color:#fff;
-    padding:8px 14px;
-    border-radius:10px;
-    box-shadow: 0 6px 18px rgba(106,13,173,0.08);
-    font-weight:700;
-  }
+    /* Service cards */
+    .service-card{background:var(--card); padding:1rem; border-radius:10px; box-shadow:0 8px 22px rgba(13,12,14,0.04); border:1px solid rgba(0,0,0,0.02); font-weight:600; font-size:.95rem}
 
-  /* Services dropdown aligned under the Services item */
-  .services-wrapper { position: relative; }
-  .services-dropdown {
-    position:absolute;
-    top: calc(100% + 10px);
-    left: 0; /* aligned under Services item - JS will adjust on smaller screens if needed */
-    background:var(--card-bg);
-    width:560px;
-    padding:18px;
-    border-radius:12px;
-    box-shadow: 0 8px 30px rgba(20,20,40,0.08);
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:12px;
-    border: 1px solid #f0f0f3;
-  }
-  .services-dropdown h4{
-    margin:0 0 6px 0;
-    font-size:14px;
-    color:var(--logo-purple);
-    font-weight:700;
-  }
-  .services-dropdown p{margin:0;font-size:13px;color:var(--muted)}
+    /* Why we need - list */
+    .points{display:grid; gap:.6rem}
+    .point{padding:.9rem; background:#fff; border-radius:10px; border:1px solid rgba(0,0,0,0.04);}
 
-  /* Hero / page container */
-  .container{
-    max-width: var(--container-width);
-    margin:28px auto;
-    padding: 20px;
-  }
+    /* Form */
+    .card{background:#fff; border-radius:12px; padding:1rem; box-shadow:0 10px 30px rgba(12,12,12,0.05); border:1px solid rgba(0,0,0,0.03)}
+    form .row{display:grid; gap:.6rem; grid-template-columns:repeat(2,1fr); margin-bottom:.6rem}
+    @media (max-width:700px){ form .row{grid-template-columns:1fr} }
+    input[type="text"], input[type="tel"], input[type="email"], textarea, select{
+      width:100%; padding:.65rem; border:1px solid rgba(0,0,0,0.08); border-radius:8px; font-size:.95rem;
+    }
+    textarea{min-height:100px; resize:vertical}
+    button[type="submit"]{background:var(--brand-purple); color:#fff; border:0; padding:.65rem .9rem; border-radius:10px; font-weight:700; cursor:pointer}
+    .small{font-size:.9rem; color:var(--muted)}
 
-  /* Section styles */
-  section{
-    background:transparent;
-    padding:36px 0;
-    /* spacing between sections handled by additional margin-bottom on each */
-  }
+    /* Footer */
+    footer{padding:1.2rem 0; text-align:center; color:var(--muted); font-size:.95rem}
 
-  .section-inner{
-    background:transparent;
-    padding: 6px 0;
-  }
+    /* Utility */
+    .muted{color:var(--muted)}
+    .logo-line{display:flex; gap:1rem; align-items:center}
+    .partners{display:flex; gap:1rem; flex-wrap:wrap; align-items:center}
 
-  .section-title{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:18px;
-  }
-  .section-title h2{
-    margin:0;
-    font-size:20px;
-    color:var(--logo-purple); /* main section headings in logo purple */
-    font-weight:800;
-    letter-spacing:0.2px;
-  }
-  .section-title .line {
-    width:48px;
-    height:6px;
-    border-radius:6px;
-    background:var(--logo-yellow);
-    display:inline-block;
-  }
+    /* Focus visible */
+    a:focus, button:focus, input:focus, textarea:focus { outline:3px solid rgba(106,13,173,0.12); outline-offset:2px; }
 
-  /* About content */
-  .card{
-    background:var(--card-bg);
-    border-radius:12px;
-    padding:22px;
-    box-shadow: var(--shadow);
-    border:1px solid #f1f1f5;
-  }
+    /* Small responsive tweaks */
+    .services-grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
 
-  /* services grid */
-  .services-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:14px;
-    margin-top:12px;
-  }
-  .svc{
-    background: #fff;
-    border-radius:10px;
-    padding:14px;
-    border:1px dashed #f0f0f3;
-    min-height:76px;
-  }
-  .svc h5{margin:0 0 8px 0;font-size:14px;color:var(--logo-purple);font-weight:700}
-  .svc p{margin:0;font-size:13px;color:var(--muted)}
-
-  /* two-column layout for why-you-need-us */
-  .two-col{
-    display:grid;
-    grid-template-columns: 1fr 360px;
-    gap:22px;
-    align-items:start;
-  }
-  .box {
-    background:#fff;
-    border-radius:12px;
-    padding:16px;
-    border:1px solid #f0f0f3;
-    box-shadow: var(--shadow);
-  }
-  .box h4{margin:0 0 8px 0;color:var(--logo-purple);font-size:14px}
-  .box p{margin:0;color:var(--muted);font-size:14px}
-
-  /* Contact form */
-  form.request {
-    margin-top:12px;
-    background:#fff;
-    border-radius:12px;
-    padding:18px;
-    border:1px solid #f1f1f5;
-    box-shadow: var(--shadow);
-  }
-  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-  label{font-size:12px;color:#454545}
-  input[type="text"], input[type="email"], textarea{
-    padding:10px 12px;border-radius:8px;border:1px solid #eceef2;font-size:14px;
-  }
-  textarea{min-height:84px;resize:vertical}
-
-  .submit {
-    margin-top:8px;
-    display:inline-block;
-    background:var(--logo-purple);
-    color:#fff;
-    padding:10px 14px;
-    border-radius:8px;
-    font-weight:700;
-  }
-
-  footer{
-    margin-top:60px;
-    padding:28px 0;
-    border-top:1px solid #f0f0f3;
-    background:transparent;
-    color:var(--muted);
-    text-align:center;
-    font-size:13px;
-  }
-
-  /* spacing between main sections (confirmed by you) */
-  /* We'll apply bottom margin to each main section container to produce the consistent gap */
-  .section-stack > section { margin-bottom: var(--section-gap); }
-
-  /* Responsive */
-  @media (max-width:1000px){
-    .services-grid{grid-template-columns:repeat(2,1fr)}
-    .two-col{grid-template-columns: 1fr 320px}
-    .services-dropdown{left:auto; right:10px; width:400px}
-  }
-  @media (max-width:720px){
-    .topbar{padding:12px}
-    .container{padding:14px}
-    .services-grid{grid-template-columns:1fr}
-    .two-col{grid-template-columns:1fr}
-    .nav-list{display:none} /* simplified mobile header for copy/paste demo */
-    header{position:relative}
-    .services-dropdown{display:none}
-  }
-</style>
+    /* Success toast */
+    .toast{position:fixed; right:20px; bottom:20px; background:var(--brand-purple); color:#fff; padding:.7rem 1rem; border-radius:10px; display:none; box-shadow:0 10px 28px rgba(13,12,14,0.12)}
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="topbar">
-    <div class="logo">
-      <div class="mark" aria-hidden="true">
-        <!-- simple snowflake-like mark using SVG filled with logo purple -->
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M32 4l2.8 8.6L44 16l-8 5.4L36 32l -4-10.6L24 21.4 32 16 29.6 12.6z" />
-        </svg>
-      </div>
-      <div class="title">
-        <h1>CrystalCore Business Solutions (CCBS)</h1>
-        <p>Transforming businesses with smart analysis &amp; strategy</p>
+  <header>
+    <div class="wrap nav" role="navigation" aria-label="Main navigation">
+      <a class="brand" href="#top">
+        <img src="logo.png" alt="CCBS logo" onerror="this.style.display='none'"/>
+        <div>
+          <div class="title">CrystalCore Business Solutions (CCBS)</div>
+          <div style="font-size:.78rem;color:var(--muted)">Business Analyst & Consultant Service</div>
+        </div>
+      </a>
+
+      <nav>
+        <div class="menu" id="menu">
+          <a href="#about" class="nav-link">About Us</a>
+          <a href="#services" class="nav-link">Our Services</a>
+          <a href="#why" class="nav-link">Why You Need Us</a>
+          <a href="#request" class="nav-link">Service Request</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu">☰</button>
+      </nav>
+
+      <div class="hero-actions">
+        <a class="cta-btn" href="#request">Book consultation</a>
       </div>
     </div>
+  </header>
 
-    <nav class="site-nav" aria-label="Main Navigation">
-      <ul class="nav-list">
-        <li><a href="#about">About</a></li>
+  <main class="wrap" id="top" role="main">
 
-        <li class="services-wrapper">
-          <a href="#services">Services ▾</a>
-
-          <!-- services dropdown aligned under Services menu -->
-          <div class="services-dropdown" role="menu" aria-hidden="false">
-            <div>
-              <h4>Business Analysis &amp; Planning</h4>
-              <p>Business health checks, BRD/FRD, process & strategy.</p>
-
-              <h4 style="margin-top:12px">Change Management</h4>
-              <p>Process transformation & team alignment strategies.</p>
-
-              <h4 style="margin-top:12px">Compliance &amp; Documentation</h4>
-              <p>Policy, SRS, controls and audits.</p>
-            </div>
-            <div>
-              <h4>Data Analysis</h4>
-              <p>Dashboards, insights, reporting & KPIs.</p>
-
-              <h4 style="margin-top:12px">Digital &amp; IT Consulting</h4>
-              <p>CRM / ERP advice, automation & integration planning.</p>
-
-              <h4 style="margin-top:12px">Market Research</h4>
-              <p>Competitor analysis and customer research.</p>
-            </div>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1 id="hero-heading">Transforming businesses with smart analysis & strategy</h1>
+          <p class="lead">We simplify complexity and deliver real business outcomes — strategy, systems, and measurable results to grow your business.</p>
+          <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+            <a class="cta-btn" href="#request">Book a free 20-min consultation</a>
+            <a class="secondary" href="#services">Explore services</a>
           </div>
-        </li>
-
-        <li><a href="#why">Why You Need Us</a></li>
-        <li><a href="#request">Request</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a class="book-btn" href="#request">Book Consultation</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main class="container">
-
-  <div class="section-stack">
+        </div>
+        <div style="max-width:360px;">
+          <div class="card">
+            <strong>Quick contact</strong>
+            <p class="small muted" style="margin:.4rem 0 0">Email: <a href="mailto:saravana.AkConsult@gmail.com">saravana.AkConsult@gmail.com</a><br/>Phone: <a href="tel:+9198876543210">+91 98876 543210</a></p>
+            <hr style="border:none;height:1px;background:rgba(0,0,0,0.04);margin:.8rem 0" />
+            <div class="small muted">Location: Chennai</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section-inner">
-      <div class="section-title">
-        <div class="line" aria-hidden="true"></div>
-        <h2>About Us</h2>
-      </div>
-
-      <div class="card">
-        <p style="color:var(--muted); margin:0 0 8px 0;">
-          CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We help organizations identify challenges, uncover opportunities, and create clear strategies for growth.
-        </p>
-        <p style="color:var(--muted); margin-top:12px;">
-          At CCBS, we focus on practical business transformation — combining data analysis, process design, and digital consulting to achieve measurable results. Whether you are a startup setting up operations or an established company improving efficiency, we tailor solutions to your needs.
-        </p>
-
-        <div style="margin-top:16px;">
-          <strong style="color:var(--logo-purple)">We work with:</strong>
-          <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
-            <div style="background:#fff;border-radius:10px;padding:12px;border:1px solid #f1f1f5;min-width:220px;">Startups</div>
-            <div style="background:#fff;border-radius:10px;padding:12px;border:1px solid #f1f1f5;min-width:220px;">Small &amp; Medium Enterprises (SMEs)</div>
-            <div style="background:#fff;border-radius:10px;padding:12px;border:1px solid #f1f1f5;min-width:220px;">Large-scale Businesses</div>
-          </div>
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Us</h2>
+      <p class="subtitle">CrystalCore Business Solutions (CCBS) — Business Analyst & Consultant Service.</p>
+      <div class="grid cols-2" style="gap:1rem; align-items:start;">
+        <div class="card">
+          <p><strong>Our approach</strong><br/>We analyze processes, identify gaps, and deliver practical solutions — from requirements and business analysis to digital transformation and automation.</p>
+        </div>
+        <div class="card">
+          <p><strong>Value we deliver</strong><br/>Clarity in decision-making, faster project delivery, measurable ROI and reduced operational friction. We work with startups and SMEs to scale processes and systems.</p>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
-    <section id="services" class="section-inner">
-      <div class="section-title">
-        <div class="line"></div>
-        <h2>Our Services</h2>
-      </div>
+    <section id="services" aria-labelledby="services-heading">
+      <h2 id="services-heading">Our Services</h2>
+      <p class="subtitle">Comprehensive services across analysis, digital, and operational excellence.</p>
 
-      <div class="services-grid">
-        <div class="svc"><h5>Business Analysis &amp; Planning</h5><p>Strategy, BRD/FRD, process & performance tracking.</p></div>
-        <div class="svc"><h5>Change Management</h5><p>Process improvement, transition planning.</p></div>
-        <div class="svc"><h5>Compliance &amp; Documentation</h5><p>Policy, SRS, audit readiness.</p></div>
-
-        <div class="svc"><h5>Data Analysis</h5><p>Dashboards, reporting & insights.</p></div>
-        <div class="svc"><h5>Digital &amp; IT Consulting</h5><p>CRM/ERP selection & automation advice.</p></div>
-        <div class="svc"><h5>Digital Marketing &amp; Online Visibility</h5><p>SEO, campaigns & web presence.</p></div>
-
-        <div class="svc"><h5>Financial &amp; Risk Advisory</h5><p>Financial planning & risk assessments.</p></div>
-        <div class="svc"><h5>Market Research</h5><p>Customer & competitor studies.</p></div>
-        <div class="svc"><h5>Project Management</h5><p>Delivery, governance & tracking.</p></div>
+      <div class="services-grid" role="list">
+        <div class="service-card" role="listitem">Business Analysis Planning & Monitoring</div>
+        <div class="service-card" role="listitem">Business Health Check-up</div>
+        <div class="service-card" role="listitem">Change Management</div>
+        <div class="service-card" role="listitem">Data Analysis & Reporting</div>
+        <div class="service-card" role="listitem">Digital Transformation Guidance (CRM, ERP Selection)</div>
+        <div class="service-card" role="listitem">End-to-End Business Transformation</div>
+        <div class="service-card" role="listitem">Financial & Risk Analysis</div>
+        <div class="service-card" role="listitem">IT & Automation Consulting</div>
+        <div class="service-card" role="listitem">Market Research & Competitor Analysis</div>
+        <div class="service-card" role="listitem">Project Management</div>
+        <div class="service-card" role="listitem">Record Management</div>
+        <div class="service-card" role="listitem">Requirements Gathering & Documentation (BRD, FRD, SRS)</div>
       </div>
     </section>
 
-    <!-- WHY YOU NEED US -->
-    <section id="why" class="section-inner">
-      <div class="section-title">
-        <div class="line"></div>
-        <h2>Why You Need Us</h2>
+    <!-- WHY -->
+    <section id="why" aria-labelledby="why-heading">
+      <h2 id="why-heading">Why You Need Us</h2>
+      <p class="subtitle">Working with a business analyst reduces waste and increases clarity — here's how.</p>
+
+      <div class="points">
+        <div class="point"><strong>Reduce project risk:</strong> Clear requirements prevent rework and missed expectations.</div>
+        <div class="point"><strong>Faster decision-making:</strong> Data-driven reports and dashboards speed up action.</div>
+        <div class="point"><strong>Cost efficiency:</strong> Process improvements and automation reduce operating costs.</div>
       </div>
+    </section>
 
-      <div class="two-col">
-        <div>
-          <p style="font-weight:700;color:var(--black);margin:0 0 12px 0;">We simplify complexity and deliver real business outcomes</p>
-          <div class="box" style="margin-top:12px;">
-            <h4>Clarity in Every Step</h4>
-            <p>We simplify complex data, processes, and decisions into clear and actionable insights that empower better business direction.</p>
-          </div>
-
-          <div class="box" style="margin-top:12px;">
-            <h4>Measurable Outcomes</h4>
-            <p>Our analysis-driven approach ensures that every recommendation delivers visible business improvement and growth.</p>
-          </div>
-
-          <div class="box" style="margin-top:12px;">
-            <h4>Trusted Partnership</h4>
-            <p>We work as an extension of your business—aligning with your goals, supporting your team, and ensuring long-term success.</p>
-          </div>
-        </div>
-
-        <div>
-          <div class="box">
-            <h4>Key Benefits</h4>
-            <p>- Faster decision making<br>- Reduced manual effort<br>- Better performance visibility</p>
-          </div>
+    <!-- PARTNERS / CLIENTS -->
+    <section aria-labelledby="partners-heading">
+      <h2 id="partners-heading">Who We Partner With</h2>
+      <p class="subtitle">Startups, small businesses, clinics, retailers and service providers.</p>
+      <div class="partners card" style="padding:.8rem;">
+        <!-- Replace or add logos here if you have them -->
+        <div style="font-weight:700">Client types:</div>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem;">
+          <span class="small muted">Healthcare</span>
+          <span class="small muted">Retail</span>
+          <span class="small muted">Wellness & Coaching</span>
+          <span class="small muted">SMEs</span>
         </div>
       </div>
     </section>
 
-    <!-- REQUEST / FORM -->
-    <section id="request" class="section-inner">
-      <div class="section-title">
-        <div class="line"></div>
-        <h2>Client Information &amp; Service Request</h2>
+    <!-- REQUEST FORM -->
+    <section id="request" aria-labelledby="request-heading">
+      <h2 id="request-heading">Client Information & Service Request</h2>
+      <p class="subtitle">Fill the form below and we'll get back to you within two business days.</p>
+
+      <div class="card">
+        <form id="requestForm" onsubmit="return handleSubmit(event)" novalidate>
+          <div class="row">
+            <input type="text" id="name" name="name" placeholder="Full name *" required aria-required="true" />
+            <input type="tel" id="phone" name="phone" placeholder="Phone *" required />
+          </div>
+
+          <div class="row">
+            <input type="email" id="email" name="email" placeholder="Email *" required />
+            <input type="text" id="company" name="company" placeholder="Company / Organization" />
+          </div>
+
+          <div style="margin-bottom:.6rem">
+            <label class="small muted" for="service">Select service (or type)</label>
+            <select id="service" name="service" style="width:100%; padding:.6rem; border-radius:8px; border:1px solid rgba(0,0,0,0.08)">
+              <option>Business Analysis Planning & Monitoring</option>
+              <option>Business Health Check-up</option>
+              <option>Digital Transformation Guidance</option>
+              <option>Data Analysis & Reporting</option>
+              <option>Project Management</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom:.6rem">
+            <textarea id="details" name="details" placeholder="Briefly describe your requirement"></textarea>
+          </div>
+
+          <div style="display:flex; gap:.6rem; align-items:center; justify-content:space-between; flex-wrap:wrap">
+            <div class="small muted">By submitting, you agree to be contacted by CCBS.</div>
+            <div style="display:flex; gap:.6rem;">
+              <button type="submit">Submit Request</button>
+              <a class="secondary" href="mailto:saravana.AkConsult@gmail.com">Email us</a>
+            </div>
+          </div>
+        </form>
       </div>
-
-      <form class="request" action="#" method="post" onsubmit="alert('Form submitted (demo).'); return false;">
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" />
-          </div>
-          <div class="form-row">
-            <label for="phone">Phone Number</label>
-            <input id="phone" name="phone" type="text" placeholder="Phone number" />
-          </div>
-
-          <div class="form-row">
-            <label for="email">Email ID</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" />
-          </div>
-          <div class="form-row">
-            <label for="company">Company Name</label>
-            <input id="company" name="company" type="text" placeholder="Company (optional)" />
-          </div>
-        </div>
-
-        <div class="form-row" style="margin-top:8px;">
-          <label for="details">Request Details</label>
-          <textarea id="details" name="details" placeholder="Tell us about your requirement..."></textarea>
-        </div>
-
-        <button class="submit" type="submit">Submit Request</button>
-      </form>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section-inner">
-      <div class="section-title">
-        <div class="line"></div>
-        <h2>Contact Us</h2>
-      </div>
-
-      <div class="card">
-        <p style="margin:0;"><strong style="color:var(--logo-purple)">Email:</strong> saravana.akconsult@gmail.com &nbsp; • &nbsp; <strong style="color:var(--logo-purple)">Phone:</strong> +91 98404 07620</p>
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact Us</h2>
+      <p class="subtitle">Let's talk — quick ways to reach us.</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <div style="font-weight:700">Email</div>
+          <div class="muted" style="margin-top:.4rem"><a href="mailto:saravana.AkConsult@gmail.com">saravana.AkConsult@gmail.com</a></div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">Phone</div>
+          <div class="muted" style="margin-top:.4rem"><a href="tel:+9198876543210">+91 98876 543210</a></div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">Location</div>
+          <div class="muted" style="margin-top:.4rem">Chennai, India</div>
+        </div>
       </div>
     </section>
 
-  </div> <!-- section-stack end -->
+  </main>
 
   <footer>
-    &copy; 2025 CrystalCore Business Solutions — Chennai, India
+    <div class="wrap">
+      <div style="display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <div class="logo-line"><img src="logo.png" alt="" style="height:26px; display:block" onerror="this.style.display='none'"/><div style="font-weight:700">CrystalCore Business Solutions (CCBS)</div></div>
+        <div class="muted">© <span id="year"></span> CCBS — Transforming businesses with smart analysis & strategy</div>
+      </div>
+    </div>
   </footer>
 
-</main>
+  <div class="toast" id="toast">Request sent — thank you!</div>
 
-<!-- Minimal JS to keep the Services dropdown aligned under Services item on wide screens -->
-<script>
-  (function alignDropdown(){
-    try{
-      var wrapper = document.querySelector('.services-wrapper');
-      var dropdown = document.querySelector('.services-dropdown');
-      var link = wrapper.querySelector('a');
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      function position(){
-        var rect = link.getBoundingClientRect();
-        var containerRect = document.querySelector('.topbar').getBoundingClientRect();
-        // compute left offset relative to the wrapper
-        var left = rect.left - containerRect.left;
-        dropdown.style.left = left + 'px';
+    // Mobile menu
+    function toggleMenu(){
+      const menu = document.getElementById('menu');
+      const button = document.querySelector('.hamburger');
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      if(menu.style.display === 'flex'){
+        menu.style.display = 'none';
+        button.setAttribute('aria-expanded','false');
+      } else {
+        menu.style.display = 'flex';
+        button.setAttribute('aria-expanded','true');
       }
+    }
 
-      // run on load and on resize (desktop only)
-      position();
-      window.addEventListener('resize', position);
-    }catch(e){ /* silent */ }
-  })();
-</script>
+    // Highlight active nav link on scroll
+    const links = document.querySelectorAll('.nav-link');
+    const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+    function onScroll(){
+      const y = window.scrollY + 120;
+      let idx = sections.findIndex(s => s && (s.offsetTop <= y && (s.offsetTop + s.offsetHeight) > y));
+      links.forEach((link,i)=> {
+        link.classList.toggle('active', i === idx);
+      });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
 
+    // Simple form handler — validates, shows toast and tries to open mail client with form summary.
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!name || !phone || !email){
+        alert('Please fill required fields: Name, Phone, Email.');
+        return false;
+      }
+      const company = document.getElementById('company').value.trim();
+      const service = document.getElementById('service').value;
+      const details = document.getElementById('details').value.trim();
+      const body = [
+        'Name: ' + name,
+        'Phone: ' + phone,
+        'Email: ' + email,
+        'Company: ' + company,
+        'Service: ' + service,
+        '',
+        'Details:',
+        details
+      ].join('%0D%0A');
+
+      // Show toast
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(()=> toast.style.display='none', 3500);
+
+      // Attempt to open email client as fallback capture
+      const mailto = 'mailto:saravana.AkConsult@gmail.com?subject=' + encodeURIComponent('Service Request from ' + name) + '&body=' + body;
+      window.location.href = mailto;
+
+      // Also keep on-page success state
+      e.target.reset();
+      return false;
+    }
+  </script>
 </body>
 </html>
