@@ -1,373 +1,571 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CrystalCore Business Solutions (CCBS)</title>
-  <meta name="description" content="CrystalCore Business Solutions — Business Analyst & Consultant Service" />
-  <!-- Brand fav -->
-  <link rel="icon" href="logo.png" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CrystalCore Business Solutions (CCBS)</title>
+<meta name="description" content="CrystalCore Business Solutions — Your strategic partner in clarity, precision, and innovation." />
+<style>
+  :root{
+    --purple:#2D1A67; /* kept from your styles */
+    --yellow:#FFD700;
+    --ink:#0f1724;
+    --muted:#6b7280;
+    --bg:#fbfbfe;
+    --card:#ffffff;
+    --max-w:1200px;
+    --header-height:72px; /* fallback used for scroll offset */
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .site-header{position:sticky;top:0;z-index:140;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(15,23,42,0.04)}
+  .header-inner{max-width:var(--max-w);margin:0 auto;padding:18px 20px;text-align:center}
+  .header-top{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+  .logo img{width:200px;height:auto;border-radius:14px;display:block}
+  .company{font-weight:900;color:var(--purple);font-size:30px;text-decoration:none;margin:0}
+  .tag{font-size:15px;color:var(--muted);margin-top:4px}
+  .menu-bar{display:flex;justify-content:center;gap:18px;padding:12px 10px;border-top:1px solid rgba(15,23,42,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98))}
+  .nav-link{padding:8px 12px;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;position:relative;background:transparent;border:none;outline:none}
+  .nav-link:hover{color:var(--purple)}
+  .nav-link::after{content:"";position:absolute;left:12px;right:12px;bottom:6px;height:3px;background:transparent;border-radius:3px;transition:background .18s ease,transform .18s ease;transform:scaleX(0);transform-origin:left center}
+  .nav-link:hover::after,.nav-link.active::after{background:var(--purple);transform:scaleX(1)}
+  .cta{padding:8px 14px;border-radius:10px;background:var(--purple);color:#fff;font-weight:800;box-shadow:0 6px 18px rgba(106,13,173,0.08);transition:transform .12s,box-shadow .12s}
+  .cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(106,13,173,0.12)}
+  .dropdown-wrap{position:relative;display:inline-block}
+  /* Dropdown - desktop two-column */
+  .dropdown-panel{
+    position:absolute;
+    top:100%;
+    left:0;
+    transform:translateY(14px);
+    min-width:320px;
+    background:var(--card);
+    border-radius:10px;
+    padding:12px;
+    border:1px solid rgba(14,20,39,0.04);
+    box-shadow:0 16px 40px rgba(16,24,40,0.06);
+    visibility:hidden;
+    opacity:0;
+    transition:opacity .12s ease,visibility .12s,transform .12s ease;
+    z-index:250;
+  }
+  .dropdown-panel.open{visibility:visible;opacity:1;transform:translateY(6px)}
+  .dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:start;}
+  .dropdown-grid a{display:block;padding:10px 12px;border-radius:8px;font-weight:700;color:#222;white-space:nowrap}
+  .dropdown-grid a:hover{background:rgba(106,13,173,0.06);color:var(--purple)}
+  /* Align left edge of dropdown to the Services button via JS; CSS fallback centers it */
+  .dropdown-panel.center-fallback{left:50%;transform:translate(-50%,14px)}
 
-  <style>
-    :root{
-      --brand-purple:#6A0DAD; /* your requested logo purple */
-      --brand-yellow:#FFD700;
-      --black:#000000;
-      --muted:#666666;
-      --bg:#fafafa;
-      --card:#ffffff;
-      --gap:1rem;
-      --radius:12px;
-      --container:1100px;
-      --max-width:1200px;
-      --section-pad:48px;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 20px}
+  .hero{padding:28px 0 18px}
+  .hero-grid{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+  .hero h1{font-size:36px;margin:8px 0 12px;color:var(--purple);text-align:left} /* hero in purple as requested */
+  .hero p{color:var(--muted);font-size:16px;max-width:760px;line-height:1.6}
+  .quick-card{width:320px;min-width:240px;background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.04)}
+  .section{padding:56px 0}
+  .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .section-title h2{margin:0;color:var(--purple);font-size:28px;font-weight:900;letter-spacing:0.2px}
+  .accent{height:8px;width:60px;background:var(--yellow);border-radius:999px}
+  .about-content{display:grid;gap:18px}
+  .about-content p{color:var(--muted);line-height:1.7}
+  .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:10px}
+  .work-card{background:var(--card);border:1px solid rgba(14,20,39,0.04);border-radius:12px;padding:18px;box-shadow:0 10px 28px rgba(16,24,40,0.04);transition:transform .12s ease,box-shadow .12s ease}
+  .work-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,0.08)}
+  .wc-title{font-weight:800;color:var(--purple);margin:0 0 8px;font-size:17px}
+  .wc-desc{color:var(--muted);font-size:15px;line-height:1.7}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
+  .service-card{background:transparent;border:none;box-shadow:none;padding:18px 8px;text-align:left;min-height:120px;transition:color .16s ease;display:flex;gap:12px;align-items:flex-start}
+  .service-card .icon{width:56px;height:56px;border-radius:8px;background:transparent;display:grid;place-items:center;color:var(--muted);font-weight:900;font-size:18px;transition:transform .18s ease,color .18s ease;flex:0 0 56px}
+  .service-card .content{flex:1}
+  .service-card .title{font-weight:800;color:var(--ink);margin-top:0;font-size:16px;transition:color .18s ease}
+  .service-card .desc{color:var(--ink);margin-top:6px;line-height:1.5;font-size:14px} /* taglines in black/dark as requested */
+  .service-card:hover .icon{color:var(--purple);transform:translateY(-6px)}
+  .service-card:hover .title{color:var(--purple)}
+  form label{display:block;margin-top:8px;font-weight:700;color:var(--ink)}
+  form input,form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-top:6px}
+  form .cta{border-radius:8px;margin-top:8px}
+  footer{padding:28px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
+  /* small screens: dropdown becomes stacked full-width under the menu */
+  @media (max-width:900px){
+    .header-top{flex-direction:column;gap:8px}
+    .company{font-size:22px}
+    .logo img{width:80px}
+    .hero-grid{flex-direction:column;align-items:center}
+    .dropdown-panel{position:static;transform:none;min-width:unset;padding:8px;margin-top:6px}
+    .dropdown-grid{grid-template-columns:1fr}
+    .dropdown-panel.open{visibility:visible;opacity:1}
+  }
+  @media (max-width:700px){
+    .section-title h2{font-size:20px;text-align:center}
+    .menu-bar{flex-wrap:wrap;padding:10px;gap:8px}
+    .nav-link{font-size:14px}
+    .service-card{padding:14px 6px}
+    .service-card .icon{width:48px;height:48px;font-size:16px}
+    .quick-card{width:100%}
+  }
 
-    /* Reset-ish */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg, rgba(255,215,0,0.02), rgba(255,215,0,0.00)),var(--bg); color:#111; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-    a{color:inherit}
-
-    /* Container */
-    .wrap{max-width:var(--container); margin:0 auto; padding:0 1rem;}
-
-    /* Header / Nav */
-    header{position:sticky; top:0; z-index:60; background:rgba(255,255,255,0.96); backdrop-filter: blur(6px); border-bottom:1px solid rgba(0,0,0,0.04);}
-    .nav{display:flex; align-items:center; gap:1rem; padding:.6rem 1rem; justify-content:space-between;}
-    .brand{display:flex; gap:.8rem; align-items:center; text-decoration:none;}
-    .brand img{height:44px; width:auto; display:block;}
-    .brand .title{font-weight:700; color:var(--brand-purple); letter-spacing:.2px}
-    .menu{display:flex; gap:.6rem; align-items:center;}
-    .menu a{padding:.45rem .6rem; border-radius:8px; text-decoration:none; color:var(--black); font-weight:600; font-size:.95rem; transition:all .18s ease;}
-    .menu a:hover, .menu a:focus{color:var(--brand-purple); background:rgba(106,13,173,0.06); outline:none;}
-    .cta-btn{background:var(--brand-purple); color:#fff; padding:.5rem .85rem; border-radius:10px; text-decoration:none; font-weight:700; box-shadow:0 8px 20px rgba(106,13,173,0.12);}
-
-    /* Mobile */
-    .hamburger{display:none; cursor:pointer; border:0; background:none; padding:.4rem; border-radius:8px;}
-    @media (max-width:900px){
-      .menu{display:none}
-      .hamburger{display:inline-flex}
-    }
-
-    /* Hero */
-    .hero{padding:3.2rem 0; display:grid; gap:1.2rem; align-items:center;}
-    .hero-inner{display:flex; gap:2rem; align-items:center; justify-content:space-between;}
-    .hero-copy{max-width:720px;}
-    .hero h1{margin:0; font-size:clamp(1.6rem,3.6vw,2.6rem); color:var(--brand-purple);}
-    .hero p.lead{margin:.6rem 0 1.2rem; color:var(--muted); font-size:1.05rem}
-    .hero-actions{display:flex; gap:.8rem; align-items:center;}
-    .secondary{background:transparent; border:1px solid rgba(0,0,0,0.08); padding:.5rem .75rem; border-radius:8px; font-weight:600}
-
-    /* Sections */
-    section{padding:var(--section-pad) 0; border-bottom:1px solid rgba(0,0,0,0.03);}
-    section h2{margin:0 0 .6rem; font-size:1.15rem; color:var(--black); font-weight:800;}
-    section h2:hover{color:var(--brand-purple)}
-    section .subtitle{color:var(--muted); margin-bottom:.9rem}
-
-    .grid{display:grid; gap:1rem}
-    .cols-3{grid-template-columns:repeat(3,1fr)}
-    .cols-2{grid-template-columns:repeat(2,1fr)}
-    @media (max-width:900px){ .cols-3, .cols-2{grid-template-columns:1fr} .hero-inner{flex-direction:column; align-items:flex-start} }
-
-    /* Service cards */
-    .service-card{background:var(--card); padding:1rem; border-radius:10px; box-shadow:0 8px 22px rgba(13,12,14,0.04); border:1px solid rgba(0,0,0,0.02); font-weight:600; font-size:.95rem}
-
-    /* Why we need - list */
-    .points{display:grid; gap:.6rem}
-    .point{padding:.9rem; background:#fff; border-radius:10px; border:1px solid rgba(0,0,0,0.04);}
-
-    /* Form */
-    .card{background:#fff; border-radius:12px; padding:1rem; box-shadow:0 10px 30px rgba(12,12,12,0.05); border:1px solid rgba(0,0,0,0.03)}
-    form .row{display:grid; gap:.6rem; grid-template-columns:repeat(2,1fr); margin-bottom:.6rem}
-    @media (max-width:700px){ form .row{grid-template-columns:1fr} }
-    input[type="text"], input[type="tel"], input[type="email"], textarea, select{
-      width:100%; padding:.65rem; border:1px solid rgba(0,0,0,0.08); border-radius:8px; font-size:.95rem;
-    }
-    textarea{min-height:100px; resize:vertical}
-    button[type="submit"]{background:var(--brand-purple); color:#fff; border:0; padding:.65rem .9rem; border-radius:10px; font-weight:700; cursor:pointer}
-    .small{font-size:.9rem; color:var(--muted)}
-
-    /* Footer */
-    footer{padding:1.2rem 0; text-align:center; color:var(--muted); font-size:.95rem}
-
-    /* Utility */
-    .muted{color:var(--muted)}
-    .logo-line{display:flex; gap:1rem; align-items:center}
-    .partners{display:flex; gap:1rem; flex-wrap:wrap; align-items:center}
-
-    /* Focus visible */
-    a:focus, button:focus, input:focus, textarea:focus { outline:3px solid rgba(106,13,173,0.12); outline-offset:2px; }
-
-    /* Small responsive tweaks */
-    .services-grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-
-    /* Success toast */
-    .toast{position:fixed; right:20px; bottom:20px; background:var(--brand-purple); color:#fff; padding:.7rem 1rem; border-radius:10px; display:none; box-shadow:0 10px 28px rgba(13,12,14,0.12)}
-  </style>
+  /* utility: visually hide but keep for screen readers */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="wrap nav" role="navigation" aria-label="Main navigation">
-      <a class="brand" href="#top">
-        <img src="logo.png" alt="CCBS logo" onerror="this.style.display='none'"/>
-        <div>
-          <div class="title">CrystalCore Business Solutions (CCBS)</div>
-          <div style="font-size:.78rem;color:var(--muted)">Business Analyst & Consultant Service</div>
-        </div>
-      </a>
-
-      <nav>
-        <div class="menu" id="menu">
-          <a href="#about" class="nav-link">About Us</a>
-          <a href="#services" class="nav-link">Our Services</a>
-          <a href="#why" class="nav-link">Why You Need Us</a>
-          <a href="#request" class="nav-link">Service Request</a>
-          <a href="#contact" class="nav-link">Contact</a>
-        </div>
-        <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="menu">☰</button>
-      </nav>
-
-      <div class="hero-actions">
-        <a class="cta-btn" href="#request">Book consultation</a>
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="logo">
+        <img src="logo.png" alt="CrystalCore Business Solutions logo">
+      </div>
+      <div>
+        <div class="company">CrystalCore Business Solutions (CCBS)</div>
+        <div class="tag">Your strategic partner in clarity, precision, and innovation</div>
       </div>
     </div>
-  </header>
 
-  <main class="wrap" id="top" role="main">
+    <nav class="menu-bar" role="navigation" aria-label="Main menu">
+      <button class="nav-link" data-target="about">About</button>
 
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <h1 id="hero-heading">Transforming businesses with smart analysis & strategy</h1>
-          <p class="lead">We simplify complexity and deliver real business outcomes — strategy, systems, and measurable results to grow your business.</p>
-          <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-            <a class="cta-btn" href="#request">Book a free 20-min consultation</a>
-            <a class="secondary" href="#services">Explore services</a>
+      <div class="dropdown-wrap" id="servicesWrap" style="position:relative">
+        <button id="servicesBtn" class="nav-link" aria-haspopup="true" aria-expanded="false">Services ▾</button>
+        <!-- dropdown-panel: left aligned under Services button via JS -->
+        <div id="dropdown" class="dropdown-panel center-fallback" role="menu" aria-hidden="true">
+          <div class="dropdown-grid" id="dropdownGrid">
+            <!-- Left column (1-6) -->
+            <div>
+              <a href="#services-business-analysis" data-target="services-business-analysis">Business Analysis &amp; Planning</a>
+              <a href="#services-change-management" data-target="services-change-management">Change Management</a>
+              <a href="#services-compliance-documentation" data-target="services-compliance-documentation">Compliance &amp; Documentation</a>
+              <a href="#services-data-analysis" data-target="services-data-analysis">Data Analysis</a>
+              <a href="#services-digital-it" data-target="services-digital-it">Digital &amp; IT Consulting</a>
+              <a href="#services-digital-marketing" data-target="services-digital-marketing">Digital Marketing &amp; Online Visibility</a>
+            </div>
+            <!-- Right column (7-12) -->
+            <div>
+              <a href="#services-financial-risk" data-target="services-financial-risk">Financial &amp; Risk Advisory</a>
+              <a href="#services-market-research" data-target="services-market-research">Market Research</a>
+              <a href="#services-project-management" data-target="services-project-management">Project Management</a>
+              <a href="#services-branding-reputation" data-target="services-branding-reputation">Branding &amp; Reputation</a>
+              <a href="#services-client-success" data-target="services-client-success">Client Success &amp; Support</a>
+              <a href="#services-operations-workflow" data-target="services-operations-workflow">Operations &amp; Workflow</a>
+            </div>
           </div>
         </div>
-        <div style="max-width:360px;">
-          <div class="card">
+      </div>
+
+      <button class="nav-link" data-target="why">Why You Need Us</button>
+      <button class="nav-link" data-target="request">Request</button>
+      <button class="nav-link" data-target="contact">Contact</button>
+      <button class="nav-link cta" data-target="request">Book Consultation</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="hero" class="hero" aria-labelledby="hero-title" style="padding-top:32px">
+    <div class="container">
+      <div class="hero-grid">
+        <div style="flex:1;min-width:260px">
+          <h1 id="hero-title">Transforming businesses with smart analysis &amp; strategy</h1>
+          <p>CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organisations through tailored consulting services that drive growth, efficiency and digital excellence.</p>
+        </div>
+        <div style="width:320px">
+          <div class="quick-card">
             <strong>Quick contact</strong>
-            <p class="small muted" style="margin:.4rem 0 0">Email: <a href="mailto:saravana.AkConsult@gmail.com">saravana.AkConsult@gmail.com</a><br/>Phone: <a href="tel:+9198876543210">+91 98876 543210</a></p>
+            <p class="sr-only">Contact details</p>
+            <p style="margin:.4rem 0 0;color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a><br/>Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
             <hr style="border:none;height:1px;background:rgba(0,0,0,0.04);margin:.8rem 0" />
             <div class="small muted">Location: Chennai</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ABOUT -->
-    <section id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">About Us</h2>
-      <p class="subtitle">CrystalCore Business Solutions (CCBS) — Business Analyst & Consultant Service.</p>
-      <div class="grid cols-2" style="gap:1rem; align-items:start;">
-        <div class="card">
-          <p><strong>Our approach</strong><br/>We analyze processes, identify gaps, and deliver practical solutions — from requirements and business analysis to digital transformation and automation.</p>
-        </div>
-        <div class="card">
-          <p><strong>Value we deliver</strong><br/>Clarity in decision-making, faster project delivery, measurable ROI and reduced operational friction. We work with startups and SMEs to scale processes and systems.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" aria-labelledby="services-heading">
-      <h2 id="services-heading">Our Services</h2>
-      <p class="subtitle">Comprehensive services across analysis, digital, and operational excellence.</p>
-
-      <div class="services-grid" role="list">
-        <div class="service-card" role="listitem">Business Analysis Planning & Monitoring</div>
-        <div class="service-card" role="listitem">Business Health Check-up</div>
-        <div class="service-card" role="listitem">Change Management</div>
-        <div class="service-card" role="listitem">Data Analysis & Reporting</div>
-        <div class="service-card" role="listitem">Digital Transformation Guidance (CRM, ERP Selection)</div>
-        <div class="service-card" role="listitem">End-to-End Business Transformation</div>
-        <div class="service-card" role="listitem">Financial & Risk Analysis</div>
-        <div class="service-card" role="listitem">IT & Automation Consulting</div>
-        <div class="service-card" role="listitem">Market Research & Competitor Analysis</div>
-        <div class="service-card" role="listitem">Project Management</div>
-        <div class="service-card" role="listitem">Record Management</div>
-        <div class="service-card" role="listitem">Requirements Gathering & Documentation (BRD, FRD, SRS)</div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section id="why" aria-labelledby="why-heading">
-      <h2 id="why-heading">Why You Need Us</h2>
-      <p class="subtitle">Working with a business analyst reduces waste and increases clarity — here's how.</p>
-
-      <div class="points">
-        <div class="point"><strong>Reduce project risk:</strong> Clear requirements prevent rework and missed expectations.</div>
-        <div class="point"><strong>Faster decision-making:</strong> Data-driven reports and dashboards speed up action.</div>
-        <div class="point"><strong>Cost efficiency:</strong> Process improvements and automation reduce operating costs.</div>
-      </div>
-    </section>
-
-    <!-- PARTNERS / CLIENTS -->
-    <section aria-labelledby="partners-heading">
-      <h2 id="partners-heading">Who We Partner With</h2>
-      <p class="subtitle">Startups, small businesses, clinics, retailers and service providers.</p>
-      <div class="partners card" style="padding:.8rem;">
-        <!-- Replace or add logos here if you have them -->
-        <div style="font-weight:700">Client types:</div>
-        <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem;">
-          <span class="small muted">Healthcare</span>
-          <span class="small muted">Retail</span>
-          <span class="small muted">Wellness & Coaching</span>
-          <span class="small muted">SMEs</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- REQUEST FORM -->
-    <section id="request" aria-labelledby="request-heading">
-      <h2 id="request-heading">Client Information & Service Request</h2>
-      <p class="subtitle">Fill the form below and we'll get back to you within two business days.</p>
-
-      <div class="card">
-        <form id="requestForm" onsubmit="return handleSubmit(event)" novalidate>
-          <div class="row">
-            <input type="text" id="name" name="name" placeholder="Full name *" required aria-required="true" />
-            <input type="tel" id="phone" name="phone" placeholder="Phone *" required />
-          </div>
-
-          <div class="row">
-            <input type="email" id="email" name="email" placeholder="Email *" required />
-            <input type="text" id="company" name="company" placeholder="Company / Organization" />
-          </div>
-
-          <div style="margin-bottom:.6rem">
-            <label class="small muted" for="service">Select service (or type)</label>
-            <select id="service" name="service" style="width:100%; padding:.6rem; border-radius:8px; border:1px solid rgba(0,0,0,0.08)">
-              <option>Business Analysis Planning & Monitoring</option>
-              <option>Business Health Check-up</option>
-              <option>Digital Transformation Guidance</option>
-              <option>Data Analysis & Reporting</option>
-              <option>Project Management</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <div style="margin-bottom:.6rem">
-            <textarea id="details" name="details" placeholder="Briefly describe your requirement"></textarea>
-          </div>
-
-          <div style="display:flex; gap:.6rem; align-items:center; justify-content:space-between; flex-wrap:wrap">
-            <div class="small muted">By submitting, you agree to be contacted by CCBS.</div>
-            <div style="display:flex; gap:.6rem;">
-              <button type="submit">Submit Request</button>
-              <a class="secondary" href="mailto:saravana.AkConsult@gmail.com">Email us</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact Us</h2>
-      <p class="subtitle">Let's talk — quick ways to reach us.</p>
-      <div class="grid cols-3">
-        <div class="card">
-          <div style="font-weight:700">Email</div>
-          <div class="muted" style="margin-top:.4rem"><a href="mailto:saravana.AkConsult@gmail.com">saravana.AkConsult@gmail.com</a></div>
-        </div>
-        <div class="card">
-          <div style="font-weight:700">Phone</div>
-          <div class="muted" style="margin-top:.4rem"><a href="tel:+9198876543210">+91 98876 543210</a></div>
-        </div>
-        <div class="card">
-          <div style="font-weight:700">Location</div>
-          <div class="muted" style="margin-top:.4rem">Chennai, India</div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div style="display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap;">
-        <div class="logo-line"><img src="logo.png" alt="" style="height:26px; display:block" onerror="this.style.display='none'"/><div style="font-weight:700">CrystalCore Business Solutions (CCBS)</div></div>
-        <div class="muted">© <span id="year"></span> CCBS — Transforming businesses with smart analysis & strategy</div>
+  <!-- ABOUT -->
+  <section id="about" class="section" aria-labelledby="about-title">
+    <div class="container">
+      <div class="section-title"><h2 id="about-title">About Us</h2><div class="accent" aria-hidden="true"></div></div>
+      <div class="about-content">
+        <p>CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We help organizations identify challenges, uncover opportunities, and create clear strategies for growth.</p>
+        <p>At CCBS, we focus on practical business transformation — combining data analysis, process design, and digital consulting to achieve measurable results. Whether you are a startup setting up operations or an established company improving efficiency, we tailor solutions to your needs.</p>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <div class="toast" id="toast">Request sent — thank you!</div>
+  <!-- WHO WE PARTNER WITH -->
+  <section id="partners" class="section" aria-labelledby="partners-title">
+    <div class="container">
+      <div class="section-title"><h2 id="partners-title">Who We Partner With</h2><div class="accent" aria-hidden="true"></div></div>
+      <p style="color:var(--muted)">Startups, SMEs, and Large-scale Businesses — helping with business analysis, change management, IT consulting, compliance, market research, and more.</p>
+      <div class="work-grid" style="margin-top:18px">
+        <div class="work-card"><div class="wc-title">Startups — From Concept to Market Readiness</div><div class="wc-desc">We help new and emerging businesses build a strong foundation — strategy, MVP readiness, process design and digital adoption (CRM, automation).</div></div>
+        <div class="work-card"><div class="wc-title">SMEs - Streamlining for Sustainable Scale</div><div class="wc-desc">We support SMEs to improve efficiency and compliance: workflow optimisation, data visibility, reporting, and affordable automation.</div></div>
+        <div class="work-card"><div class="wc-title">Large-scale Businesses - Governance & Transformation</div><div class="wc-desc">We partner with enterprises on transformation programs — change management, system selection (ERP/CRM), risk & performance analysis and governance.</div></div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- SERVICES -->
+  <section id="services" class="section" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-title"><h2 id="services-title">Our Services</h2><div class="accent" aria-hidden="true"></div></div>
+      <p style="color:var(--muted)">Comprehensive services across analysis, digital, and operational excellence.</p>
 
-    // Mobile menu
-    function toggleMenu(){
-      const menu = document.getElementById('menu');
-      const button = document.querySelector('.hamburger');
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      if(menu.style.display === 'flex'){
-        menu.style.display = 'none';
-        button.setAttribute('aria-expanded','false');
-      } else {
-        menu.style.display = 'flex';
-        button.setAttribute('aria-expanded','true');
-      }
+      <!-- Services grid with individual cards; each card has an id matching dropdown link -->
+      <div class="services-grid" style="margin-top:18px">
+        <article id="services-business-analysis" class="service-card" role="article">
+          <div class="icon">BA</div>
+          <div class="content"><h3 class="title">Business Analysis &amp; Planning</h3><div class="desc">Business health check-up • Performance tracking &amp; BRD / FRD / SRS</div></div>
+        </article>
+
+        <article id="services-change-management" class="service-card" role="article">
+          <div class="icon">CM</div>
+          <div class="content"><h3 class="title">Change Management</h3><div class="desc">Process improvement plans • Roadmap for smooth change • Team alignment</div></div>
+        </article>
+
+        <article id="services-compliance-documentation" class="service-card" role="article">
+          <div class="icon">CD</div>
+          <div class="content"><h3 class="title">Compliance &amp; Documentation</h3><div class="desc">MSME &amp; GST guidance • Certificate &amp; report verification • Checklists</div></div>
+        </article>
+
+        <article id="services-data-analysis" class="service-card" role="article">
+          <div class="icon">DA</div>
+          <div class="content"><h3 class="title">Data Analysis</h3><div class="desc">Clean data • Dashboards &amp; insights • Spot business trends</div></div>
+        </article>
+
+        <article id="services-digital-it" class="service-card" role="article">
+          <div class="icon">IT</div>
+          <div class="content"><h3 class="title">Digital &amp; IT Consulting</h3><div class="desc">CRM/ERP selection • Automation • Digital tools</div></div>
+        </article>
+
+        <article id="services-digital-marketing" class="service-card" role="article">
+          <div class="icon">DM</div>
+          <div class="content"><h3 class="title">Digital Marketing &amp; Online Visibility</h3><div class="desc">SEO, social campaigns, website performance</div></div>
+        </article>
+
+        <article id="services-financial-risk" class="service-card" role="article">
+          <div class="icon">FR</div>
+          <div class="content"><h3 class="title">Financial &amp; Risk Advisory</h3><div class="desc">Financial planning • Risk checks • Budgeting</div></div>
+        </article>
+
+        <article id="services-market-research" class="service-card" role="article">
+          <div class="icon">MR</div>
+          <div class="content"><h3 class="title">Market Research</h3><div class="desc">Competitor analysis • Growth strategies • Customer insights</div></div>
+        </article>
+
+        <article id="services-project-management" class="service-card" role="article">
+          <div class="icon">PM</div>
+          <div class="content"><h3 class="title">Project Management</h3><div class="desc">Manage teams &amp; tasks efficiently • Agile planning</div></div>
+        </article>
+
+        <article id="services-branding-reputation" class="service-card" role="article">
+          <div class="icon">BR</div>
+          <div class="content"><h3 class="title">Branding &amp; Reputation</h3><div class="desc">Logo &amp; identity • Google review setup • Reputation management</div></div>
+        </article>
+
+        <article id="services-client-success" class="service-card" role="article">
+          <div class="icon">CS</div>
+          <div class="content"><h3 class="title">Client Success &amp; Support</h3><div class="desc">Feedback tools • Onboarding kits • Automated follow-ups</div></div>
+        </article>
+
+        <article id="services-operations-workflow" class="service-card" role="article">
+          <div class="icon">OP</div>
+          <div class="content"><h3 class="title">Operations &amp; Workflow</h3><div class="desc">Task delegation • SOPs • Productivity tools</div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why" class="section" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-title"><h2 id="why-title">Why You Need Us</h2><div class="accent" aria-hidden="true"></div></div>
+      <p style="color:var(--muted)">We simplify complexity and deliver real business outcomes. Many businesses face unclear processes, lack of documentation, or delays in adapting to change. At CCBS, we identify gaps and turn them into opportunities by bringing clarity, structure, and strategy.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px">
+        <div class="work-card"><div class="wc-title">Clarity in Every Step</div><div class="wc-desc">Simplify complex data and processes into actionable insights.</div></div>
+        <div class="work-card"><div class="wc-title">Measurable Outcomes</div><div class="wc-desc">Analysis-driven approach to deliver visible business improvement.</div></div>
+        <div class="work-card"><div class="wc-title">Trusted Partnership</div><div class="wc-desc">We work as an extension of your business — aligning with your goals and supporting your team.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUEST FORM -->
+  <section id="request" class="section" aria-labelledby="request-title">
+    <div class="container">
+      <div class="section-title"><h2 id="request-title">Client Information &amp; Service Request</h2><div class="accent" aria-hidden="true"></div></div>
+      <form id="requestForm" style="background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.04)">
+        <label for="name">Name</label>
+        <input id="name" name="name" required />
+        <label for="phone">Phone Number</label>
+        <input id="phone" name="phone" required />
+        <label for="email">Email ID</label>
+        <input id="email" name="email" type="email" required />
+        <label for="company">Company Name</label>
+        <input id="company" name="company" />
+        <label for="serviceSelect">Select service</label>
+        <select id="serviceSelect" name="service" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-top:6px">
+          <option>Business Analysis & Planning</option>
+          <option>Change Management</option>
+          <option>Compliance & Documentation</option>
+          <option>Data Analysis</option>
+          <option>Digital & IT Consulting</option>
+          <option>Digital Marketing & Online Visibility</option>
+          <option>Financial & Risk Advisory</option>
+          <option>Market Research</option>
+          <option>Project Management</option>
+          <option>Branding & Reputation</option>
+          <option>Client Success & Support</option>
+          <option>Operations & Workflow</option>
+        </select>
+
+        <label for="message">Request Details</label>
+        <textarea id="message" name="message" rows="5"></textarea>
+
+        <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:10px">
+          <div style="color:var(--muted)">By submitting, you agree to be contacted by CCBS.</div>
+          <div>
+            <button type="submit" class="cta">Submit Request</button>
+            <a class="nav-link" href="mailto:saravana.akconsult@gmail.com" style="margin-left:8px">Email us</a>
+          </div>
+        </div>
+
+        <div id="resp" style="margin-top:10px;color:var(--muted)"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-title"><h2 id="contact-title">Contact Us</h2><div class="accent" aria-hidden="true"></div></div>
+      <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a> • Phone: <a href="tel:+919840407627">+91 98404 07627</a><br/>Location: Chennai, Tamil Nadu, India</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="padding:12px 0;color:var(--muted)">© <span id="year"></span> CrystalCore Business Solutions — Chennai, India</div>
+</footer>
+
+<script>
+/* Globals and helpers */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function qs(selector, parent=document){ return parent.querySelector(selector); }
+function qsa(selector, parent=document){ return Array.from(parent.querySelectorAll(selector)); }
+
+/* --- Dropdown alignment & behaviour --- */
+(function(){
+  const servicesBtn = qs('#servicesBtn');
+  const dropdown = qs('#dropdown');
+  const dropdownWrap = qs('#servicesWrap');
+  const dropdownLinks = qsa('#dropdown a');
+
+  // Position dropdown left edge to align with servicesBtn left
+  function alignDropdown(){
+    if(window.innerWidth <= 900){
+      dropdown.classList.remove('center-fallback');
+      dropdown.style.left = '';
+      dropdown.style.minWidth = '';
+      return;
     }
+    dropdown.classList.remove('center-fallback');
+    const btnRect = servicesBtn.getBoundingClientRect();
+    const wrapRect = dropdownWrap.getBoundingClientRect();
+    // calculate left relative to parent (dropdownWrap has position:relative)
+    const left = btnRect.left - wrapRect.left;
+    dropdown.style.left = left + 'px';
+    dropdown.style.minWidth = Math.max(btnRect.width * 2.1, 320) + 'px';
+  }
 
-    // Highlight active nav link on scroll
-    const links = document.querySelectorAll('.nav-link');
-    const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
-    function onScroll(){
-      const y = window.scrollY + 120;
-      let idx = sections.findIndex(s => s && (s.offsetTop <= y && (s.offsetTop + s.offsetHeight) > y));
-      links.forEach((link,i)=> {
-        link.classList.toggle('active', i === idx);
-      });
-    }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
+  // open/close
+  function openDropdown(){
+    dropdown.classList.add('open');
+    servicesBtn.setAttribute('aria-expanded','true');
+    dropdown.setAttribute('aria-hidden','false');
+    alignDropdown();
+  }
+  function closeDropdown(){
+    dropdown.classList.remove('open');
+    servicesBtn.setAttribute('aria-expanded','false');
+    dropdown.setAttribute('aria-hidden','true');
+  }
 
-    // Simple form handler — validates, shows toast and tries to open mail client with form summary.
-    function handleSubmit(e){
+  servicesBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+  });
+
+  // keyboard: Escape to close; Arrow navigation inside dropdown
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){ closeDropdown(); servicesBtn.focus(); }
+  });
+
+  // close when clicking outside
+  document.addEventListener('click', (e)=>{
+    if(!dropdownWrap.contains(e.target)) closeDropdown();
+  });
+
+  // clicking a dropdown item -> close & navigate (scroll handled by anchor handler)
+  dropdownLinks.forEach(a=>{
+    a.addEventListener('click', function(e){
+      closeDropdown();
+      // let normal anchor behavior happen; we also call scrollIntoView with offset in handler below
+    });
+  });
+
+  // ensure dropdown aligns on resize or orientation change
+  window.addEventListener('resize', ()=>{ alignDropdown(); });
+
+  // initial align
+  alignDropdown();
+})();
+
+/* --- Nav anchor scrolling with offset for sticky header --- */
+(function(){
+  const header = qs('.site-header');
+  let headerHeight = header ? header.offsetHeight : parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 72;
+
+  // Update headerHeight on resize (in case sticky header changes)
+  function updateHeaderHeight(){ headerHeight = header ? header.offsetHeight : headerHeight; }
+  window.addEventListener('resize', updateHeaderHeight);
+
+  // Smooth scroll to anchor with offset
+  function scrollToId(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const rect = el.getBoundingClientRect();
+    const absoluteTop = window.scrollY + rect.top;
+    const offsetTop = Math.max(8, headerHeight + 8); // keep small gap under header
+    window.scrollTo({ top: absoluteTop - offsetTop, behavior: 'smooth' });
+  }
+
+  // handle header nav buttons (data-target)
+  const navButtons = qsa('.menu-bar .nav-link');
+  navButtons.forEach(btn=>{
+    const tgt = btn.getAttribute('data-target');
+    if(!tgt) return;
+    btn.addEventListener('click', (e)=>{
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
-      if(!name || !phone || !email){
-        alert('Please fill required fields: Name, Phone, Email.');
-        return false;
+      // special: Services button handled separately
+      if(tgt === 'services') return;
+      scrollToId(tgt);
+      // update URL hash without jump
+      history.replaceState(null, '', '#' + tgt);
+    });
+  });
+
+  // handle anchor links (dropdown links)
+  qsa('#dropdown a').forEach(a=>{
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      const href = this.getAttribute('href') || this.dataset.target;
+      const id = (href || '').replace(/^#/, '');
+      scrollToId(id);
+      history.replaceState(null, '', '#' + id);
+    });
+  });
+
+  // If page loads with hash, scroll to it with offset
+  if(location.hash){
+    const id = location.hash.replace('#','');
+    setTimeout(()=> { if(id) scrollToId(id); }, 120);
+  }
+})();
+
+/* --- Active nav highlighting using IntersectionObserver --- */
+(function(){
+  const options = { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0 }; // triggers when top part visible
+  const sections = qsa('main section[id], main article[id]');
+  const idToLink = {};
+  qsa('.menu-bar .nav-link').forEach(link=>{
+    const tgt = link.getAttribute('data-target');
+    if(tgt) idToLink[tgt] = link;
+  });
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const id = entry.target.id;
+      if(!id) return;
+      const link = idToLink[id];
+      // favorite: highlight main nav items: about/why/request/contact only; services handled via dropdown
+      // Determine which top-level mapping should be active based on section id
+      if(entry.isIntersecting){
+        // find which top nav to highlight
+        if(id.startsWith('services-')){
+          // highlight Services menu
+          qsa('.menu-bar .nav-link').forEach(l=>l.classList.remove('active'));
+          const servicesBtn = qs('#servicesBtn');
+          if(servicesBtn) servicesBtn.classList.add('active');
+        } else {
+          qsa('.menu-bar .nav-link').forEach(l=>l.classList.remove('active'));
+          const topKey = (id.match(/^(about|why|request|contact|hero|partners)/) || [null])[0];
+          if(topKey && idToLink[topKey]) idToLink[topKey].classList.add('active');
+        }
       }
-      const company = document.getElementById('company').value.trim();
-      const service = document.getElementById('service').value;
-      const details = document.getElementById('details').value.trim();
-      const body = [
-        'Name: ' + name,
-        'Phone: ' + phone,
-        'Email: ' + email,
-        'Company: ' + company,
-        'Service: ' + service,
-        '',
-        'Details:',
-        details
-      ].join('%0D%0A');
+    });
+  }, options);
 
-      // Show toast
-      const toast = document.getElementById('toast');
-      toast.style.display = 'block';
-      setTimeout(()=> toast.style.display='none', 3500);
+  sections.forEach(s=>observer.observe(s));
+})();
 
-      // Attempt to open email client as fallback capture
-      const mailto = 'mailto:saravana.AkConsult@gmail.com?subject=' + encodeURIComponent('Service Request from ' + name) + '&body=' + body;
-      window.location.href = mailto;
+/* --- Form submit: POST to Apps Script Web App --- */
+(function(){
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw-Xb23GCQazDTFj5JvFBcYmvMzPeYQNeHv5_NOxKvl2M_f48bKXYFYlXueKU1nkVDJ/exec';
+  const reqForm = qs('#requestForm');
+  const resp = qs('#resp');
+  if(!reqForm) return;
 
-      // Also keep on-page success state
-      e.target.reset();
-      return false;
+  reqForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    resp.style.color = '';
+    resp.textContent = 'Sending...';
+
+    // Basic validation
+    const name = reqForm.querySelector('[name="name"]').value.trim();
+    const phone = reqForm.querySelector('[name="phone"]').value.trim();
+    const email = reqForm.querySelector('[name="email"]').value.trim();
+    if(!name || !phone || !email){
+      resp.style.color = 'crimson';
+      resp.textContent = 'Please fill required fields: Name, Phone, Email.';
+      return;
     }
-  </script>
+
+    const submitBtn = reqForm.querySelector('button[type="submit"]');
+    if(submitBtn){ submitBtn.disabled = true; submitBtn.style.opacity = '0.7'; }
+
+    try {
+      const formData = new FormData(reqForm);
+
+      const res = await fetch(WEB_APP_URL, { method: 'POST', body: formData });
+      let data = null;
+      try { data = await res.json(); } catch(err){ /* ignore */ }
+
+      if(res.ok && data && data.status === 'success'){
+        resp.style.color = '';
+        resp.textContent = '✅ Thanks — we received your request.';
+        reqForm.reset();
+      } else if (res.ok){
+        resp.style.color = '';
+        resp.textContent = '✅ Sent — check sheet to confirm.';
+        reqForm.reset();
+      } else {
+        resp.style.color = 'crimson';
+        resp.textContent = '❌ Submission failed — try again or email us.';
+        console.error('Submission failed', res.status, await res.text());
+      }
+    } catch(err){
+      console.error('Error sending:', err);
+      resp.style.color = 'crimson';
+      resp.textContent = '❌ Could not send — check network or script deployment.';
+    } finally {
+      if(submitBtn){ submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+    }
+  });
+})();
+</script>
 </body>
 </html>
