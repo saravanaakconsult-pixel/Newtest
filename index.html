@@ -7,7 +7,7 @@
 <meta name="description" content="CrystalCore Business Solutions — Your strategic partner in clarity, precision, and innovation." />
 <style>
   :root{
-    --purple:#2D1A67;   /* exact brand purple */
+    --purple:#2D1A67;
     --yellow:#FFD700;
     --ink:#0f1724;
     --muted:#6b7280;
@@ -25,35 +25,19 @@
   .header-inner{max-width:var(--max-w);margin:0 auto;padding:18px 20px;text-align:center}
   .header-top{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
   .logo img{width:200px;height:auto;border-radius:14px;display:block}
-  .company{
-    font-weight:900;
-    color:var(--purple);
-    font-size:30px;
-    text-decoration:none;
-    margin:0;
-  }
+  .company{font-weight:900;color:var(--purple);font-size:30px;text-decoration:none;margin:0}
   .tag{font-size:15px;color:var(--muted);margin-top:4px}
 
   /* Menu bar */
   .menu-bar{display:flex;justify-content:center;gap:18px;padding:12px 10px;border-top:1px solid rgba(15,23,42,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98))}
   .nav-link{padding:8px 12px;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;position:relative;background:transparent;border:none;outline:none}
   .nav-link:hover{color:var(--purple)}
-  .nav-link::after{
-    content:"";position:absolute;left:12px;right:12px;bottom:6px;height:3px;background:transparent;
-    border-radius:3px;transition:background .18s ease, transform .18s ease;transform:scaleX(0);transform-origin:left center;
-  }
-  .nav-link:hover::after,
-  .nav-link.active::after{background:var(--purple);transform:scaleX(1);}
-  .cta{padding:8px 14px;border-radius:10px;background:var(--purple);color:#fff;font-weight:800;box-shadow:0 6px 18px rgba(106,13,173,0.08);transition:transform .12s,box-shadow .12s;}
+  .nav-link::after{content:"";position:absolute;left:12px;right:12px;bottom:6px;height:3px;background:transparent;border-radius:3px;transition:background .18s ease,transform .18s ease;transform:scaleX(0);transform-origin:left center}
+  .nav-link:hover::after,.nav-link.active::after{background:var(--purple);transform:scaleX(1)}
+  .cta{padding:8px 14px;border-radius:10px;background:var(--purple);color:#fff;font-weight:800;box-shadow:0 6px 18px rgba(106,13,173,0.08);transition:transform .12s,box-shadow .12s}
   .cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(106,13,173,0.12)}
-
-  /* Dropdown panel */
   .dropdown-wrap{position:relative;display:inline-block}
-  .dropdown-panel{
-    position:absolute;left:50%;transform:translateX(-50%);top:50px;
-    width:320px;background:var(--card);border-radius:10px;padding:8px;border:1px solid rgba(14,20,39,0.04);
-    box-shadow:0 16px 40px rgba(16,24,40,0.06);visibility:hidden;opacity:0;transition:opacity .12s ease,visibility .12s;
-  }
+  .dropdown-panel{position:absolute;left:50%;transform:translateX(-50%);top:50px;width:320px;background:var(--card);border-radius:10px;padding:8px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 16px 40px rgba(16,24,40,0.06);visibility:hidden;opacity:0;transition:opacity .12s ease,visibility .12s}
   .dropdown-panel.open{visibility:visible;opacity:1}
   .dropdown-list{list-style:none;margin:0;padding:6px;max-height:320px;overflow:auto}
   .dropdown-list li{border-bottom:1px solid rgba(15,23,42,0.03)}
@@ -67,7 +51,6 @@
   .hero-grid{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
   .hero h1{font-size:36px;margin:8px 0 12px;color:var(--ink);text-align:left}
   .hero p{color:var(--muted);font-size:16px;max-width:760px;line-height:1.6}
-
   .quick-card{width:320px;min-width:240px;background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 12px 30px rgba(16,24,40,0.04)}
 
   /* Section titles */
@@ -79,101 +62,33 @@
   /* About */
   .about-content{display:grid;gap:18px}
   .about-content p{color:var(--muted);line-height:1.7}
-.about-content{display:grid;gap:18px}
-.about-content p{color:var(--muted);line-height:1.7}
 
 /* About -> "We work with" cards */
-.work-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
-  margin-top:10px;
-}
-.work-card{
-  background:var(--card);
-  border:1px solid rgba(14,20,39,0.04);
-  border-radius:12px;
-  padding:18px;
-  box-shadow:0 10px 28px rgba(16,24,40,0.04);
-  transition:transform .12s ease,box-shadow .12s ease;
-}
-.work-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 40px rgba(16,24,40,0.08);
-}
-.wc-title{
-  font-weight:800;
-  color:var(--purple);
-  margin:0 0 8px;
-  font-size:17px;
-}
-.wc-desc{
-  color:var(--muted);
-  font-size:15px;
-  line-height:1.7;
-}
-@media (max-width:540px){
-  .work-card{padding:14px}
-}
+.work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:10px}
+.work-card{background:var(--card);border:1px solid rgba(14,20,39,0.04);border-radius:12px;padding:18px;box-shadow:0 10px 28px rgba(16,24,40,0.04);transition:transform .12s ease,box-shadow .12s ease}
+.work-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,0.08)}
+.wc-title{font-weight:800;color:var(--purple);margin:0 0 8px;font-size:17px}
+.wc-desc{color:var(--muted);font-size:15px;line-height:1.7}
 
-/* Services - Flat style (no boxes) */
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:18px;
-  margin-top:18px;
-}
+/* Services - Flat style */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
+.service-card{background:transparent;border:none;box-shadow:none;padding:18px 8px;text-align:left;min-height:120px;transition:color .16s ease;display:flex;gap:12px;align-items:flex-start}
+.service-card .icon{width:56px;height:56px;border-radius:8px;background:transparent;display:grid;place-items:center;color:var(--muted);font-weight:900;font-size:18px;transition:transform .18s ease,color .18s ease;flex:0 0 56px}
+.service-card .content{flex:1}
+.service-card .title{font-weight:800;color:var(--ink);margin-top:0;font-size:16px;transition:color .18s ease}
+.service-card .desc{color:var(--muted);margin-top:6px;line-height:1.5;font-size:14px}
+.service-card:hover .icon{color:var(--purple);transform:translateY(-6px)}
+.service-card:hover .title{color:var(--purple)}
 
-  /* Services - Flat style (no boxes) */
-  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
-  .service-card{
-    background:transparent;border:none;box-shadow:none;
-    padding:18px 8px;text-align:left;min-height:120px;
-    transition:color .16s ease;display:flex;gap:12px;align-items:flex-start;
-  }
-  .service-card .icon{
-    width:56px;height:56px;border-radius:8px;background:transparent;
-    display:grid;place-items:center;color:var(--muted);
-    font-weight:900;font-size:18px;transition:transform .18s ease,color .18s ease;flex:0 0 56px;
-  }
-  .service-card .content{flex:1}
-  .service-card .title{font-weight:800;color:var(--ink);margin-top:0;font-size:16px;transition:color .18s ease;}
-  .service-card .desc{color:var(--muted);margin-top:6px;line-height:1.5;font-size:14px}
-  .service-card:hover .icon{color:var(--purple);transform:translateY(-6px);}
-  .service-card:hover .title{color:var(--purple);}
+form label{display:block;margin-top:8px;font-weight:700;color:var(--ink)}
+form input,form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-top:6px}
+form .cta{border-radius:8px;margin-top:8px}
+footer{padding:28px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
 
-  /* Experts */
-  .experts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
-  .expert{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 28px rgba(16,24,40,0.04)}
-  .expert .img{height:100px;border-radius:10px;background:linear-gradient(180deg,#f3f0ff,#efe9ff);display:grid;place-items:center;font-weight:800;color:var(--purple);margin-bottom:12px}
-  .expert .name{font-weight:800;color:var(--purple);font-size:16px;margin-bottom:6px}
-  .expert .role{color:var(--muted);font-weight:700;margin-bottom:8px}
-  .expert .bio{color:var(--muted);font-size:14px;line-height:1.6}
+@media (max-width:900px){.header-top{flex-direction:column;gap:8px}.company{font-size:22px}.logo img{width:80px}.hero-grid{flex-direction:column;align-items:center}}
+@media (max-width:700px){.section-title h2{font-size:20px;text-align:center}.menu-bar{flex-wrap:wrap;padding:10px;gap:8px}.nav-link{font-size:14px}.service-card{padding:14px 6px}.service-card .icon{width:48px;height:48px;font-size:16px}.quick-card{width:100%}}
 
-  /* Form */
-  form label{display:block;margin-top:8px;font-weight:700;color:var(--ink)}
-  form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-top:6px}
-  form .cta{border-radius:8px;margin-top:8px}
-
-  footer{padding:28px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04);background:#fff}
-
-  @media (max-width:900px){
-    .header-top{flex-direction:column;gap:8px}
-    .company{font-size:22px;text-decoration:none;}
-    .logo img{width:80px}
-    .hero-grid{flex-direction:column;align-items:center}
-  }
-  @media (max-width:700px){
-    .section-title h2{font-size:20px;text-align:center;}
-    .menu-bar{flex-wrap:wrap;padding:10px;gap:8px}
-    .nav-link{font-size:14px}
-    .service-card{padding:14px 6px;}
-    .service-card .icon{width:48px;height:48px;font-size:16px;}
-    .quick-card{width:100%}
-  }
-
-  /* visually hidden for accessibility */
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
@@ -182,7 +97,6 @@
   <div class="header-inner">
     <div class="header-top">
       <div class="logo">
-        <!-- Ensure logo.png exists in repo root (you uploaded it) -->
         <img src="logo.png" alt="CrystalCore Business Solutions logo">
       </div>
       <div>
@@ -257,6 +171,7 @@
   We work closely with clients to build strong business foundations, manage change effectively, and introduce tools that save time and reduce manual effort. 
   With our expertise in business analysis, IT consulting, and transformation planning, we help you make informed decisions that lead to long-term success.
 </p>
+
        <strong style="display:block;margin-bottom:6px;color:var(--purple)">We work with:</strong>
 
 <div class="work-grid" aria-label="Who we work with">
@@ -367,86 +282,39 @@
 
   <!-- Why -->
   <section id="why" class="section" aria-labelledby="why-title">
-  <div class="container">
-    <div class="section-title">
-      <h2 id="why-title">Why You Need Us</h2>
-      <div class="accent" aria-hidden="true"></div>
-    </div>
-
-    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
-      <!-- Left Side Content -->
-      <div style="flex:1;min-width:260px">
-        <div style="font-size:20px;color:var(--purple);font-weight:800;margin-bottom:8px">
-          We simplify complexity and deliver real business outcomes
-        </div>
-        <p style="color:var(--muted);line-height:1.7">
-          Many businesses face challenges like unclear processes, lack of proper documentation, or delays in adapting to change. 
-          At CCBS, we identify these gaps and turn them into opportunities by bringing clarity, structure, and strategy to every project. 
-          We make sure every department in your organization moves in the same direction toward measurable goals.
-        </p>
-        <p style="color:var(--muted);line-height:1.7">
-          Our support doesn’t stop with strategy — we stay involved through execution, ensuring that each recommendation delivers tangible results. 
-          Whether you are planning to scale operations, go digital, or improve profitability, we help you do it confidently and efficiently.
-        </p>
-      </div>
-
-      <!-- Right Side Highlight Box -->
-      <div style="flex:1;min-width:260px">
-        <div style="background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 28px rgba(16,24,40,0.04)">
-          
-          <div style="font-weight:800;color:var(--purple);margin-bottom:6px">Clarity in Every Step</div>
-          <div style="color:var(--muted);line-height:1.6">
-            We simplify complex data, processes, and decisions into clear and actionable insights that empower better business direction.
-          </div>
-
-          <div style="font-weight:800;color:var(--purple);margin-top:16px;margin-bottom:6px">Measurable Outcomes</div>
-          <div style="color:var(--muted);line-height:1.6">
-            Our analysis-driven approach ensures that every recommendation delivers visible business improvement and growth.
-          </div>
-
-          <div style="font-weight:800;color:var(--purple);margin-top:16px;margin-bottom:6px">Trusted Partnership</div>
-          <div style="color:var(--muted);line-height:1.6">
-            We work as an extension of your business — aligning with your goals, supporting your team, and ensuring long-term success.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- Experts -->
-  <section id="experts" class="section" aria-labelledby="experts-title" style="background:linear-gradient(180deg,#fbfbff,#fcfbff)">
     <div class="container">
-      <div class="section-title"><h2 id="experts-title">Our Experts</h2><div class="accent" aria-hidden="true"></div></div>
-      <p style="color:var(--muted);margin-bottom:12px">A team of experienced consultants delivering measurable outcomes across business analysis, transformation, technology, compliance, and finance.</p>
+      <div class="section-title">
+        <h2 id="why-title">Why You Need Us</h2>
+        <div class="accent" aria-hidden="true"></div>
+      </div>
 
-      <div class="experts-grid">
-        <div class="expert">
-          <div class="img" aria-hidden="true">SA</div>
-          <div class="name">Saravanan A — Founder</div>
-          <div class="role">Business Analyst &amp; Consultant</div>
-          <div class="bio">Founder with deep experience in business analysis and transformation roadmaps.</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:260px">
+          <div style="font-size:20px;color:var(--purple);font-weight:800;margin-bottom:8px">
+            We simplify complexity and deliver real business outcomes
+          </div>
+          <p style="color:var(--muted);line-height:1.7">
+            Many businesses face challenges like unclear processes, lack of proper documentation, or delays in adapting to change. 
+            At CCBS, we identify these gaps and turn them into opportunities by bringing clarity, structure, and strategy to every project. 
+            We make sure every department in your organization moves in the same direction toward measurable goals.
+          </p>
+          <p style="color:var(--muted);line-height:1.7">
+            Our support doesn’t stop with strategy — we stay involved through execution, ensuring that each recommendation delivers tangible results. 
+            Whether you are planning to scale operations, go digital, or improve profitability, we help you do it confidently and efficiently.
+          </p>
         </div>
 
-        <div class="expert">
-          <div class="img" aria-hidden="true">SW</div>
-          <div class="name">Saraswathi — Software Developer</div>
-          <div class="role">Software Development &amp; Data Analysis</div>
-          <div class="bio">Builds dashboards, integrations and automation for faster, data-driven decisions.</div>
-        </div>
+        <div style="flex:1;min-width:260px">
+          <div style="background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 28px rgba(16,24,40,0.04)">
+            <div style="font-weight:800;color:var(--purple);margin-bottom:6px">Clarity in Every Step</div>
+            <div style="color:var(--muted);line-height:1.6">We simplify complex data, processes, and decisions into clear and actionable insights that empower better business direction.</div>
 
-        <div class="expert">
-          <div class="img" aria-hidden="true">UM</div>
-          <div class="name">Umamageshwari — Compliance</div>
-          <div class="role">Compliance &amp; Market Research</div>
-          <div class="bio">Regulatory documentation, certification support and market research specialist.</div>
-        </div>
+            <div style="font-weight:800;color:var(--purple);margin-top:16px;margin-bottom:6px">Measurable Outcomes</div>
+            <div style="color:var(--muted);line-height:1.6">Our analysis-driven approach ensures that every recommendation delivers visible business improvement and growth.</div>
 
-        <div class="expert">
-          <div class="img" aria-hidden="true">AK</div>
-          <div class="name">Akshaya — Finance</div>
-          <div class="role">Financial &amp; Risk Advisory</div>
-          <div class="bio">Financial planning, risk assessment and pragmatic mitigation strategies.</div>
+            <div style="font-weight:800;color:var(--purple);margin-top:16px;margin-bottom:6px">Trusted Partnership</div>
+            <div style="color:var(--muted);line-height:1.6">We work as an extension of your business — aligning with your goals, supporting your team, and ensuring long-term success.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -455,7 +323,7 @@
   <!-- Request form -->
   <section id="request" class="section" aria-labelledby="request-title">
     <div class="container">
-      <div class="section-title"><h2 id="request-title">Client Information & Service Request</h2><div class="accent" aria-hidden="true"></div></div>
+      <div class="section-title"><h2 id="request-title">Client Information &amp; Service Request</h2><div class="accent" aria-hidden="true"></div></div>
       <form id="requestForm" style="background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(14,20,39,0.04);box-shadow:0 10px 30px rgba(16,24,40,0.04)">
         <label for="name">Name</label>
         <input id="name" name="name" required />
@@ -482,7 +350,7 @@
   <section id="contact" class="section" aria-labelledby="contact-title">
     <div class="container">
       <div class="section-title"><h2 id="contact-title">Contact Us</h2><div class="accent" aria-hidden="true"></div></div>
-      <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a> • Phone: <a href="tel:+919840407627">+91 98404 07627</a></p>
+      <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a> • Phone: <a href="tel:+919840407620">+91 98404 07620</a></p>
     </div>
   </section>
 </main>
@@ -495,13 +363,18 @@
 // dynamic year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// navigation: click-to-scroll using data-target or anchors
+// top-level nav click-to-scroll: only target main sections with those ids
 document.querySelectorAll('.menu-bar .nav-link').forEach(btn=>{
   btn.addEventListener('click', (e)=>{
     const tgt = btn.getAttribute('data-target');
     if (tgt){
-      const el = document.getElementById(tgt);
-      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      // only allow scrolling to top-level sections (main > section#id)
+      const el = document.querySelector('main > section#' + CSS.escape(tgt));
+      if (el){
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+        // close dropdown if open
+        if (dropdown && dropdown.classList.contains('open')) { dropdown.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); dropdown.setAttribute('aria-hidden','true'); }
+      }
     }
   });
 });
@@ -513,19 +386,51 @@ servicesBtn.addEventListener('click', (e)=>{ e.preventDefault(); const open = dr
 document.addEventListener('click', (e)=>{ if (!servicesBtn.contains(e.target) && !dropdown.contains(e.target)) { dropdown.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); dropdown.setAttribute('aria-hidden','true'); }});
 document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') { dropdown.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); dropdown.setAttribute('aria-hidden','true'); }});
 
-// dropdown links: scroll and highlight service card briefly
+// dropdown links: scroll to service card container
 document.querySelectorAll('.dropdown-list a').forEach(a=>{
   a.addEventListener('click', (ev)=>{
     ev.preventDefault();
     const href = a.getAttribute('href');
     if (href && href.startsWith('#')){
       const id = href.replace('#','');
-      const el = document.getElementById(id);
-      if (el){ el.scrollIntoView({behavior:'smooth', block:'center'}); el.style.boxShadow = '0 18px 40px rgba(106,13,173,0.06)'; setTimeout(()=>el.style.boxShadow='','900'); }
+      const el = document.getElementById(id); // service card id
+      if (el){
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+        // highlight briefly
+        el.style.boxShadow = '0 18px 40px rgba(106,13,173,0.06)';
+        setTimeout(()=>{ el.style.boxShadow = ''; }, 900);
+      }
       dropdown.classList.remove('open'); servicesBtn.setAttribute('aria-expanded','false'); dropdown.setAttribute('aria-hidden','true');
     }
   });
 });
+
+// IntersectionObserver to sync nav active underline
+const navButtons = Array.from(document.querySelectorAll('.menu-bar .nav-link'));
+const sectionElems = Array.from(document.querySelectorAll('main > section[id]'));
+const anchorMap = {};
+navButtons.forEach(nl=>{
+  const dt = nl.getAttribute('data-target');
+  if (dt) anchorMap[dt] = nl;
+});
+
+// helper to clear active state from top-level nav buttons
+function clearActive(){ navButtons.forEach(n=>n.classList.remove('active')); }
+function setActiveForSectionId(id){
+  clearActive();
+  const mapped = anchorMap[id];
+  if (mapped) mapped.classList.add('active');
+}
+
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (entry.isIntersecting){
+      const id = entry.target.id;
+      setActiveForSectionId(id);
+    }
+  });
+},{root:null,rootMargin:'0px 0px -45% 0px',threshold:0});
+sectionElems.forEach(s=>obs.observe(s));
 
 // simple form placeholder submit
 const reqForm = document.getElementById('requestForm');
@@ -539,33 +444,6 @@ if (reqForm){
     reqForm.reset();
   });
 }
-
-// IntersectionObserver to sync nav active underline
-const navLinks = Array.from(document.querySelectorAll('.menu-bar .nav-link'));
-const anchorElems = Array.from(document.querySelectorAll('main section[id], main [id]')).filter(el=>el.id);
-const anchorMap = {};
-// match anchors to nav links by data-target or href in dropdown
-navLinks.forEach(nl=>{
-  const dt = nl.getAttribute('data-target');
-  if (dt) anchorMap[dt] = nl;
-});
-document.querySelectorAll('.menu-bar a, .menu-bar .nav-link').forEach(el=>{
-  const href = el.getAttribute('href');
-  if (href && href.startsWith('#')) anchorMap[href.replace('#','')] = el.closest('.nav-link') || el;
-});
-function clearActive(){ navLinks.forEach(n=>n.classList.remove('active')); }
-function setActive(n){ clearActive(); if (n) n.classList.add('active'); }
-
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if (entry.isIntersecting){
-      const id=entry.target.id;
-      const nl = anchorMap[id];
-      if (nl) setActive(nl);
-    }
-  });
-},{root:null,rootMargin:'0px 0px -45% 0px',threshold:0});
-anchorElems.forEach(s=>obs.observe(s));
 
 // helpful: show console error hint if logo missing
 (function checkLogo(){
