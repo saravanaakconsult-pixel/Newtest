@@ -4,263 +4,140 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CrystalCore Business Solutions (CCBS)</title>
-<meta name="description" content="CrystalCore Business Solutions — Transforming businesses with smart analysis & strategy." />
+<meta name="description" content="CrystalCore Business Solutions — Your strategic partner in clarity, precision, and innovation." />
 <style>
-:root {
-  --purple:#2D1A67;
-  --yellow:#FFD700;
-  --ink:#0f1724;
-  --muted:#6b7280;
-  --bg:#fbfbfe;
-  --card:#ffffff;
-  --max-w:1200px;
-}
+  :root{
+    --purple:#2D1A67;
+    --yellow:#FFD700;
+    --ink:#0f1724;
+    --muted:#6b7280;
+    --bg:#fbfbfe;
+    --card:#ffffff;
+    --max-w:1200px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
 
-/* ---------- Base ---------- */
-body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);}
-a{text-decoration:none;color:inherit;}
-h1,h2,h3,h4{margin:0;}
-.section{padding:60px 20px;}
-.container{max-width:var(--max-w);margin:auto;}
+  .site-header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid rgba(15,23,42,0.06)}
+  .menu-bar{display:flex;justify-content:center;gap:14px;padding:10px;flex-wrap:wrap}
+  .nav-link{background:none;border:none;font-weight:700;color:var(--ink);cursor:pointer}
+  .cta{background:var(--purple);color:#fff;padding:8px 14px;border-radius:8px;font-weight:700}
 
-/* ---------- Header ---------- */
-.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid rgba(0,0,0,0.05);}
-.header-inner{max-width:var(--max-w);margin:auto;padding:16px;}
-.header-top{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-.logo img{width:120px;border-radius:10px;}
-.company{font-size:28px;font-weight:900;color:var(--purple);}
-.tag{color:var(--muted);font-size:15px;text-align:center;}
-.menu-bar{display:flex;justify-content:center;gap:16px;padding:12px 0;border-top:1px solid rgba(0,0,0,0.05);}
-.nav-link{background:none;border:none;font-weight:700;color:var(--ink);cursor:pointer;position:relative;}
-.nav-link:hover{color:var(--purple);}
-.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:transparent;transition:0.2s;}
-.nav-link:hover::after{background:var(--purple);}
-.cta{background:var(--purple);color:#fff;padding:8px 14px;border-radius:10px;font-weight:800;}
-.cta:hover{background:#3f2785;}
-.dropdown-wrap{position:relative;}
-.dropdown-panel{position:absolute;left:50%;transform:translateX(-50%);top:100%;background:var(--card);border-radius:10px;padding:16px;box-shadow:0 8px 30px rgba(0,0,0,0.1);display:none;}
-.dropdown-panel.open{display:block;}
-.dropdown-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.dropdown-list a{display:block;padding:6px 8px;border-radius:6px;font-weight:600;}
-.dropdown-list a:hover{background:rgba(45,26,103,0.1);color:var(--purple);}
+  .section{padding:56px 0}
+  .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .section-title h2{color:var(--purple);font-size:26px;margin:0;font-weight:900}
+  .accent{height:6px;width:50px;background:var(--yellow);border-radius:999px}
 
-/* ---------- Hero ---------- */
-.hero{padding:60px 0;}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;max-width:var(--max-w);margin:auto;padding:0 20px;}
-.hero-left h1{color:var(--purple);font-size:32px;margin-bottom:10px;}
-.hero-left p{color:var(--ink);font-size:16px;line-height:1.6;}
-.hero-right{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
-.hero-right h3{color:var(--purple);margin-top:0;}
-.hero-right p{color:var(--muted);line-height:1.6;}
-.quick-contact{text-align:center;margin-top:20px;}
-.quick-contact h3{color:var(--purple);}
-.quick-contact p{color:var(--ink);}
+  .about-content p{color:var(--muted);line-height:1.7;margin:8px 0;} /* tighter spacing */
 
-/* ---------- About ---------- */
-.about-content p{color:var(--muted);line-height:1.7;}
-.partner-block{max-width:var(--max-w);margin:auto;color:var(--muted);}
-.partner-block h3{color:var(--purple);margin-bottom:4px;}
-.partner-block h4{color:black;margin-top:0;}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .service-card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,0.06)}
+  .sc-title{font-weight:800;color:var(--ink);margin-bottom:4px}
+  .sc-tag{font-weight:700;color:var(--purple);font-size:14px;margin-bottom:6px}
+  .sc-list{color:var(--muted);margin:0;padding-left:20px;line-height:1.5;font-size:14px}
+  .sc-list li{margin:3px 0}
 
-/* ---------- Services ---------- */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:var(--max-w);margin:auto;}
-.service-card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.05);transition:0.3s;}
-.service-card:hover{transform:translateY(-4px);}
-.service-card.highlight{outline:3px solid var(--yellow);outline-offset:3px;}
-.service-card h3{color:var(--purple);margin:0;}
-.service-card .tagline{color:black;font-weight:700;margin:6px 0;}
-.service-card ul{margin:0;padding-left:18px;color:var(--muted);}
+  form label{display:block;margin-top:10px;font-weight:700;color:var(--ink)}
+  form input,form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e5e7eb;margin-top:6px}
+  form .cta{margin-top:10px;border-radius:8px}
 
-/* ---------- Why You Need Us ---------- */
-.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:var(--max-w);margin:auto;}
-.why-box{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
-.why-box h4{color:var(--purple);margin-bottom:6px;}
-
-/* ---------- Form ---------- */
-form{max-width:600px;margin:auto;background:var(--card);padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
-form label{font-weight:600;display:block;margin-top:10px;}
-form input,form textarea{width:100%;padding:10px;margin-top:4px;border-radius:8px;border:1px solid #ddd;}
-form button{margin-top:10px;}
-
-/* ---------- Footer ---------- */
-footer{text-align:center;color:var(--muted);padding:20px 0;border-top:1px solid rgba(0,0,0,0.05);}
-
-@media(max-width:800px){
-.hero-grid{grid-template-columns:1fr;}
-.why-grid{grid-template-columns:1fr;}
-.dropdown-grid{grid-template-columns:1fr;}
-}
+  footer{padding:24px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.06)}
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="header-inner">
-    <div class="header-top">
-      <div class="logo"><img src="logo.png" alt="CCBS logo"></div>
-      <div>
-        <div class="company">CrystalCore Business Solutions (CCBS)</div>
-        <div class="tag">Transforming businesses with smart analysis & strategy</div>
-      </div>
-    </div>
-
-    <nav class="menu-bar">
-      <button class="nav-link" data-target="about">About</button>
-      <div class="dropdown-wrap">
-        <button id="servicesBtn" class="nav-link">Services ▾</button>
-        <div id="dropdown" class="dropdown-panel">
-          <div class="dropdown-grid" id="dropdownList">
-            <div class="dropdown-list">
-              <a href="#services-business-analysis">Business Analysis & Planning</a>
-              <a href="#services-change-management">Change Management</a>
-              <a href="#services-compliance">Compliance & Documentation</a>
-              <a href="#services-data-analysis">Data Analysis</a>
-              <a href="#services-digital-it">Digital & IT Consulting</a>
-              <a href="#services-digital-marketing">Digital Marketing & Online Visibility</a>
-            </div>
-            <div class="dropdown-list">
-              <a href="#services-financial-risk">Financial & Risk Advisory</a>
-              <a href="#services-market-research">Market Research</a>
-              <a href="#services-project-management">Project Management</a>
-              <a href="#services-branding">Branding & Reputation</a>
-              <a href="#services-client-success">Client Success & Support</a>
-              <a href="#services-operations">Operations & Workflow</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="nav-link" data-target="why">Why You Need Us</button>
-      <button class="nav-link" data-target="request">Request</button>
-      <button class="nav-link" data-target="contact">Contact</button>
-      <button class="nav-link cta" data-target="request">Book Consultation</button>
-    </nav>
-  </div>
+  <nav class="menu-bar">
+    <button class="nav-link" data-target="about">About</button>
+    <button class="nav-link" data-target="services">Services</button>
+    <button class="nav-link" data-target="why">Why You Need Us</button>
+    <button class="nav-link" data-target="request">Request</button>
+    <button class="nav-link" data-target="contact">Contact</button>
+    <button class="nav-link cta" data-target="request">Book Consultation</button>
+  </nav>
 </header>
 
 <main>
-
-<section class="hero">
-  <div class="hero-grid">
-    <div class="hero-left">
-      <h1>Transforming businesses with smart analysis & strategy</h1>
-      <p>CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We empower organisations through tailored consulting services that drive growth, efficiency and digital excellence.</p>
+  <!-- About Us -->
+  <section id="about" class="section">
+    <div class="section-title"><h2>About Us</h2><div class="accent"></div></div>
+    <div class="about-content">
+      <p>CrystalCore Business Solutions (CCBS) is your strategic partner in navigating business complexity with clarity, precision, and innovation. We help organizations identify challenges, uncover opportunities, and create clear strategies for growth.</p>
+      <p>At CCBS, we focus on practical business transformation — combining data analysis, process design, and digital consulting to achieve measurable results. Whether you are a startup setting up operations or an established company improving efficiency, we tailor solutions to your needs.</p>
+      <p>Our approach is simple yet powerful: <strong>understand, analyze, and transform</strong>. We build strong business foundations, manage change effectively, and introduce tools that save time and reduce manual effort.</p>
     </div>
-    <div class="hero-right">
-      <h3>Quick Summary</h3>
-      <p>We work with Startups, SMEs, and Large-scale Businesses — helping with business analysis, change management, IT consulting, compliance, market research, and more.</p>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="section-title"><h2>Our Services</h2><div class="accent"></div></div>
+
+    <div class="services-grid">
+      <article class="service-card"><h3 class="sc-title">Business Analysis & Planning</h3><div class="sc-tag">Smart Business Setup & Strategy</div><ul class="sc-list"><li>Business health check-up</li><li>Performance tracking & improvement</li><li>Clear business reports (BRD / FRD / SRS)</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Change Management</h3><div class="sc-tag">Smooth Business Transformation</div><ul class="sc-list"><li>Process improvement plans</li><li>Roadmap for smooth change</li><li>Team alignment strategies</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Compliance & Documentation</h3><div class="sc-tag">Stay Legal, Stay Confident</div><ul class="sc-list"><li>MSME & GST guidance</li><li>Certificate & report verification</li><li>Easy compliance checklists</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Data Analysis</h3><div class="sc-tag">Turn Data into Decisions</div><ul class="sc-list"><li>Clean up messy data</li><li>Simple dashboards & insights</li><li>Spot business trends early</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Digital & IT Consulting</h3><div class="sc-tag">Tech That Works for You</div><ul class="sc-list"><li>Select the right CRM / ERP</li><li>Automate daily tasks</li><li>Adopt digital tools for growth</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Digital Marketing & Online Visibility</h3><div class="sc-tag">Be Seen, Be Trusted Online</div><ul class="sc-list"><li>SEO & content that ranks</li><li>Social media campaigns</li><li>Website traffic & performance tracking</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Financial & Risk Advisory</h3><div class="sc-tag">Secure Your Finances, Reduce Risks</div><ul class="sc-list"><li>Smart financial planning</li><li>Risk checks for your business</li><li>Budgeting made easy</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Market Research</h3><div class="sc-tag">Know Your Market, Win Your Customers</div><ul class="sc-list"><li>Competitor analysis</li><li>Growth strategies</li><li>Customer insights</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Project Management</h3><div class="sc-tag">Get Things Done, On Time</div><ul class="sc-list"><li>Manage teams & tasks efficiently</li><li>Agile project planning made simple</li><li>Clear roles & responsibilities</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Branding & Reputation</h3><div class="sc-tag">Build a Brand People Trust</div><ul class="sc-list"><li>Logo & identity design</li><li>Google Review system setup</li><li>Online reputation management</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Client Success & Support</h3><div class="sc-tag">Keep Your Clients Happy</div><ul class="sc-list"><li>Feedback collection tools</li><li>Client onboarding kits</li><li>Automated follow-up systems</li></ul></article>
+
+      <article class="service-card"><h3 class="sc-title">Operations & Workflow</h3><div class="sc-tag">Run Your Business Smoothly</div><ul class="sc-list"><li>Task delegation systems</li><li>Workflow diagrams</li><li>SOP documentation & team training</li><li>Productivity tool setup</li></ul></article>
     </div>
-  </div>
+  </section>
 
-  <div class="quick-contact">
-    <h3>Quick Contact</h3>
-    <p>Email: saravana.AkConsult@gmail.com<br>Phone: +91 98876 543210<br>Location: Chennai</p>
-  </div>
-</section>
+  <!-- Why You Need Us -->
+  <section id="why" class="section">
+    <div class="section-title"><h2>Why You Need Us</h2><div class="accent"></div></div>
+    <p style="color:var(--muted);line-height:1.7">Many businesses face challenges like unclear processes, lack of documentation, or delays in adapting to change. At CCBS, we turn those challenges into opportunities by bringing clarity, structure, and strategy to every project.</p>
+    <p style="color:var(--muted);line-height:1.7">Our involvement doesn’t end with strategy — we support you through execution, ensuring every recommendation delivers measurable results. Whether scaling operations, going digital, or improving profitability, we help you do it confidently and efficiently.</p>
+  </section>
 
-<section id="about" class="section">
-  <h2 style="text-align:center;">About Us</h2>
-  <div class="about-content container">
-    <p>CrystalCore Business Solutions (CCBS) helps organizations identify challenges, uncover opportunities, and create clear strategies for growth...</p>
-  </div>
-</section>
+  <!-- Request -->
+  <section id="request" class="section">
+    <div class="section-title"><h2>Client Information & Service Request</h2><div class="accent"></div></div>
+    <form>
+      <label>Name</label><input type="text" required />
+      <label>Phone Number</label><input type="text" required />
+      <label>Email ID</label><input type="email" required />
+      <label>Company Name</label><input type="text" />
+      <label>Request Details</label><textarea rows="5"></textarea>
+      <button type="submit" class="cta">Submit Request</button>
+    </form>
+  </section>
 
-<section class="section">
-  <h2 style="text-align:center;">Who We Partner With</h2>
-  <div class="partner-block">
-    <p>At CrystalCore Business Solutions, we design strategies that adapt to your business scale, speed, and goals...</p>
-    <h3>Startups</h3><h4>From Concept to Market Readiness</h4>
-    <p>We help new and emerging businesses build a strong foundation — strategy, MVP readiness, process design and digital adoption (CRM, automation).</p>
-    <h3>Small & Medium Enterprises (SMEs)</h3><h4>Streamlining for Sustainable Scale</h4>
-    <p>We support SMEs to improve efficiency and compliance...</p>
-    <h3>Large-scale Businesses</h3><h4>Governance & Transformation</h4>
-    <p>We partner with enterprises on transformation programs...</p>
-  </div>
-</section>
-
-<section id="services" class="section">
-  <h2 style="text-align:center;">Our Services</h2>
-  <div class="services-grid">
-    <!-- repeat service cards (titles purple, taglines black, bullets gray) -->
-  </div>
-</section>
-
-<section id="why" class="section">
-  <div class="why-grid">
-    <div>
-      <h2>Why You Need Us</h2>
-      <h4 style="color:black;">We simplify complexity and deliver real business outcomes</h4>
-      <p>Many businesses face challenges like unclear processes...</p>
-    </div>
-    <div class="why-box">
-      <h4>Clarity in Every Step</h4><p>We simplify complex data...</p>
-      <h4>Measurable Outcomes</h4><p>Our analysis-driven approach...</p>
-      <h4>Trusted Partnership</h4><p>We work as an extension...</p>
-    </div>
-  </div>
-</section>
-
-<section id="request" class="section">
-  <h2 style="text-align:center;">Client Information & Service Request</h2>
-  <form id="requestForm">
-    <label>Name</label><input name="name" required>
-    <label>Phone</label><input name="phone" required>
-    <label>Email</label><input name="email" type="email" required>
-    <label>Company</label><input name="company">
-    <label>Request Details</label><textarea name="message" rows="4"></textarea>
-    <button type="submit" class="cta">Submit Request</button>
-    <div id="resp"></div>
-  </form>
-</section>
-
-<section id="contact" class="section">
-  <h2 style="text-align:center;">Contact Us</h2>
-  <p style="text-align:center;">Email: saravana.akconsult@gmail.com<br>Phone: +91 98404 07620<br>Location: Chennai, Tamil Nadu, India</p>
-</section>
-
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="section-title"><h2>Contact Us</h2><div class="accent"></div></div>
+    <p style="color:var(--muted)">Email: <a href="mailto:saravana.akconsult@gmail.com">saravana.akconsult@gmail.com</a> • Phone: <a href="tel:+919840407620">+91 98404 07620</a></p>
+  </section>
 </main>
 
-<footer>© 2025 CrystalCore Business Solutions — Chennai, India</footer>
-
+<footer>© <span id="year"></span> CrystalCore Business Solutions — Chennai, India</footer>
 <script>
-/* --- Dropdown --- */
-const servicesBtn=document.getElementById('servicesBtn');
-const dropdown=document.getElementById('dropdown');
-servicesBtn.addEventListener('click',()=>dropdown.classList.toggle('open'));
-document.addEventListener('click',e=>{
- if(!servicesBtn.contains(e.target)&&!dropdown.contains(e.target)){
-   dropdown.classList.remove('open');
- }
-});
-
-/* --- Highlight selected service --- */
-document.querySelectorAll('#dropdownList a').forEach(link=>{
- link.addEventListener('click',e=>{
-   dropdown.classList.remove('open');
-   const target=document.querySelector(link.getAttribute('href'));
-   if(target){target.scrollIntoView({behavior:'smooth',block:'center'});
-     target.classList.add('highlight');
-     setTimeout(()=>target.classList.remove('highlight'),3000);
-   }
- });
-});
-
-/* --- Form submission (placeholder URL) --- */
-const reqForm=document.getElementById('requestForm');
-const resp=document.getElementById('resp');
-reqForm.addEventListener('submit',async e=>{
- e.preventDefault();
- resp.textContent='Sending...';
- const url='YOUR_GOOGLE_SHEET_SCRIPT_URL_HERE';
- const formData=new FormData(reqForm);
- try{
-   const r=await fetch(url,{method:'POST',body:formData});
-   resp.textContent='✅ Thanks — we received your request.';
-   reqForm.reset();
- }catch(err){
-   resp.textContent='❌ Could not send — check connection.';
- }
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.menu-bar .nav-link').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    const id=btn.getAttribute('data-target');
+    if(id){const el=document.getElementById(id);
+      if(el){e.preventDefault();window.scrollTo({top:el.offsetTop-60,behavior:'smooth'});}
+    }
+  });
 });
 </script>
-
 </body>
 </html>
